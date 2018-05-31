@@ -8,3 +8,13 @@ C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\bin\Debug\EntityFramework.SqlServe
 C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\obj\Debug\POSEntity.exe
 C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\obj\Debug\POSEntity.pdb
 C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\obj\Debug\POSEntity.csprojResolveAssemblyReference.cache
+C:\Users\Hasnain\Documents\GitHub\Online Cafe Pos\onlineinternetpos\Internet-CAFE-POS\POSEntity\bin\Debug\POSEntity.exe.config
+C:\Users\Hasnain\Documents\GitHub\Online Cafe Pos\onlineinternetpos\Internet-CAFE-POS\POSEntity\bin\Debug\POSEntity.exe
+C:\Users\Hasnain\Documents\GitHub\Online Cafe Pos\onlineinternetpos\Internet-CAFE-POS\POSEntity\bin\Debug\POSEntity.pdb
+C:\Users\Hasnain\Documents\GitHub\Online Cafe Pos\onlineinternetpos\Internet-CAFE-POS\POSEntity\bin\Debug\EntityFramework.dll
+C:\Users\Hasnain\Documents\GitHub\Online Cafe Pos\onlineinternetpos\Internet-CAFE-POS\POSEntity\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Hasnain\Documents\GitHub\Online Cafe Pos\onlineinternetpos\Internet-CAFE-POS\POSEntity\bin\Debug\EntityFramework.xml
+C:\Users\Hasnain\Documents\GitHub\Online Cafe Pos\onlineinternetpos\Internet-CAFE-POS\POSEntity\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Hasnain\Documents\GitHub\Online Cafe Pos\onlineinternetpos\Internet-CAFE-POS\POSEntity\obj\Debug\POSEntity.csprojResolveAssemblyReference.cache
+C:\Users\Hasnain\Documents\GitHub\Online Cafe Pos\onlineinternetpos\Internet-CAFE-POS\POSEntity\obj\Debug\POSEntity.exe
+C:\Users\Hasnain\Documents\GitHub\Online Cafe Pos\onlineinternetpos\Internet-CAFE-POS\POSEntity\obj\Debug\POSEntity.pdb

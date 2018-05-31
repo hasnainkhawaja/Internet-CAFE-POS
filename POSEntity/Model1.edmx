@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="onlineinternetposModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="onlineinternetposModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="categoryId" />
@@ -206,6 +206,10 @@
         <Function Name="Rate_SelectByRateID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="rateID" Type="int" Mode="In" />
         </Function>
+        <Function Name="SelectFloors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="companyid" Type="int" Mode="In" />
+          <Parameter Name="storeid" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="Shfit_SelectByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="companyId" Type="int" Mode="In" />
         </Function>
@@ -375,6 +379,10 @@
             <Parameter Name="userName" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
             <Parameter Name="companyid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectFloors" ReturnType="Collection(onlineinternetposModel.SelectFloors_Result)">
+            <Parameter Name="companyid" Mode="In" Type="Int32" />
+            <Parameter Name="storeid" Mode="In" Type="Int64" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="EmployeeInfomation">
@@ -679,6 +687,13 @@
           <Property Type="Int32" Name="updatedBy" Nullable="true" />
           <Property Type="DateTime" Name="updatedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="Password" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="SelectFloors_Result">
+          <Property Type="Int32" Name="Floorid" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Order" Nullable="true" />
+          <Property Type="Int64" Name="Storeid" Nullable="true" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1114,6 +1129,17 @@
                 <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
                 <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectFloors" FunctionName="onlineinternetposModel.Store.SelectFloors">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.SelectFloors_Result">
+                <ScalarProperty Name="Floorid" ColumnName="Floorid" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Storeid" ColumnName="Storeid" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -3,97 +3,88 @@
     ViewBag.Title = "AddEdit Store";
     Layout = "~/Views/Shared/_Layout.cshtml";
     //Layout = "";
-        
+
 }
 
+@section styles{
+    <link href="~/Content/colorpicker.css" type="text/css" rel="stylesheet" />
+    <style type="text/css">
+        #colorSelector {
+            position: relative;
+            width: 36px;
+            height: 36px;
+            background: url(/Content/images/select.png);
+        }
+
+        #colorSelector div {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 30px;
+            height: 30px;
+            background: url(/Content/images/select.png) center;
+        }
+    </style>
+}
 
 <div class="content container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-             @using (Html.BeginForm("AddEditStoreTerminalSave", "StoreTerminal", FormMethod.Post))
+            @using (Html.BeginForm("AddEditStoreTerminal", "StoreTerminal", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
-                <h3 class="page-title">Add/Edit Store</h3>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-    <div class="row divErrorStore hide">
-        <div class="col-md-12">
-            <div class="text-danger">
-                <b>    terminal name already exists!!!</b>
-            </div>
-        </div>
-    </div>
-                
-                   <div class="row">
+                <h3 class="page-title">Add/Edit Terminal</h3>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })  
+                <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <label>
-                                TerminalCode
-                            </label>
-                          
+                            @Html.LabelFor(model => model.terminalCode)
                             @Html.ValidationMessageFor(model => model.terminalCode, "", new { @class = "text-danger" })
-                            @Html.TextBoxFor(model => model.terminalCode, new { @class = "form-control",  @readonly="readonly" })
-
-                           
+                            @Html.TextBoxFor(model => model.terminalCode, new { @class = "form-control", @readonly = "readonly" })
 
                         </div>
                     </div>
                 </div>
-              <div class="row">
+                <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <label>
-                                Terminal Name
-                            </label>
+                            @Html.LabelFor(model => model.title)
                             @Html.TextBoxFor(model => model.title, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
-
-
-
-
-
+                            @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" }) 
+                            <div style="color:red" class="hide divError">Terminal title already in use</div>
                         </div>
                     </div>
                 </div>
-              
-                 
-                    <div class="row">
-                    <div class="col-sm-12">
+
+                <div class="row">
+                    <div class="col-sm-6">
                         <div class="form-group">
-                            <label>
-                                Floor Name
-                            </label>
-                           
+                            @Html.LabelFor(model => model.SelectedStoreId)
+                            @Html.DropDownListFor(x => x.SelectedStoreId, new SelectList(Model.Stores, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.SelectedStoreId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SelectedFloorId)
                             @Html.DropDownListFor(x => x.SelectedFloorId, new SelectList(Model.Floor, "Value", "Text"), new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.SelectedFloorId, "", new { @class = "text-danger" })
-
-
-
-
-
-
                         </div>
                     </div>
                 </div>
+                
                  
-                    <div class="row">
+                <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <label>
-                                Color
-                            </label>
-                            @Html.TextBoxFor(model => model.color, new { @class = "form-control" })
+                            <div id="colorSelector"><div style="background-color: @Model.color"></div></div>
+                            <br />
+                            @Html.TextBoxFor(model => model.color, new { @class = "form-control", @readonly = true })
                             @Html.ValidationMessageFor(model => model.color, "", new { @class = "text-danger" })
-
-
-
-
-
                         </div>
                     </div>
                 </div>
-
-          
 
                 <div class="row">
                     <div class="col-sm-12">
@@ -103,106 +94,122 @@
                             </label>
                             @Html.CheckBoxFor(m => m.active, new { @class = "chkactive" })
 
-
-
-
                         </div>
                     </div>
                 </div>
 
 
-    <div class="row">
-        <div class="row">
-            <div class="col-sm-12 text-center m-t-20">
-                <a href="@Url.Action("ManageStoreTerminal", "StoreTerminal")" class="btn btn-primary">
-                    Cancel
-                </a>
-                <button type="submit" class="btn btn-primary divSaveCancel">Save &amp; update</button>
-            </div>
-        </div>
-    </div>
-                 
-                  @Html.Hidden("hdnterminalID", Model.terminalID, new { @class = "hdnterminalID" })
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-12 text-center m-t-20">
+                            <a href="@Url.Action("ManageStoreTerminal", "StoreTerminal")" class="btn btn-primary">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary divSaveCancel">Save &amp; update</button>
+                        </div>
+                    </div>
+                </div>
+
+                @Html.HiddenFor(x => x.terminalID)
 
             }
         </div>
     </div>
-</div> 
+</div>
 
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
-}
+    <script type="text/javascript" src="~/Scripts/colorpicker.js"></script>
+    <script>
 
-<script>
-
-    jQuery(function () {
-
-
-        
-        jQuery('.chkactive').change(function()
-        {
-
-            jQuery('#terminationDate').val('');
-            if (jQuery(this).is(":checked")) {
-
-                jQuery('.divterminationDate').attr('style', 'display:none');
-                
-            }
-            else {
-                jQuery('.divterminationDate').removeAttr('style');
-            }
+        jQuery(function () {
 
 
+            jQuery('#title').blur(function () {
+                var _terminalName = jQuery(this).val();
+                var _terminalID = jQuery('#terminalID').val();
+                ValidateTerminalName(_terminalName, _terminalID);
+            });
+
+
+            jQuery('#SelectedStoreId').on('change', function () {
+                SelectStoreFloors($("#SelectedStoreId").val())
+            });
+
+
+            $('#colorSelector').ColorPicker({
+                color: '@Model.color',
+                onShow: function (colpkr) {
+                    $(colpkr).fadeIn(500);
+                    return false;
+                },
+                onHide: function (colpkr) {
+                    $(colpkr).fadeOut(500);
+                    return false;
+                },
+                onChange: function (hsb, hex, rgb) {
+                    $('#colorSelector div').css('backgroundColor', '#' + hex);
+                    $("#color").val('#' + hex);
+                },
+
+            }); 
         });
 
 
-        jQuery('#title').blur(function ()
-        {
-            
-            var _terminalName = jQuery(this).val();
-            var _terminalID = jQuery('.hdnterminalID').val();
-            //console.log(jQuery('.hdnterminalID').val());
 
-            ValidateTerminalName(_terminalName, _terminalID);
-        });
-        
+        function SelectStoreFloors(storeid) {
 
+            var $select = $('#SelectedFloorId');
 
-    });
+            $select.empty()
+            .append('<option selected="selected" value="0">Select</option>');
+            var url = '@Url.Content("~/")' + "Floor/LoadDataForFloorsDataTable"; 
+            data = { storeid: storeid};
+            jQuery.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                success: function (data) {
 
-
-
-    function ValidateTerminalName(terminalName,terminalID) {
-        var url = '@Url.Content("~/")' + "StoreTerminal/ValidateTerminalName";
-
-        
-        data = { terminalName: terminalName, terminalID: terminalID };
-        jQuery.ajax({
-            type: 'GET',
-            url: url,
-            data: data,
-            success: function (data) {
-
-                var result = jQuery.parseJSON(data);
-                if (result == '1')
-                {
-                    jQuery('.divErrorStore').removeClass('hide');
-                    jQuery('.divSaveCancel').hide();
+                    $.each(data.data, function (key, entry) {
+                         
+                        $select.append($('<option></option>').attr('value', entry.Floorid).text(entry.Title));
+                    }) 
+                    
                 }
-                else
-                {
-                    jQuery('.divErrorStore').addClass('hide');
-                    jQuery('.divSaveCancel').show();
+            });
+
+           
+        }
+         
+
+        function ValidateTerminalName(terminalName, terminalID) {
+            var url = '@Url.Content("~/")' + "StoreTerminal/ValidateTerminalName";
+
+
+            data = { terminalName: terminalName, terminalID: terminalID };
+            jQuery.ajax({
+                type: 'GET',
+                url: url,
+                data: data,
+                success: function (data) {
+
+                    var result = jQuery.parseJSON(data);
+                    if (result == '1') {
+                        jQuery('.divError').removeClass('hide');
+                        jQuery('.divSaveCancel').hide();
+                    }
+                    else {
+                        jQuery('.divError').addClass('hide');
+                        jQuery('.divSaveCancel').show();
+                    }
+
                 }
-                
+            });
 
-                //jQuery('#myModalLabelUser').text("VIEW USER");
-
-            }
-        });
-
-    }
-
+          
+        }
 
 </script>
+}

@@ -125,6 +125,10 @@
       <Parameter Name="password" Mode="In" Type="String" />
       <Parameter Name="companyid" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SelectFloors" ReturnType="Collection(onlineinternetposModel.SelectFloors_Result)">
+      <Parameter Name="companyid" Mode="In" Type="Int32" />
+      <Parameter Name="storeid" Mode="In" Type="Int64" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="EmployeeInfomation">
     <Key>
@@ -428,5 +432,12 @@
     <Property Type="Int32" Name="updatedBy" Nullable="true" />
     <Property Type="DateTime" Name="updatedDate" Nullable="true" Precision="23" />
     <Property Type="String" Name="Password" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="SelectFloors_Result">
+    <Property Type="Int32" Name="Floorid" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="Order" Nullable="true" />
+    <Property Type="Int64" Name="Storeid" Nullable="true" />
+    <Property Type="Boolean" Name="Active" Nullable="true" />
   </ComplexType>
 </Schema>

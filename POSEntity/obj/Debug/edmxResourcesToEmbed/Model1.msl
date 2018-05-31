@@ -432,5 +432,16 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectFloors" FunctionName="onlineinternetposModel.Store.SelectFloors">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.SelectFloors_Result">
+          <ScalarProperty Name="Floorid" ColumnName="Floorid" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="Storeid" ColumnName="Storeid" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -13,33 +13,42 @@ namespace POS.Models
     public class StoreTerminalModel
     {
 
+
+        public IEnumerable<SelectListItem> Stores { get; set; }
+
+        [Display(Name = "Store")]
+        [Required]
+        [OptionVerificationAttribute]
+        public Int64 SelectedStoreId { get; set; }
+
+
         public Int32? terminalID { get; set; }
 
 
         public IEnumerable<SelectListItem> Floor { get; set; }
 
 
-        [Display(Name = "Select Floor")]
+        [Display(Name = "Floor")]
         [Required]
         [OptionVerificationAttribute]
         public int SelectedFloorId { get; set; }
 
+        [Required]
+        [Display(Name = "Terminal Code")]
         public string terminalCode { get; set; }
 
 
-        [Display(Name = "Enter Title")]
-        [Required]
+        [Display(Name = "Terminal Title")]
+        [Required] 
         public string title { get; set; }
        
         public Guid? connectionCode { get; set; }
 
         public int? floorid { get; set; }
 
-        [Display(Name = "Enter Color")]
+        [Display(Name = "Select Color")]
         [Required]
-        public string color { get; set; }
-
-
+        public string color { get; set; } 
 
         public Boolean active { get; set; }
 

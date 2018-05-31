@@ -28,9 +28,7 @@ namespace POS.Controllers
             ShiftModel mod = new ShiftModel();
             return View(mod);
 
-        }
-
-        
+        } 
 
         public JsonResult LoadDataForShiftDataTable()
         {

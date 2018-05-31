@@ -91,9 +91,8 @@ namespace POS.Controllers
             int _newValue = rand.Next();
 
 
-            #region loadstores
-            List<Floor> lstFloor = (from data in db.Floors
-                                  select data).ToList();
+            #region loadfloors
+            List<Floor> lstFloor = db.SelectFloors(ClientSession.CompanyID, -2).ToList().Select(x => new Floor() { Floorid = x.Floorid, Storeid = x.Storeid, Active = x.Active, Title = x.Title }).ToList();
 
             Floor objFloor = new Floor();
             objFloor.Title = "Select";
@@ -106,6 +105,21 @@ namespace POS.Controllers
             });
             #endregion
 
+            #region loadstores
+            List<Store> stores = (from data in db.Stores
+                                  where data.companyId == ClientSession.CompanyID
+                                  select data).ToList();
+
+            Store objStores = new Store();
+            objStores.storeName = "Select";
+            objStores.storeID = 0;
+            stores.Insert(0, objStores);
+            mod.Stores = stores.Select(a => new SelectListItem
+            {
+                Text = a.storeName,
+                Value = a.storeID.ToString()
+            });
+            #endregion
 
             
             if (_hdnStoreterminalId > 0)
@@ -127,6 +141,8 @@ namespace POS.Controllers
             mod.title = objStoreTerminal.title;
             mod.connectionCode =  objStoreTerminal.connectionCode;
             mod.SelectedFloorId = Convert.ToInt32(objStoreTerminal.floorid);
+            var floorval = db.Floors.SingleOrDefault(x => x.Floorid == objStoreTerminal.floorid);
+            mod.SelectedStoreId  = floorval!=null?floorval.Storeid.Value :0;
             mod.color = objStoreTerminal.color;
 
             return View(mod);
@@ -136,12 +152,12 @@ namespace POS.Controllers
 
 
         [HttpPost]
-        public ActionResult AddEditStoreTerminalSave(FormCollection frm, HttpPostedFileBase logoUpload)
+        [ValidateAntiForgeryToken]
+        public ActionResult AddEditStoreTerminal(StoreTerminalModel model)
         {
             int _companyid = ClientSession.CompanyID;
             int _hdnterminalID = 0;
-            String _isActive = "";
-            Store objStore;
+            String _isActive = ""; 
             Guid objGuid = Guid.NewGuid();
             
             StoreTerminalModel mod = new StoreTerminalModel();
@@ -151,68 +167,95 @@ namespace POS.Controllers
 
             if (ModelState.IsValid)
             {
-                _hdnterminalID = Convert.ToInt32(frm["hdnterminalID"].ToString());
-
-                if (_hdnterminalID > 0)
+                var result = ValidateTerminalName(model.title, mod.terminalID.HasValue == false ? "" : mod.terminalID.Value.ToString());
+                if (result.ToString() == "1")
                 {
-
-                    objStoreTerminal = db.Store_Terminal.Where(o => o.terminalID == _hdnterminalID).SingleOrDefault();
-                    mod.terminalID = _hdnterminalID;
-                    
+                    ModelState.AddModelError("title", "Terminal title already in user"); 
                 }
                 else
                 {
-                    objStoreTerminal = new Store_Terminal();
-                    objStoreTerminal.connectionCode = objGuid;
-                    
+
+                    if (mod.terminalID > 0)
+                    {
+
+                        objStoreTerminal = db.Store_Terminal.Where(o => o.terminalID == mod.terminalID).SingleOrDefault();
+
+                    }
+                    else
+                    {
+                        objStoreTerminal = new Store_Terminal();
+                        objStoreTerminal.connectionCode = objGuid;
+                    }
+
+                    _isActive = model.active.ToString();
+                    if (_isActive == "true,false" || _isActive == "true")
+                    {
+                        objStoreTerminal.active = true;
+
+                    }
+                    else
+                    {
+                        objStoreTerminal.active = false;
+                    }
+                     
+                    objStoreTerminal.terminalCode = model.terminalCode.ToString();
+                    objStoreTerminal.title = model.title.ToString(); 
+                    objStoreTerminal.floorid = Convert.ToInt32(model.SelectedFloorId);
+                    objStoreTerminal.color = model.color;
+
+                    if (_hdnterminalID > 0)
+                    {
+                        objStoreTerminal.updatedBy = 1;
+                        objStoreTerminal.updatedDated = DateTime.Now;
+                        db.Entry(objStoreTerminal).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        objStoreTerminal.createdBy = 1233;
+                        objStoreTerminal.createdDate = DateTime.Now;
+                        db.Store_Terminal.Add(objStoreTerminal);
+                    }
+
+                    db.SaveChanges(); 
+
                 }
-
-                _isActive = frm["active"].ToString();
-                if (_isActive == "true,false" || _isActive == "true")
-                {
-                    objStoreTerminal.active = true;
-                    
-
-                }
-                else
-                {
-                    objStoreTerminal.active = false;   
-                }
-
-
-                objStoreTerminal.terminalCode = frm["terminalCode"].ToString();
-                objStoreTerminal.title =  frm["title"].ToString();
-                //objStoreTerminal.connectionCode = frm["connectionCode"].ToString();
-                objStoreTerminal.floorid = Convert.ToInt32(frm["SelectedFloorId"].ToString());
-                objStoreTerminal.color = frm["color"].ToString();
-
-
-
-                if (_hdnterminalID > 0)
-                {
-                    objStoreTerminal.updatedBy = 1;
-                    objStoreTerminal.updatedDated = DateTime.Now;
-                    db.Entry(objStoreTerminal).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-                else
-                {
-                    objStoreTerminal.createdBy = 1233;
-                    objStoreTerminal.createdDate = DateTime.Now;
-                    db.Store_Terminal.Add(objStoreTerminal);
-                }
-
-                db.SaveChanges();
-
-
-
-
+                 
+                return RedirectToAction("ManageStoreTerminal");
             }
+             
 
-            //Users/LoadDataForDataTable
-            return RedirectToAction("ManageStoreTerminal");
+            #region loadfloors
+            List<Floor> lstFloor = db.SelectFloors(ClientSession.CompanyID, -1).ToList().Select(x=>new Floor(){ Floorid = x.Floorid , Storeid = x.Storeid , Active = x.Active , Title = x.Title}).ToList();
 
-            //return View("AddEditUserSave");
+            Floor objFloor = new Floor();
+            objFloor.Title = "Select";
+            objFloor.Floorid = 0;
+            lstFloor.Insert(0, objFloor);
+            model.Floor = lstFloor.Select(a => new SelectListItem
+            {
+                Text = a.Title,
+                Value = a.Floorid.ToString()
+            });
+            #endregion
+
+            #region loadstores
+            List<Store> stores = (from data in db.Stores
+                                  where data.companyId == ClientSession.CompanyID
+                                  select data).ToList();
+
+            Store objStores = new Store();
+            objStores.storeName = "Select";
+            objStores.storeID = 0;
+            stores.Insert(0, objStores);
+            model.Stores = stores.Select(a => new SelectListItem
+            {
+                Text = a.storeName,
+                Value = a.storeID.ToString()
+            });
+            #endregion
+
+            return View(model);
         }
 
 
@@ -220,7 +263,7 @@ namespace POS.Controllers
         public String ValidateTerminalName(String terminalName , String terminalID)
         { 
             String _retval = "0";
-            int? _companyId=1;
+            int? _companyId=ClientSession.CompanyID;
             int _terminalID = 0;
 
              if(!String.IsNullOrEmpty(terminalID))

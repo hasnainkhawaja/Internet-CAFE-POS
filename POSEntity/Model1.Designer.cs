@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\Model1.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Hasnain\Documents\GitHub\Online Cafe Pos\onlineinternetpos\Internet-CAFE-POS\POSEntity\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

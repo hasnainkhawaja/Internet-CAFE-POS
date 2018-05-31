@@ -181,5 +181,18 @@ namespace POSEntity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ValidateUser_Result>("ValidateUser", userNameParameter, passwordParameter, companyidParameter);
         }
+    
+        public virtual ObjectResult<SelectFloors_Result> SelectFloors(Nullable<int> companyid, Nullable<long> storeid)
+        {
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("companyid", companyid) :
+                new ObjectParameter("companyid", typeof(int));
+    
+            var storeidParameter = storeid.HasValue ?
+                new ObjectParameter("storeid", storeid) :
+                new ObjectParameter("storeid", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectFloors_Result>("SelectFloors", companyidParameter, storeidParameter);
+        }
     }
 }
