@@ -1,0 +1,243 @@
+﻿@model POS.Models.StoreModel
+@{
+    ViewBag.Title = "AddEdit Store";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "";
+        
+}
+
+
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+             @using (Html.BeginForm("AddEditStoreSave", "Store", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <h3 class="page-title">Add/Edit Store</h3>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="row divErrorStore hide">
+        <div class="col-md-12">
+            <div class="text-danger">
+                store name already exsts!!!
+            </div>
+        </div>
+    </div>
+
+                   <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>
+                                Store Name
+                            </label>
+                          
+                            @Html.ValidationMessageFor(model => model.storeName, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.storeName, new { @class = "form-control" })
+
+                           
+
+                        </div>
+                    </div>
+                </div>
+              <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>
+                                Store Code
+                            </label>
+                            @Html.TextBoxFor(model => model.storeCode, new { @class = "form-control", @readonly = true })
+                            @*@Html.ValidationMessageFor(model => model.storeCode, "", new { @class = "text-danger" })*@
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+              
+                 
+                    <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>
+                                Phone No
+                            </label>
+                            @Html.TextBoxFor(model => model.phoneNo, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.phoneNo, "", new { @class = "text-danger" })
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+                 
+                    <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>
+                                Address
+                            </label>
+                            @Html.TextBoxFor(model => model.address, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                 
+                  <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>
+                                Service Start Date
+                            </label>
+                            @Html.TextBoxFor(model => model.servicestartDate, new { @class = "form-control datepicker" })
+                            @Html.ValidationMessageFor(model => model.servicestartDate, "", new { @class = "text-danger" })
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+    <div class="row divterminationDate" style="@(Model.active ? "display:none" : "display:block")">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>
+                    Termination Date
+                </label>
+                @Html.TextBoxFor(model => model.terminationDate, new { @class = "form-control datepicker" })
+                @Html.ValidationMessageFor(model => model.terminationDate, "", new { @class = "text-danger" })
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>
+                                Status
+                            </label>
+                            @Html.CheckBoxFor(m => m.active, new { @class = "chkactive" })
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-12 text-center m-t-20">
+                <a href="@Url.Action("ManageStore", "Store")" class="btn btn-primary">
+                    Cancel
+                </a>
+                <button type="submit" class="btn btn-primary divSaveCancel">Save &amp; update</button>
+            </div>
+        </div>
+    </div>
+
+                  @Html.Hidden("hdnStoreid", Model.storeID)
+
+            }
+        </div>
+    </div>
+</div> 
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+
+
+
+    jQuery(function () {
+
+        jQuery('.chkactive').change(function()
+        {
+
+            jQuery('#terminationDate').val('');
+            if (jQuery(this).is(":checked")) {
+
+                jQuery('.divterminationDate').attr('style', 'display:none');
+                
+            }
+            else {
+                jQuery('.divterminationDate').removeAttr('style');
+            }
+
+
+        });
+
+
+        jQuery('#storeName').blur(function()
+        {
+
+
+            var _stName = jQuery(this).val();
+            var _streid = jQuery('#hdnStoreid').val();
+
+            ValidateStoreName(_stName, _streid);
+        });
+        
+
+
+    });
+
+
+
+    function ValidateStoreName(storeName,storeid) {
+        var url = '@Url.Content("~/")' + "Store/ValidateStoreName";
+
+        
+        data = { storeName: storeName, storeid: storeid };
+        jQuery.ajax({
+            type: 'GET',
+            url: url,
+            data: data,
+            success: function (data) {
+
+                var result = jQuery.parseJSON(data);
+                if (result == '1')
+                {
+                    jQuery('.divErrorStore').removeClass('hide');
+                    jQuery('.divSaveCancel').hide();
+                }
+                else
+                {
+                    jQuery('.divErrorStore').addClass('hide');
+                    jQuery('.divSaveCancel').show();
+                }
+                
+
+                //jQuery('#myModalLabelUser').text("VIEW USER");
+
+            }
+        });
+
+    }
+
+
+</script>

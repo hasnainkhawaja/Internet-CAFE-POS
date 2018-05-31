@@ -1,0 +1,10 @@
+C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\bin\Debug\POSEntity.exe.config
+C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\bin\Debug\POSEntity.exe
+C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\bin\Debug\POSEntity.pdb
+C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\bin\Debug\EntityFramework.dll
+C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\bin\Debug\EntityFramework.xml
+C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\obj\Debug\POSEntity.exe
+C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\obj\Debug\POSEntity.pdb
+C:\Users\hp\Desktop\POS-Hus-Mod-old\POSEntity\obj\Debug\POSEntity.csprojResolveAssemblyReference.cache

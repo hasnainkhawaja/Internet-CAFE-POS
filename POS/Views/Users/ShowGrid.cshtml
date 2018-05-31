@@ -1,0 +1,235 @@
+﻿@model POS.Models.UsersModel
+@{
+    ViewBag.Title = "Manage Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "";
+}
+
+
+<div class=" container">
+    @*@Html.ActionLink("Add New", "AddEditUser", "Users");*@
+
+
+    <a href="@Url.Action("AddEditUser", "Users")" class="waves-effect waves-light btn left">
+        Add New<i class="mdi-content-send right"></i>
+    </a>
+
+
+</div>
+
+<div id="table-datatables">
+    <div class="row">
+
+        <div class="col s12 m8 l9">
+            <table id="example" class="responsive-table display" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Employee D</th>
+                        <th>User Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Employee Code</th>
+                        <th>Employee Email</th>
+                        <th>Status</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        <th>View</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div id="modal-content" class="iziModal">
+    <div class="container">
+        @*<p class="caption">Collections allow you to group list objects together.</p>
+            <div class="divider"></div>*@
+
+        <div id="basic-collections" class="section">
+
+            <div class="row">
+                <div class="col s12 m8 l9">
+                    <ul class="collection">
+                        <li class="collection-item">        
+                            <b> User Name : </b>
+                            <span class="lbl popup-drop lblUserName"></span>
+                        </li>
+                        <li class="collection-item">    
+                            <b> First Name : </b>
+                                <span class="lbl popup-drop lblFirstName"></span>
+                        </li>
+
+                        <li class="collection-item">
+                            <b> Last Name : </b>
+                            <span class="lbl popup-drop lblLastName"></span>
+                        </li>
+
+                        <li class="collection-item">
+                            <b> Employee Code : </b>
+                            <span class="lbl popup-drop lblEmployeeCode"></span>
+                        </li>
+
+                        <li class="collection-item">
+                            <b> Gender : </b>
+                            <span class="lbl popup-drop lblGender"></span>
+                        </li>
+
+                        <li class="collection-item">
+                            <b> Email Address : </b>
+                            <span class="lbl popup-drop lblEmailAddress"></span>
+                        </li>
+                        <li class="collection-item">
+                            <b>Status : </b>
+                            <span class="lbl popup-drop ViewModelblActive"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--Dismissable Content    -->
+    </div>
+</div>
+
+
+
+
+
+<script>
+    jQuery(document).ready(function () {
+
+        $('#example').DataTable({
+            "ajax": {
+                "url": "/Users/LoadDataForDataTable", // GetUserList",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "employeeID" },
+  { "data": "userName" },
+  { "data": "firstName" },
+  { "data": "lastName" },
+  { "data": "employeeCode" },
+  { "data": "employeeEmail" },
+  { "data": "active" },
+              {
+                  "render": function (data, type, full, meta) {
+                      return '<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Click here to update record" href="/Users/AddEditUser/' + full.employeeID + '"><i class="mdi-editor-mode-edit"></i></a>';
+                      //return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.employeeID + "'); >Delete</a>";
+
+                  }
+              },
+              {
+                  data: null, render: function (data, type, row) {
+                      return '<a href="javascript:void(0);" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Click here to view record" onclick=DeleteData("' + row.employeeID + '"); ><i class="mdi-action-delete"></i></a>';
+                  }
+              },
+              {
+                  data: null, render: function (data, type, row) {
+                      return '<a href="javascript:void(0);" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Click here to view record" onclick="UserDetalis(this);" title="View" Lang="' + row.employeeID + '"><i class="mdi-action-search"></i></a>';
+                  }
+              },
+
+            ]
+        });
+
+
+
+        jQuery("#modal-content").iziModal({
+            title: "User Details",
+            //subtitle: "Simple, complete and lightweight modal plugin with jquery.",
+            //iconClass: 'icon-stack',
+            //overlayColor: 'rgba(255, 255, 255, 0.4)',
+            width: 500,
+            closeOnEscape: true,
+            closeButton: true,
+            overlay: true,
+            overlayClose: true,
+            appendTo: 'body', // or false
+            appendToOverlay: 'body', // or false
+            overlayColor: 'rgba(0, 0, 0, 0.4)',
+            padding: 20
+        });
+
+    });
+
+    function DeleteData(CustomerID) {
+        if (confirm("Are you sure you want to delete ...?")) {
+            Delete(CustomerID);
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    function Delete(CustomerID) {
+        var url = '@Url.Content("~/")' + "Users/DelteUser";
+
+        $.post(url, { employeeID: CustomerID }, function (data) {
+            if (data) {
+                oTable = $('#example').DataTable();
+                oTable.draw();
+            }
+            else {
+                alert("Something Went Wrong!");
+            }
+        });
+    }
+
+
+    function UserDetalis(obj) {
+        var url = '@Url.Content("~/")' + "Users/GetUserDataByUserID";
+
+        var _userID = jQuery(obj).attr("Lang");
+        //alert('_userID' + _userID)
+        data = { employeeID: _userID };
+        jQuery.ajax({
+            type: 'GET',
+            url: url,
+            data: data,
+            success: function (data) {
+
+                var result = jQuery.parseJSON(data);
+
+
+                jQuery('.lblUserName').text(result[0]["userName"]).show();
+                jQuery('.lblFirstName').text(result[0]["firstName"]).show();
+                jQuery('.lblLastName').text(result[0]["lastName"]).show();
+                jQuery('.lblEmployeeCode').text(result[0]["employeeCode"]).show();
+                jQuery('.lblGender').text(result[0]["employeeGender"]).show();
+                jQuery('.lblEmailAddress').text(result[0]["employeeEmail"]).show();
+
+
+                if (result[0]["active"] != true) {
+
+
+                    jQuery('.ViewModelblActive').text('NO');
+                }
+                else {
+
+
+                    jQuery('.ViewModelblActive').text('YES');
+                }
+
+
+
+
+                event.preventDefault();
+                jQuery('#modal-content').iziModal('open');
+
+
+                //jQuery('#myModalLabelUser').text("VIEW USER");
+
+            }
+        });
+
+    }
+
+
+</script>
+

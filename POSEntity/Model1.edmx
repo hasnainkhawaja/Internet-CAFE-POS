@@ -1,0 +1,1143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="onlineinternetposModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="categoryId" />
+          </Key>
+          <Property Name="categoryId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categroyTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="discount" Type="bit" />
+          <Property Name="parentId" Type="bigint" />
+          <Property Name="storeid" Type="bigint" />
+          <Property Name="companyId" Type="int" />
+          <Property Name="printOrder" Type="int" />
+          <Property Name="active" Type="bit" />
+          <Property Name="createdBy" Type="int" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="companyId" />
+          </Key>
+          <Property Name="companyId" Type="int" Nullable="false" />
+          <Property Name="companyCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="companyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="url" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dbname" Type="varchar" MaxLength="50" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Designations">
+          <Key>
+            <PropertyRef Name="designationId" />
+          </Key>
+          <Property Name="designationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="companyId" Type="int" />
+          <Property Name="active" Type="bit" />
+          <Property Name="createdBy" Type="int" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="modifiedBy" Type="int" />
+          <Property Name="modifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Employee_encryptedpass">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeid" Type="int" />
+          <Property Name="encryptedPassword" Type="nvarchar" MaxLength="200" />
+          <Property Name="createdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EmployeeInfomation">
+          <Key>
+            <PropertyRef Name="employeeID" />
+          </Key>
+          <Property Name="employeeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userName" Type="nvarchar(max)" />
+          <Property Name="firstName" Type="varchar" MaxLength="300" />
+          <Property Name="lastName" Type="varchar" MaxLength="300" />
+          <Property Name="employeeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="employeeGender" Type="varchar" MaxLength="300" />
+          <Property Name="employeeEmail" Type="varchar(max)" />
+          <Property Name="active" Type="bit" />
+          <Property Name="aspnet_userid" Type="nvarchar(max)" />
+          <Property Name="companyid" Type="int" />
+          <Property Name="createdBy" Type="int" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EmployeeRole">
+          <Key>
+            <PropertyRef Name="employeeroleid" />
+          </Key>
+          <Property Name="employeeroleid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeid" Type="bigint" Nullable="false" />
+          <Property Name="designationId" Type="int" Nullable="false" />
+          <Property Name="storeid" Type="bigint" Nullable="false" />
+          <Property Name="isdefault" Type="bit" Nullable="false" />
+          <Property Name="createdBy" Type="int" />
+          <Property Name="createdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Floors">
+          <Key>
+            <PropertyRef Name="Floorid" />
+          </Key>
+          <Property Name="Floorid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="Order" Type="int" />
+          <Property Name="Storeid" Type="bigint" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Menu_List">
+          <Key>
+            <PropertyRef Name="menuID" />
+          </Key>
+          <Property Name="menuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="menuParentID" Type="int" />
+          <Property Name="menuName" Type="varchar(max)" />
+          <Property Name="controllerName" Type="varchar(max)" />
+          <Property Name="actionName" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Rate">
+          <Key>
+            <PropertyRef Name="rateID" />
+          </Key>
+          <Property Name="rateID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rateCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="storeID" Type="bigint" Nullable="false" />
+          <Property Name="companyID" Type="bigint" Nullable="false" />
+          <Property Name="isPrepay" Type="bit" Nullable="false" />
+          <Property Name="startTime" Type="datetime" Nullable="false" />
+          <Property Name="endTime" Type="datetime" Nullable="false" />
+          <Property Name="color" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="bufferTime" Type="int" />
+          <Property Name="alertInterval" Type="int" />
+          <Property Name="createdBy" Type="int" />
+          <Property Name="Createddate" Type="datetime" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDate" Type="datetime" />
+          <Property Name="ratetype" Type="int" />
+        </EntityType>
+        <EntityType Name="RateType">
+          <Key>
+            <PropertyRef Name="RateTypeid" />
+          </Key>
+          <Property Name="RateTypeid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="130" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Shift">
+          <Key>
+            <PropertyRef Name="shfitID" />
+          </Key>
+          <Property Name="shfitID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shiftCode" Type="varchar" MaxLength="100" />
+          <Property Name="storeID" Type="bigint" Nullable="false" />
+          <Property Name="startTime" Type="datetime" Nullable="false" />
+          <Property Name="endTime" Type="datetime" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="createdBy" Type="int" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="storeID" />
+          </Key>
+          <Property Name="storeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="storeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="storeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="servicestartDate" Type="date" />
+          <Property Name="terminationDate" Type="date" />
+          <Property Name="companyId" Type="int" Nullable="false" />
+          <Property Name="createdBy" Type="int" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDate" Type="datetime" />
+          <Property Name="phone" Type="varchar" MaxLength="20" />
+          <Property Name="address" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Store_Terminal">
+          <Key>
+            <PropertyRef Name="terminalID" />
+          </Key>
+          <Property Name="terminalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="terminalCode" Type="varchar" MaxLength="150" />
+          <Property Name="title" Type="varchar" MaxLength="150" />
+          <Property Name="connectionCode" Type="uniqueidentifier" />
+          <Property Name="floorid" Type="int" />
+          <Property Name="color" Type="nvarchar(max)" />
+          <Property Name="active" Type="bit" />
+          <Property Name="createdBy" Type="int" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="updatedBy" Type="int" />
+          <Property Name="updatedDated" Type="datetime" />
+        </EntityType>
+        <Function Name="Designations_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="comapnyID" Type="int" Mode="In" />
+          <Parameter Name="active" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="EmployeeInfomation_GetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="companyID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EmployeeInfomation_GetByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employeeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Rate_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="rateID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Rate_SelectByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="companyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Rate_SelectByRateID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="rateID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Shfit_SelectByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="companyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Shfit_SelectByShiftID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="shiftID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Store_SelectByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="companyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Store_SelectByStoreID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="storeID" Type="int" Mode="In" />
+          <Parameter Name="companyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Store_Terminal_ByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="companyID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ValidateStoreTerminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="title" Type="varchar(max)" Mode="In" />
+          <Parameter Name="companyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ValidateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="password" Type="varchar(max)" Mode="In" />
+          <Parameter Name="companyid" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="onlineinternetposModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Designations" EntityType="Self.Designations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee_encryptedpass" EntityType="Self.Employee_encryptedpass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeInfomation" EntityType="Self.EmployeeInfomation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeRole" EntityType="Self.EmployeeRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Floors" EntityType="Self.Floors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu_List" EntityType="Self.Menu_List" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rate" EntityType="Self.Rate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RateType" EntityType="Self.RateType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shift" EntityType="Self.Shift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store_Terminal" EntityType="Self.Store_Terminal" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="onlineinternetposModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="companyId" />
+          </Key>
+          <Property Name="companyId" Type="Int32" Nullable="false" />
+          <Property Name="companyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="companyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dbname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Employee_encryptedpass">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeid" Type="Int32" />
+          <Property Name="encryptedPassword" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="EmployeeRole">
+          <Key>
+            <PropertyRef Name="employeeroleid" />
+          </Key>
+          <Property Name="employeeroleid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeid" Type="Int64" Nullable="false" />
+          <Property Name="designationId" Type="Int32" Nullable="false" />
+          <Property Name="storeid" Type="Int64" Nullable="false" />
+          <Property Name="isdefault" Type="Boolean" Nullable="false" />
+          <Property Name="createdBy" Type="Int32" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Shift">
+          <Key>
+            <PropertyRef Name="shfitID" />
+          </Key>
+          <Property Name="shfitID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shiftCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="storeID" Type="Int64" Nullable="false" />
+          <Property Name="startTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="endTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="createdBy" Type="Int32" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="storeID" />
+          </Key>
+          <Property Name="storeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="storeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="storeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="servicestartDate" Type="DateTime" Precision="0" />
+          <Property Name="terminationDate" Type="DateTime" Precision="0" />
+          <Property Name="companyId" Type="Int32" Nullable="false" />
+          <Property Name="createdBy" Type="Int32" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="onlineinternetposEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Employee_encryptedpass" EntityType="Self.Employee_encryptedpass" />
+          <EntitySet Name="EmployeeRoles" EntityType="Self.EmployeeRole" />
+          <EntitySet Name="Shifts" EntityType="Self.Shift" />
+          <EntitySet Name="Stores" EntityType="Self.Store" />
+          <EntitySet Name="EmployeeInfomations" EntityType="onlineinternetposModel.EmployeeInfomation" />
+          <FunctionImport Name="EmployeeInfomation_GetAll" ReturnType="Collection(onlineinternetposModel.EmployeeInfomation_GetAll_Result)">
+          <Parameter Name="companyID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EmployeeInfomation_GetByID" ReturnType="Collection(onlineinternetposModel.EmployeeInfomation_GetByID_Result)">
+          <Parameter Name="employeeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Menu_List" EntityType="onlineinternetposModel.Menu_List" />
+          <EntitySet Name="Designations" EntityType="onlineinternetposModel.Designation" />
+          <FunctionImport Name="Store_SelectByCompanyID" ReturnType="Collection(onlineinternetposModel.Store_SelectByCompanyID_Result)">
+          <Parameter Name="companyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Store_SelectByStoreID" ReturnType="Collection(onlineinternetposModel.Store_SelectByStoreID_Result)">
+            <Parameter Name="storeID" Mode="In" Type="Int32" />
+            <Parameter Name="companyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Designations_SelectAll" ReturnType="Collection(onlineinternetposModel.Designations_SelectAll_Result)">
+            <Parameter Name="comapnyID" Mode="In" Type="Int32" />
+            <Parameter Name="active" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Rates" EntityType="onlineinternetposModel.Rate" />
+          <FunctionImport Name="Rate_SelectByCompanyID" ReturnType="Collection(onlineinternetposModel.Rate_SelectByCompanyID_Result)">
+          <Parameter Name="companyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Rate_SelectByRateID" ReturnType="Collection(onlineinternetposModel.Rate_SelectByRateID_Result)">
+          <Parameter Name="rateID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Rate_Delete">
+          <Parameter Name="rateID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Shfit_SelectByCompanyID" ReturnType="Collection(onlineinternetposModel.Shfit_SelectByCompanyID_Result)">
+          <Parameter Name="companyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Shfit_SelectByShiftID" ReturnType="Collection(onlineinternetposModel.Shfit_SelectByShiftID_Result)">
+          <Parameter Name="shiftID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Categories" EntityType="onlineinternetposModel.Category" />
+          <EntitySet Name="Floors" EntityType="onlineinternetposModel.Floor" />
+          <EntitySet Name="RateTypes" EntityType="onlineinternetposModel.RateType" />
+          <FunctionImport Name="Store_Terminal_ByCompanyID" ReturnType="Collection(onlineinternetposModel.Store_Terminal_ByCompanyID_Result)">
+          <Parameter Name="companyID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Store_Terminal" EntityType="onlineinternetposModel.Store_Terminal" />
+          <FunctionImport Name="ValidateStoreTerminal" ReturnType="Collection(onlineinternetposModel.ValidateStoreTerminal_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="companyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ValidateUser" ReturnType="Collection(onlineinternetposModel.ValidateUser_Result)">
+            <Parameter Name="userName" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="companyid" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="EmployeeInfomation">
+          <Key>
+            <PropertyRef Name="employeeID" />
+          </Key>
+          <Property Name="employeeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="firstName" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="employeeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="employeeGender" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="employeeEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="aspnet_userid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="companyid" Type="Int32" />
+          <Property Name="createdBy" Type="Int32" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="EmployeeInfomation_GetAll_Result">
+          <Property Type="Int64" Name="employeeID" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="true" />
+          <Property Type="String" Name="firstName" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="lastName" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="employeeCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="employeeGender" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="employeeEmail" Nullable="true" />
+          <Property Type="Boolean" Name="active" Nullable="true" />
+          <Property Type="String" Name="aspnet_userid" Nullable="true" />
+          <Property Type="Int32" Name="companyid" Nullable="true" />
+          <Property Type="Int32" Name="createdBy" Nullable="true" />
+          <Property Type="DateTime" Name="createdDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="updatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="updatedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="EmployeeInfomation_GetByID_Result">
+          <Property Type="Int64" Name="employeeID" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="true" />
+          <Property Type="String" Name="firstName" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="lastName" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="employeeCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="employeeGender" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="employeeEmail" Nullable="true" />
+          <Property Type="Boolean" Name="active" Nullable="true" />
+          <Property Type="String" Name="aspnet_userid" Nullable="true" />
+          <Property Type="Int32" Name="companyid" Nullable="true" />
+          <Property Type="Int32" Name="createdBy" Nullable="true" />
+          <Property Type="DateTime" Name="createdDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="updatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="updatedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <EntityType Name="Menu_List">
+          <Key>
+            <PropertyRef Name="menuID" />
+          </Key>
+          <Property Name="menuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="menuParentID" Type="Int32" />
+          <Property Name="menuName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="controllerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="actionName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Designation">
+          <Key>
+            <PropertyRef Name="designationId" />
+          </Key>
+          <Property Name="designationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="companyId" Type="Int32" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="createdBy" Type="Int32" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+          <Property Name="modifiedBy" Type="Int32" />
+          <Property Name="modifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="Store_SelectByCompanyID_Result">
+          <Property Type="Int64" Name="storeID" Nullable="false" />
+          <Property Type="String" Name="storeCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="storeName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="active" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="servicestartDate" Nullable="true" />
+          <Property Type="String" Name="terminationDate" Nullable="true" />
+          <Property Type="Int32" Name="companyId" Nullable="false" />
+          <Property Type="Int32" Name="createdBy" Nullable="false" />
+          <Property Type="String" Name="createdDate" Nullable="true" />
+          <Property Type="Int32" Name="updatedBy" Nullable="true" />
+          <Property Type="String" Name="updatedDate" Nullable="true" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="Store_SelectByStoreID_Result">
+          <Property Type="Int64" Name="storeID" Nullable="false" />
+          <Property Type="String" Name="storeCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="storeName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="active" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="servicestartDate" Nullable="false" />
+          <Property Type="String" Name="terminationDate" Nullable="false" />
+          <Property Type="Int32" Name="companyId" Nullable="false" />
+          <Property Type="Int32" Name="createdBy" Nullable="false" />
+          <Property Type="String" Name="createdDate" Nullable="true" />
+          <Property Type="Int32" Name="updatedBy" Nullable="true" />
+          <Property Type="String" Name="updatedDate" Nullable="true" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="Designations_SelectAll_Result">
+          <Property Type="Int32" Name="designationId" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="companyId" Nullable="true" />
+          <Property Type="Boolean" Name="active" Nullable="true" />
+          <Property Type="Int32" Name="createdBy" Nullable="true" />
+          <Property Type="DateTime" Name="createdDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="modifiedBy" Nullable="true" />
+          <Property Type="DateTime" Name="modifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <EntityType Name="Rate">
+          <Key>
+            <PropertyRef Name="rateID" />
+          </Key>
+          <Property Name="rateID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rateCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="storeID" Type="Int64" Nullable="false" />
+          <Property Name="companyID" Type="Int64" Nullable="false" />
+          <Property Name="isPrepay" Type="Boolean" Nullable="false" />
+          <Property Name="startTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="endTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="color" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bufferTime" Type="Int32" />
+          <Property Name="alertInterval" Type="Int32" />
+          <Property Name="createdBy" Type="Int32" />
+          <Property Name="Createddate" Type="DateTime" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ratetype" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="Rate_SelectByCompanyID_Result">
+          <Property Type="Int64" Name="rateID" Nullable="false" />
+          <Property Type="String" Name="rateCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="amount" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int64" Name="storeID" Nullable="false" />
+          <Property Type="Int64" Name="companyID" Nullable="false" />
+          <Property Type="String" Name="isPrepay" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="startTime" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="endTime" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="color" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="bufferTime" Nullable="true" />
+          <Property Type="Int32" Name="alertInterval" Nullable="true" />
+          <Property Type="Int32" Name="createdBy" Nullable="true" />
+          <Property Type="DateTime" Name="Createddate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="updatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="updatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="StoreName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="active" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="RateTypeName" Nullable="true" MaxLength="130" />
+          </ComplexType>
+        <ComplexType Name="Rate_SelectByRateID_Result">
+          <Property Type="Int64" Name="rateID" Nullable="false" />
+          <Property Type="String" Name="rateCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="amount" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Boolean" Name="active" Nullable="false" />
+          <Property Type="Int64" Name="storeID" Nullable="false" />
+          <Property Type="Int64" Name="companyID" Nullable="false" />
+          <Property Type="Boolean" Name="isPrepay" Nullable="false" />
+          <Property Type="String" Name="startTime" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="endTime" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="color" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="bufferTime" Nullable="true" />
+          <Property Type="Int32" Name="alertInterval" Nullable="true" />
+          <Property Type="Int32" Name="createdBy" Nullable="true" />
+          <Property Type="DateTime" Name="Createddate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="updatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="updatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="StoreName" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="rateID1" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Shfit_SelectByCompanyID_Result">
+          <Property Type="Int64" Name="shfitID" Nullable="false" />
+          <Property Type="String" Name="shiftCode" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="storeID" Nullable="false" />
+          <Property Type="String" Name="startTime" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="endTime" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="active" Nullable="false" MaxLength="8" />
+          <Property Type="Int32" Name="createdBy" Nullable="true" />
+          <Property Type="DateTime" Name="createdDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="updatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="updatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="StoreName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Shfit_SelectByShiftID_Result">
+          <Property Type="Int64" Name="shfitID" Nullable="false" />
+          <Property Type="String" Name="shiftCode" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="storeID" Nullable="false" />
+          <Property Type="String" Name="startTime" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="endTime" Nullable="true" MaxLength="8" />
+          <Property Type="Boolean" Name="active" Nullable="false" />
+          <Property Type="Int32" Name="createdBy" Nullable="true" />
+          <Property Type="DateTime" Name="createdDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="updatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="updatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="StoreName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="categoryId" />
+          </Key>
+          <Property Name="categoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categroyTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="discount" Type="Boolean" />
+          <Property Name="parentId" Type="Int64" />
+          <Property Name="storeid" Type="Int64" />
+          <Property Name="companyId" Type="Int32" />
+          <Property Name="printOrder" Type="Int32" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="createdBy" Type="Int32" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Floor">
+          <Key>
+            <PropertyRef Name="Floorid" />
+          </Key>
+          <Property Name="Floorid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="Storeid" Type="Int64" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="RateType">
+          <Key>
+            <PropertyRef Name="RateTypeid" />
+          </Key>
+          <Property Name="RateTypeid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="130" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <ComplexType Name="Store_Terminal_ByCompanyID_Result">
+          <Property Type="Int32" Name="terminalID" Nullable="false" />
+          <Property Type="String" Name="terminalCode" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="title" Nullable="true" MaxLength="150" />
+          <Property Type="Guid" Name="connectionCode" Nullable="true" />
+          <Property Type="Int32" Name="floorid" Nullable="true" />
+          <Property Type="String" Name="color" Nullable="true" />
+          <Property Type="Boolean" Name="active" Nullable="true" />
+          <Property Type="Int32" Name="createdBy" Nullable="true" />
+          <Property Type="DateTime" Name="createdDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="updatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="updatedDated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FloorName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StatusName" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <EntityType Name="Store_Terminal">
+          <Key>
+            <PropertyRef Name="terminalID" />
+          </Key>
+          <Property Name="terminalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="terminalCode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="connectionCode" Type="Guid" />
+          <Property Name="floorid" Type="Int32" />
+          <Property Name="color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="createdBy" Type="Int32" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="updatedDated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="ValidateStoreTerminal_Result">
+          <Property Type="Int64" Name="storeID" Nullable="false" />
+          <Property Type="String" Name="storeCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="storeName" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="active" Nullable="false" />
+          <Property Type="DateTime" Name="servicestartDate" Nullable="true" />
+          <Property Type="DateTime" Name="terminationDate" Nullable="true" />
+          <Property Type="Int32" Name="companyId" Nullable="false" />
+          <Property Type="Int32" Name="createdBy" Nullable="false" />
+          <Property Type="DateTime" Name="createdDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="updatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="updatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="phone" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="address" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="ValidateUser_Result">
+          <Property Type="Int64" Name="employeeID" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="true" />
+          <Property Type="String" Name="firstName" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="lastName" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="employeeCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="employeeGender" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="employeeEmail" Nullable="true" />
+          <Property Type="Boolean" Name="active" Nullable="true" />
+          <Property Type="String" Name="aspnet_userid" Nullable="true" />
+          <Property Type="Int32" Name="companyid" Nullable="true" />
+          <Property Type="Int32" Name="createdBy" Nullable="true" />
+          <Property Type="DateTime" Name="createdDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="updatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="updatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="200" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="onlineinternetposModelStoreContainer" CdmEntityContainer="onlineinternetposEntities">
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="onlineinternetposModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="companyCode" ColumnName="companyCode" />
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="dbname" ColumnName="dbname" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee_encryptedpass">
+            <EntityTypeMapping TypeName="onlineinternetposModel.Employee_encryptedpass">
+              <MappingFragment StoreEntitySet="Employee_encryptedpass">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+                <ScalarProperty Name="encryptedPassword" ColumnName="encryptedPassword" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeRoles">
+            <EntityTypeMapping TypeName="onlineinternetposModel.EmployeeRole">
+              <MappingFragment StoreEntitySet="EmployeeRole">
+                <ScalarProperty Name="employeeroleid" ColumnName="employeeroleid" />
+                <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+                <ScalarProperty Name="designationId" ColumnName="designationId" />
+                <ScalarProperty Name="storeid" ColumnName="storeid" />
+                <ScalarProperty Name="isdefault" ColumnName="isdefault" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shifts">
+            <EntityTypeMapping TypeName="onlineinternetposModel.Shift">
+              <MappingFragment StoreEntitySet="Shift">
+                <ScalarProperty Name="shfitID" ColumnName="shfitID" />
+                <ScalarProperty Name="shiftCode" ColumnName="shiftCode" />
+                <ScalarProperty Name="storeID" ColumnName="storeID" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stores">
+            <EntityTypeMapping TypeName="onlineinternetposModel.Store">
+              <MappingFragment StoreEntitySet="Store">
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="storeID" ColumnName="storeID" />
+                <ScalarProperty Name="storeCode" ColumnName="storeCode" />
+                <ScalarProperty Name="storeName" ColumnName="storeName" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="servicestartDate" ColumnName="servicestartDate" />
+                <ScalarProperty Name="terminationDate" ColumnName="terminationDate" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeInfomations">
+            <EntityTypeMapping TypeName="onlineinternetposModel.EmployeeInfomation">
+              <MappingFragment StoreEntitySet="EmployeeInfomation">
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="companyid" ColumnName="companyid" />
+                <ScalarProperty Name="aspnet_userid" ColumnName="aspnet_userid" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="employeeEmail" ColumnName="employeeEmail" />
+                <ScalarProperty Name="employeeGender" ColumnName="employeeGender" />
+                <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="EmployeeInfomation_GetAll" FunctionName="onlineinternetposModel.Store.EmployeeInfomation_GetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.EmployeeInfomation_GetAll_Result">
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+                <ScalarProperty Name="employeeGender" ColumnName="employeeGender" />
+                <ScalarProperty Name="employeeEmail" ColumnName="employeeEmail" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="aspnet_userid" ColumnName="aspnet_userid" />
+                <ScalarProperty Name="companyid" ColumnName="companyid" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EmployeeInfomation_GetByID" FunctionName="onlineinternetposModel.Store.EmployeeInfomation_GetByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.EmployeeInfomation_GetByID_Result">
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+                <ScalarProperty Name="employeeGender" ColumnName="employeeGender" />
+                <ScalarProperty Name="employeeEmail" ColumnName="employeeEmail" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="aspnet_userid" ColumnName="aspnet_userid" />
+                <ScalarProperty Name="companyid" ColumnName="companyid" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Menu_List">
+            <EntityTypeMapping TypeName="onlineinternetposModel.Menu_List">
+              <MappingFragment StoreEntitySet="Menu_List">
+                <ScalarProperty Name="actionName" ColumnName="actionName" />
+                <ScalarProperty Name="controllerName" ColumnName="controllerName" />
+                <ScalarProperty Name="menuName" ColumnName="menuName" />
+                <ScalarProperty Name="menuParentID" ColumnName="menuParentID" />
+                <ScalarProperty Name="menuID" ColumnName="menuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Designations">
+            <EntityTypeMapping TypeName="onlineinternetposModel.Designation">
+              <MappingFragment StoreEntitySet="Designations">
+                <ScalarProperty Name="modifiedDate" ColumnName="modifiedDate" />
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="designationId" ColumnName="designationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Store_SelectByCompanyID" FunctionName="onlineinternetposModel.Store.Store_SelectByCompanyID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.Store_SelectByCompanyID_Result">
+                <ScalarProperty Name="storeID" ColumnName="storeID" />
+                <ScalarProperty Name="storeCode" ColumnName="storeCode" />
+                <ScalarProperty Name="storeName" ColumnName="storeName" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="servicestartDate" ColumnName="servicestartDate" />
+                <ScalarProperty Name="terminationDate" ColumnName="terminationDate" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Store_SelectByStoreID" FunctionName="onlineinternetposModel.Store.Store_SelectByStoreID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.Store_SelectByStoreID_Result">
+                <ScalarProperty Name="storeID" ColumnName="storeID" />
+                <ScalarProperty Name="storeCode" ColumnName="storeCode" />
+                <ScalarProperty Name="storeName" ColumnName="storeName" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="servicestartDate" ColumnName="servicestartDate" />
+                <ScalarProperty Name="terminationDate" ColumnName="terminationDate" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Designations_SelectAll" FunctionName="onlineinternetposModel.Store.Designations_SelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.Designations_SelectAll_Result">
+                <ScalarProperty Name="designationId" ColumnName="designationId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="modifiedDate" ColumnName="modifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Rates">
+            <EntityTypeMapping TypeName="onlineinternetposModel.Rate">
+              <MappingFragment StoreEntitySet="Rate">
+                <ScalarProperty Name="ratetype" ColumnName="ratetype" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="alertInterval" ColumnName="alertInterval" />
+                <ScalarProperty Name="bufferTime" ColumnName="bufferTime" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="isPrepay" ColumnName="isPrepay" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="storeID" ColumnName="storeID" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="rateCode" ColumnName="rateCode" />
+                <ScalarProperty Name="rateID" ColumnName="rateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Rate_SelectByCompanyID" FunctionName="onlineinternetposModel.Store.Rate_SelectByCompanyID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.Rate_SelectByCompanyID_Result">
+                <ScalarProperty Name="rateID" ColumnName="rateID" />
+                <ScalarProperty Name="rateCode" ColumnName="rateCode" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="storeID" ColumnName="storeID" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="isPrepay" ColumnName="isPrepay" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="bufferTime" ColumnName="bufferTime" />
+                <ScalarProperty Name="alertInterval" ColumnName="alertInterval" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="RateTypeName" ColumnName="RateTypeName" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Rate_SelectByRateID" FunctionName="onlineinternetposModel.Store.Rate_SelectByRateID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.Rate_SelectByRateID_Result">
+                <ScalarProperty Name="rateID" ColumnName="rateID" />
+                <ScalarProperty Name="rateCode" ColumnName="rateCode" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="storeID" ColumnName="storeID" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="isPrepay" ColumnName="isPrepay" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="bufferTime" ColumnName="bufferTime" />
+                <ScalarProperty Name="alertInterval" ColumnName="alertInterval" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="rateID1" ColumnName="rateID1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Rate_Delete" FunctionName="onlineinternetposModel.Store.Rate_Delete" />
+          <FunctionImportMapping FunctionImportName="Shfit_SelectByCompanyID" FunctionName="onlineinternetposModel.Store.Shfit_SelectByCompanyID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.Shfit_SelectByCompanyID_Result">
+                <ScalarProperty Name="shfitID" ColumnName="shfitID" />
+                <ScalarProperty Name="shiftCode" ColumnName="shiftCode" />
+                <ScalarProperty Name="storeID" ColumnName="storeID" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Shfit_SelectByShiftID" FunctionName="onlineinternetposModel.Store.Shfit_SelectByShiftID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.Shfit_SelectByShiftID_Result">
+                <ScalarProperty Name="shfitID" ColumnName="shfitID" />
+                <ScalarProperty Name="shiftCode" ColumnName="shiftCode" />
+                <ScalarProperty Name="storeID" ColumnName="storeID" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="onlineinternetposModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="printOrder" ColumnName="printOrder" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="storeid" ColumnName="storeid" />
+                <ScalarProperty Name="parentId" ColumnName="parentId" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="categroyTitle" ColumnName="categroyTitle" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Floors">
+            <EntityTypeMapping TypeName="onlineinternetposModel.Floor">
+              <MappingFragment StoreEntitySet="Floors">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Storeid" ColumnName="Storeid" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Floorid" ColumnName="Floorid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RateTypes">
+            <EntityTypeMapping TypeName="onlineinternetposModel.RateType">
+              <MappingFragment StoreEntitySet="RateType">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="RateTypeid" ColumnName="RateTypeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Store_Terminal_ByCompanyID" FunctionName="onlineinternetposModel.Store.Store_Terminal_ByCompanyID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.Store_Terminal_ByCompanyID_Result">
+                <ScalarProperty Name="terminalID" ColumnName="terminalID" />
+                <ScalarProperty Name="terminalCode" ColumnName="terminalCode" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="connectionCode" ColumnName="connectionCode" />
+                <ScalarProperty Name="floorid" ColumnName="floorid" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedDated" ColumnName="updatedDated" />
+                <ScalarProperty Name="FloorName" ColumnName="FloorName" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Store_Terminal">
+            <EntityTypeMapping TypeName="onlineinternetposModel.Store_Terminal">
+              <MappingFragment StoreEntitySet="Store_Terminal">
+                <ScalarProperty Name="updatedDated" ColumnName="updatedDated" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="floorid" ColumnName="floorid" />
+                <ScalarProperty Name="connectionCode" ColumnName="connectionCode" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="terminalCode" ColumnName="terminalCode" />
+                <ScalarProperty Name="terminalID" ColumnName="terminalID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ValidateStoreTerminal" FunctionName="onlineinternetposModel.Store.ValidateStoreTerminal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.ValidateStoreTerminal_Result">
+                <ScalarProperty Name="storeID" ColumnName="storeID" />
+                <ScalarProperty Name="storeCode" ColumnName="storeCode" />
+                <ScalarProperty Name="storeName" ColumnName="storeName" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="servicestartDate" ColumnName="servicestartDate" />
+                <ScalarProperty Name="terminationDate" ColumnName="terminationDate" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="onlineinternetposModel.Store.ValidateUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.ValidateUser_Result">
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+                <ScalarProperty Name="employeeGender" ColumnName="employeeGender" />
+                <ScalarProperty Name="employeeEmail" ColumnName="employeeEmail" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="aspnet_userid" ColumnName="aspnet_userid" />
+                <ScalarProperty Name="companyid" ColumnName="companyid" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

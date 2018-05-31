@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @*@Html.Action("GetMenuList", "Home")*@
+    
+    
+
+}
+
+<section id="content">
+    <!--breadcrumbs start-->
+    <div id="breadcrumbs-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <h5 class="breadcrumbs-title">
+                        Schedule Monitoring Center
+                    </h5>
+                    <ol class="breadcrumbs">
+                        <li><a href="/Home">Home</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--breadcrumbs end-->
+    <!--start container-->
+    <div class="container">
+        @*<p class="caption">Click to navigate your desire change.</p>*@
+        <div class="divider"></div>
+        <div id="card-stats">
+            <div class="row">
+                @*<div class="col s12 m6 l2">
+                    <div class="card dashboardCard card-move-up waves-effect waves-block waves-light">
+                        <div class="card-content  green white-text">
+                            <a href="/Home" class="white-text"><i class="mdi-action-home medium"></i></a>
+                        </div>
+                        <div class="card-action  green darken-2">
+                            <h6><a href="/Home" class="white-text">Home</a></h6>
+                        </div>
+                    </div>
+                </div>*@
+                
+                <div class="col s12 m6 l2">
+                    <div class="card dashboardCard card-move-up waves-effect waves-block waves-light">
+                        <div class="card-content pink lighten-1 white-text">
+                            <a href="/Machines" class="white-text"><i class="mdi-hardware-desktop-mac medium"></i></a>
+                        </div>
+                        <div class="card-action  pink darken-2">
+                            <h6><a href="/Machines" class="white-text">Manage Machines</a></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6 l2">
+                    <div class="card dashboardCard card-move-up waves-effect waves-block waves-light">
+                        <div class="card-content blue-grey white-text">
+                            <a href="/Groups" class="white-text"><i class="mdi-action-group-work medium"></i></a>
+                        </div>
+                        <div class="card-action blue-grey darken-2">
+                            <h6><a href="/Groups" class="white-text">Manage Group</a></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6 l2" >
+                    <div class="card dashboardCard card-move-up waves-effect waves-block waves-light">
+                        <div class="card-content purple white-text">
+                            <a href="/Company" class="white-text"><i class="mdi-action-account-balance medium"></i></a>
+                        </div>
+                        <div class="card-action purple darken-2">
+                            <h6><a href="/Company" class="white-text">Manage Company</a></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6 l2" >
+                    <div class="card dashboardCard card-move-up waves-effect waves-block waves-light">
+                        <div class="card-content teal white-text">
+                            <a href="/GroupConfiguration" class="white-text"><i class="mdi-social-people medium"></i></a>
+                        </div>
+                        <div class="card-action teal darken-2">
+                            <h6><a href="/GroupConfiguration" class="white-text">Group Configuration</a></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6 l2">
+                    <div class="card dashboardCard card-move-up waves-effect waves-block waves-light">
+                        <div class="card-content  red white-text">
+                            <a href="/Reports" class="white-text"><i class="mdi-av-equalizer medium"></i></a>
+                        </div>
+                        <div class="card-action  red darken-2">
+                            <h6><a href="/Reports" class="white-text">Reports</a></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6 l2">
+                    <div class="card dashboardCard card-move-up waves-effect waves-block waves-light">
+                        <div class="card-content indigo white-text">
+                            <a href="/Users" class="white-text"><i class="mdi-social-person medium"></i></a>
+                        </div>
+                        <div class="card-action indigo darken-2">
+                            <h6><a href="/Users" class="white-text">Manage Users</a></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6 l2">
+                    <div class="card dashboardCard card-move-up waves-effect waves-block waves-light">
+                        <div class="card-content brown white-text">
+                            <a href="/ChangePassword" class="white-text"><i class="mdi-action-lock medium"></i></a>
+                        </div>
+                        <div class="card-action brown darken-2">
+                            <h6><a href="/ChangePassword" class="white-text">Change Password</a></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end container-->
+</section>

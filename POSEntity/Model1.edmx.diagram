@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="47fb77aa7d434757becbd8913f25b9cb" Name="Diagram1">
+        <EntityTypeShape EntityType="onlineinternetposModel.Company" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlineinternetposModel.Employee_encryptedpass" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlineinternetposModel.EmployeeRole" Width="1.5" PointX="0.875" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlineinternetposModel.Shift" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlineinternetposModel.Store" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlineinternetposModel.EmployeeInfomation" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="onlineinternetposModel.Menu_List" Width="1.5" PointX="0.75" PointY="6.875" />
+        <EntityTypeShape EntityType="onlineinternetposModel.Designation" Width="1.5" PointX="2.625" PointY="1.75" />
+        <EntityTypeShape EntityType="onlineinternetposModel.Rate" Width="1.5" PointX="2.75" PointY="6" />
+        <EntityTypeShape EntityType="onlineinternetposModel.Category" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="onlineinternetposModel.Floor" Width="1.5" PointX="10.625" PointY="4.875" />
+        <EntityTypeShape EntityType="onlineinternetposModel.RateType" Width="1.5" PointX="8.5" PointY="4.625" />
+        <EntityTypeShape EntityType="onlineinternetposModel.Store_Terminal" Width="1.5" PointX="5.375" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

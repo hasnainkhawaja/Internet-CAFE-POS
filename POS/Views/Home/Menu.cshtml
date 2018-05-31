@@ -1,0 +1,83 @@
+﻿@model IEnumerable<POS.Models.MenuModel>
+
+@* <ul>
+                       <li class="active">
+            <a href="index.html">Dashboard</a>
+        </li>
+        <li class="submenu">
+            <a href="#"><i class="fa fa-bars"></i><span>&nbsp;Settings</span> <span class="menu-arrow"></span></a>
+            <ul class="list-unstyled" style="display: none;">
+                <li><a href="~/store/addstore">Add Store</a></li>
+                <li><a href="~/store/index">Manage Stores</a></li>
+            </ul>
+        </li>
+    </ul>*@
+      
+
+        <ul>
+            @{foreach (var item in Model.Where(s => s.menuParentID == 0).GroupBy(Obj => new { Obj.menuID }).Distinct().ToList())
+              {
+
+                  
+    <li class="submenu">
+        <a href="/@item.FirstOrDefault().controllerName/@item.FirstOrDefault().actionName"><i class="fa fa-bars"></i><span>&nbsp;@item.FirstOrDefault().menuName</span> <span class="menu-arrow"></span></a>
+
+        @*<a class="collapsible-header waves-effect waves-cyan" href="/@item.FirstOrDefault().controllerName/@item.FirstOrDefault().actionName">
+                <i class="mdi-av-equalizer"></i>
+                @item.FirstOrDefault().menuName
+            </a>*@
+
+
+        <ul class="list-unstyled" style="display: none;">
+            @{foreach (var firstItem in (Model.Where(s => s.menuParentID == item.FirstOrDefault().menuID).ToList()))
+{
+
+
+        <li class="bold">
+            <a href="/@firstItem.controllerName/@firstItem.actionName" class=""><i class="fa fa-bars"></i><span>&nbsp;@firstItem.menuName</span> @*<span class="menu-arrow"></span>*@</a>
+            @*<a class="collapsible-header waves-effect waves-cyan" href="/@firstItem.controllerName/@firstItem.actionName">
+
+
+
+                </a>*@
+
+            @*<ul>
+                    @foreach (var secondItem in (Model.Where(s => s.menuParentID == firstItem.menuID).ToList()))
+                    {
+                        <li class="bold active">
+                            <a href="/@secondItem.controllerName/@secondItem.actionName">
+                                @secondItem.menuName
+                            </a>
+
+                        </li>
+                    }
+                </ul>*@
+
+
+
+        </li>
+
+
+
+                }
+            }
+        </ul> @*man*@
+
+    </li>
+
+
+}
+}
+        </ul>
+
+@*<script>
+
+    jQuery('.submenu ul li').each(function () {
+        var _html = jQuery(this).html();
+        console.log('len=='+_html);
+       
+
+        
+
+    });
+  </script>*@

@@ -1,0 +1,126 @@
+﻿@model POS.Models.UsersModel
+@{
+    ViewBag.Title = "AddEditUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "";
+        
+}
+
+
+<div class="container">
+    <div id="basic-form" class="section">
+        <div class="row">
+
+            <div class="col s12 m12 l6">
+
+                <div class="card-panel">
+                    <h4 class="header2">Add/Edit User</h4>
+                    <div class="row">
+                        <!-- Modal -->
+                        @using (Html.BeginForm("AddEditUserSave", "Users", FormMethod.Post))
+                        {
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                            <div class="row">
+                                <div class="input-field col l6 m6 s12">
+
+                                    @Html.EditorFor(model => model.userName)
+                                    <label>
+                                        User Name
+                                        @Html.ValidationMessageFor(model => model.userName, "", new { @class = "red-text" })
+                                    </label>
+                                </div>
+                                <div class="input-field col l6 m6 s12">
+                                    @*@Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.EditorFor(model => model.firstName)
+                                    <label>
+                                        First Name
+                                        @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "red-text" })
+                                    </label>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <div class="row">
+                                <div class="input-field col l6 m6 s12">
+
+                                    @Html.EditorFor(model => model.lastName)
+                                    <label>
+                                        Last Name
+                                        @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "red-text" })
+                                    </label>
+                                </div>
+                                <div class="input-field col l6 m6 s12">
+                                    @*@Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.EditorFor(model => model.employeeCode)
+                                    <label>
+                                        Employee Code
+                                        @Html.ValidationMessageFor(model => model.employeeCode, "", new { @class = "red-text" })
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-div">
+                                <label>Employee Gender: <span class="error">*</span></label>
+
+
+                                @Html.DropDownListFor(m => m.employeeGender, new SelectList(Enum.GetValues(typeof(Gender))),
+                    "-- Select --")
+
+
+                            </div>
+                            <div class="form-div">
+                                <label>Email Address: <span class="error">*</span></label>
+                                @Html.EditorFor(model => model.employeeEmail, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.employeeEmail, "", new { @class = "text-danger" })
+
+
+
+
+
+
+
+                                <span class="lbl popup-drop lblEmailAddress"></span>
+
+                            </div>
+
+
+                            <div class="form-div">
+                                <label>Status: <span class="error">*</span></label>
+
+                                <label class="checkbox check-text" style="font-weight: bold;">
+                                    @Html.CheckBoxFor(m => m.active)
+                                    @*@Html.CheckBox("chkActive", @Model.active)*@
+                                </label>
+                                <span class="lbl popup-drop ViewModelblActive"></span>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col s12 formButton">
+                                    <a href="@Url.Action("ShowGrid","Users")" class="waves-effect waves-light btn red right">
+                                        Cancel<i class="mdi-content-send right"></i>
+                                    </a>
+                                    <input type="submit" value="Save" class="waves-effect waves-light btn green right" />
+
+                                </div>
+                            </div>
+
+                            @Html.Hidden("hdnEmployeeid", Model.employeeid)
+                        }
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

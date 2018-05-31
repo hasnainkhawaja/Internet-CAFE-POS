@@ -1,0 +1,477 @@
+﻿@model POS.Models.UsersModel
+@{
+    ViewBag.Title = "ManageUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+
+
+        jQuery('#MarksTable').jtable({
+            paging: true,
+            pageSize: 5,
+            sorting: true,
+            columnResizable: false, //Actually, no need to set true since it's default
+            columnSelectable: false, //Actually, no need to set true since it's default
+            defaultSorting: 'userName ASC',
+            actions: {
+                listAction: '@Url.Action("GetUserList", "Users")'
+            },
+
+            fields: {
+                employeeID: {
+                    key: true,
+                    list: false
+                },
+                userName: {
+                    title: 'User Name',
+                    width: '10%'
+                },
+                firstName: {
+                    title: 'First Name',
+                    width: '10%'
+                },
+                lastName: {
+                    title: 'Last Name',
+                    width: '10%',
+                },
+                employeeCode: {
+                    title: 'Employee Code',
+                    width: '5%',
+                },
+                employeeEmail: {
+                    title: 'Employee Email',
+                    width: '10%',
+                },
+
+                employeeGender: {
+                    title: 'Gender',
+                    width: '7%',
+                },
+                active: {
+                    title: 'Active',
+                    width: '5%',
+                    sorting: false,
+                    display: function (data) {
+                        return (data.record.active == 1 ? 'Yes' : 'No');
+                    }
+                },
+
+                Actions: {
+                    title: 'Actions',
+                    width: '10%',
+                    display: function (data) {
+                        return '<div class="actions">' +
+                        '<a class="btnView1" onclick="ViewClickUser(this);" title="View" Lang="' + data.record.employeeID + '" data-toggle="modal" href="#myModalUser" data-target="#myModalUser">View<span class="icon-search"></span></a>' +
+                        '<a class="btnEdit1" onclick="EditClickUser(this);" title="Edit" Lang="' + data.record.employeeID + '" data-toggle="modal" href="#myModalUser" data-target="#myModalUser">Edit<span class="icon-pencil"></span></a>' +
+                        '<span class="btnDelete1" onclick="DeleteClickUser(this);"  title="Delete" Lang="' + data.record.employeeID + '">Delete<i class="icon-trash"></i></span></div>';
+
+                    }
+                }
+            }
+        });
+        jQuery("#MarksTable").jtable('load');
+
+
+        jQuery('.btnAddUser').click(function () {
+
+
+            jQuery('.lblUserName').hide();
+            jQuery('.lblFirstName').hide();
+            jQuery('.lblLastName').hide();
+            jQuery('.lblEmployeeCode').hide();
+            jQuery('.lblGender').hide();
+            jQuery('.lblEmailAddress').hide();
+            jQuery('.ViewModelblActive').hide();
+
+            jQuery('#txtUserName').val('').show();
+            jQuery('#txFirstName').val('').show();
+            jQuery('#txtLastName').val('').show();
+            jQuery('#txtEmployeeCode').val('').show();
+
+
+
+            jQuery('.ddlGender').show();
+            //jQuery('#ddlGender').val(result[0]["employeeGender"]).show();
+
+
+            jQuery('#txtEmployeeEmail').val('').show();
+
+
+            jQuery('#hdnUserID').val('0');
+
+            jQuery('#chkActive').show();
+
+            jQuery('#chkActive').prop("checked", false);
+
+
+            jQuery('.error').show();
+            jQuery('#myModalLabelUser').text("ADD USER");
+            jQuery('.btnCancel').html('Cancel');
+            jQuery('.btnSaveUser').removeClass('hide');
+            jQuery('.btnUpdateUser').addClass('hide');
+
+        });
+
+        jQuery('.btnSaveUser').click(function () {
+
+            
+            CheckEmailExistandSubmit(0);
+            jQuery("#MarksTable").jtable('load');
+
+        });
+
+
+        jQuery('.btnUpdateUser').click(function () {
+
+            var _empid = jQuery('#hdnUserID').val()
+            CheckEmailExistandSubmit(_empid);
+            jQuery("#MarksTable").jtable('load');
+
+        });
+
+    });
+
+
+    function DeleteClickUser(obj) {
+
+        if (confirm("Are you sure want to Delete?")) {
+            var _employeeID = jQuery(obj).attr("Lang");
+            data = { employeeID: _employeeID };
+            CallActionUsingAjax('@Url.Action("DelteUser", "Users")', data);
+        }
+
+    }
+    function ViewClickUser(obj) {
+
+        var _userID = jQuery(obj).attr("Lang");
+        //alert(_userID);
+        data = { employeeID: _userID };
+        var aa = GetUserDataByID('@Url.Action("GetUserDataByUserID", "Users")', data, false);
+    }
+
+
+    function EditClickUser(obj) {
+
+        var _userID = jQuery(obj).attr("Lang");
+        data = { employeeID: _userID };
+        GetUserDataByID('@Url.Action("GetUserDataByUserID", "Users")', data, true);
+    }
+
+
+
+    function CallActionUsingAjax(actionName, Data) {
+        var dd = "";
+        jQuery.ajax({
+            type: 'POST',
+            url: actionName,
+            data: Data,
+            success: function (data) {
+               
+                jQuery("#MarksTable").jtable('load');
+                //SuccessMessage("lblSuccess", "Success!");
+            },
+            error: function (data) {
+                //return "" + data;
+
+            }
+        });
+    }
+
+    function GetUserDataByID(actionName, data, isEdit) {
+
+
+        var dd = "";
+        jQuery.ajax({
+            type: 'GET',
+            url: actionName,
+            data: data,
+            success: function (data) {
+
+                var result = jQuery.parseJSON(data);
+
+
+
+                //jQuery('#DdlClient').val(result[0]["ClientID"]);
+                //jQuery('#txtUserName').val(result[0]["Username"]);
+                //jQuery('#txtFirstName').val(result[0]["FirstName"]);
+                //jQuery('#txtLastName').val(result[0]["LastName"]);
+                //jQuery('#ddlRole').val(result[0]["RoleID"]);
+                //jQuery('#txtEmailAddress').val(result[0]["EmailAddress"]);
+                //jQuery('#hdnUserID').val(result[0]["UserID"]);
+                //jQuery('#hdnClientID').val(result[0]["ClientID"]);
+                //jQuery('#hdnRoleID').val(result[0]["RoleID"]);
+                //jQuery('#myModalLabelUser').text("EDIT USER");
+                //jQuery('.btnSaveUser').addClass('hide');
+                //jQuery('.btnUpdateUser').removeClass('hide');
+
+
+                if (isEdit) {
+
+
+
+                    jQuery('.lblUserName').hide();
+                    jQuery('.lblFirstName').hide();
+                    jQuery('.lblLastName').hide();
+                    jQuery('.lblEmployeeCode').hide();
+                    jQuery('.lblGender').hide();
+                    jQuery('.lblEmailAddress').hide();
+                    jQuery('.ViewModelblActive').hide();
+
+
+
+
+
+
+                    //jQuery('.imgView').hide();
+
+                    jQuery('.ddlClient').show();
+                    jQuery('.ddlRole').show();
+                    //jQuery('#logoUploaddiv').show();
+
+
+                    jQuery('#txtUserName').val(result[0]["userName"]).show();
+                    jQuery('#txFirstName').val(result[0]["firstName"]).show();
+                    jQuery('#txtLastName').val(result[0]["lastName"]).show();
+                    jQuery('#txtEmployeeCode').val(result[0]["employeeCode"]).show();
+
+
+
+                    jQuery('.ddlGender').show();
+                    jQuery('#ddlGender').val(result[0]["employeeGender"]).show();
+
+
+                   jQuery('#txtEmployeeEmail').val(result[0]["employeeEmail"]).show();
+
+
+                    jQuery('#hdnUserID').val(result[0]["employeeID"]);
+
+                    jQuery('#chkActive').show();
+
+                    jQuery('.ViewModelblActive').hide();
+
+
+                    if (result[0]["active"] != true) {
+
+                        jQuery('#chkActive').prop("checked", false);
+
+                    }
+                    else {
+
+                        jQuery('#chkActive').prop("checked", true);
+
+                    }
+
+
+
+                    jQuery('.error').show();
+                    jQuery('#myModalLabelUser').text("EDIT USER");
+                    jQuery('.btnCancel').html('Cancel');
+                    jQuery('.btnSaveUser').addClass('hide');
+                    jQuery('.btnUpdateUser').removeClass('hide');
+                    //jQuery('.divActive').removeAttr('style');
+
+
+                }
+                else {
+
+                    jQuery('.btnCancel').html('Close');
+                    jQuery('.lblUserName').text(result[0]["userName"]).show();
+                    jQuery('#txtUserName').hide();
+
+                    jQuery('#txFirstName').hide();
+                    jQuery('.lblFirstName').text(result[0]["firstName"]).show();
+
+
+                    jQuery('#txtLastName').hide();
+                    jQuery('.lblLastName').text(result[0]["lastName"]).show();
+
+                    jQuery('#txtEmployeeCode').hide();
+                    jQuery('.lblEmployeeCode').text(result[0]["employeeCode"]).show();
+
+                    jQuery('.ddlGender').hide();
+                    jQuery('.lblGender').text(result[0]["employeeGender"]).show();
+
+                    jQuery('#txtEmployeeEmail').hide();
+                    jQuery('.lblEmailAddress').text(result[0]["employeeEmail"]).show();
+
+                    jQuery('#hdnUserID').val(result[0]["employeeID"]);
+
+
+                    //jQuery('.ViewModelblRole').text(result[0]["RoleName"]);
+
+
+                    jQuery('.ViewModelblActive').show();
+
+                    jQuery('#chkActive').hide();
+
+
+                    if (result[0]["active"] != true) {
+
+
+                        jQuery('.ViewModelblActive').text('NO');
+                    }
+                    else {
+
+
+                        jQuery('.ViewModelblActive').text('YES');
+                    }
+
+
+                    jQuery('.btnSaveUser').addClass('hide');
+                    jQuery('.btnUpdateUser').addClass('hide');
+                    jQuery('#myModalLabelUser').text("VIEW USER");
+                    //jQuery('.divActive').attr('style', 'position:relative;right:19px;');
+
+                }
+                //jQuery("#frmAddEditUser").valid();
+            },
+            error: function (data) {
+                //return "" + data;
+
+            }
+        });
+    }
+
+    function CheckEmailExistandSubmit(_userID) {
+
+        PostFormDataUser(jQuery("#frmAddEditUser").attr('action'), jQuery("#frmAddEditUser").serialize());
+
+    }
+
+    function PostFormDataUser(actionName, Data) {
+        var dd = "";
+        jQuery.ajax({
+            type: 'POST',
+            url: actionName,
+            data: Data,
+            success: function (data) {
+                $('#myModalUser').modal('hide');
+                jQuery("#MarksTable").jtable('load');
+
+                //SuccessMessage("lblSuccess", "Success!");
+            },
+            error: function (data) {
+                //return "" + data;
+
+            }
+        });
+    }
+
+</script>
+
+<h2>ManageUsers</h2>
+
+
+
+
+<div class="MarksTable" id="MarksTable"></div>
+
+
+<div class="span5">
+    <h1>
+        MANAGE USERS
+        <!-- Button to trigger modal -->
+        <a href="#myModalUser" role="button" class="btnAddUser" data-toggle="modal"><i class="icon-plus-sign" style="margin-left: 10px;"></i> Add User </a>
+
+        <!-- Modal -->
+        @using (Html.BeginForm("AddEditUser", "Users", FormMethod.Post, new { name = "frmAddEditUser", id = "frmAddEditUser", enctype = "multipart/form-data" }))
+        {
+            <div id="myModalUser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabelUser" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove icon-1"></i></button>
+                    <h3 id="myModalLabelUser">Add User</h3>
+                </div>
+                
+                <div class="modal-body">
+                
+                 
+                    <div class="form-div">
+                        <label>Username: <span class="error">*</span></label>
+
+                        
+                        @Html.TextBox("txtUserName", Model.userName)
+                        <span class="lbl popup-drop lblUserName"></span>
+
+                    </div>
+
+                    <div class="form-div">
+                        <label>First Name: <span class="error">*</span></label>
+
+                        @Html.TextBox("txFirstName", Model.firstName)
+                        <span class="lbl popup-drop lblFirstName"></span>
+
+                    </div>
+                    <div class="form-div">
+                        <label>Last Name: <span class="error">*</span></label>
+
+                        @Html.TextBox("txtLastName", Model.lastName)
+                        <span class="lbl popup-drop lblLastName"></span>
+
+                    </div>
+                    <div class="form-div">
+                        <label>Employee Code: <span class="error">*</span></label>
+
+                        @Html.TextBox("txtEmployeeCode", Model.employeeCode)
+                        <span class="lbl popup-drop lblEmployeeCode"></span>
+
+                    </div>
+
+                    <div class="form-div">
+                        <label>Employee Gender: <span class="error">*</span></label>
+                        
+                            @Html.DropDownList("ddlGender",
+                    new SelectList(Enum.GetValues(typeof(Gender))),
+                    "-- Select --",
+                            new { @class = "ddlGender" })
+
+
+
+                        
+                        <span class="lbl popup-drop lblGender"></span>
+                    </div>
+                        <div class="form-div">
+                            <label>Email Address: <span class="error">*</span></label>
+
+                            @Html.TextBox("txtEmployeeEmail", Model.employeeEmail)
+                            <span class="lbl popup-drop lblEmailAddress"></span>
+
+                        </div>
+                    
+
+                    <div class="form-div">
+                        <label>Status: <span class="error">*</span></label>
+
+                        <label class="checkbox check-text" style="font-weight: bold;">
+                            @*@Html.CheckBoxFor(m => m.active)*@
+                            @Html.CheckBox("chkActive", @Model.active)
+                        </label>
+                        <span class="lbl popup-drop ViewModelblActive"></span>
+                        
+                    </div>
+
+
+                    </div>
+                <div class="modal-footer">
+                    <button class="btn btnCancel" data-dismiss="modal" aria-hidden="true">CANCEL</button>
+                    @*<button class="btn btn-primary btnSave">SAVE</button>
+                        <button class="btn btn-primary btnUpdate hide">UPDATE</button>*@
+                    <a href="javascript:void(0)" class="btn btn-primary btnSaveUser">SAVE</a>
+                    <a href="javascript:void(0)" class="btn btn-primary btnUpdateUser hide">UPDATE</a>
+                </div>
+            </div>
+
+            @Html.Hidden("hdnUserID", 0)
+            @Html.Hidden("hdnClientID", 0)
+            @Html.Hidden("hdnRoleID", 0)
+        }
+    </h1>
+
+    
+    
+</div>
+

@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="onlineinternetposModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="categoryId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categroyTitle" Type="nvarchar" MaxLength="100" />
+    <Property Name="discount" Type="bit" />
+    <Property Name="parentId" Type="bigint" />
+    <Property Name="storeid" Type="bigint" />
+    <Property Name="companyId" Type="int" />
+    <Property Name="printOrder" Type="int" />
+    <Property Name="active" Type="bit" />
+    <Property Name="createdBy" Type="int" />
+    <Property Name="createdDate" Type="datetime" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="companyId" />
+    </Key>
+    <Property Name="companyId" Type="int" Nullable="false" />
+    <Property Name="companyCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="companyName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="url" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="dbname" Type="varchar" MaxLength="50" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="createdDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Designations">
+    <Key>
+      <PropertyRef Name="designationId" />
+    </Key>
+    <Property Name="designationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="companyId" Type="int" />
+    <Property Name="active" Type="bit" />
+    <Property Name="createdBy" Type="int" />
+    <Property Name="createdDate" Type="datetime" />
+    <Property Name="modifiedBy" Type="int" />
+    <Property Name="modifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee_encryptedpass">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="employeeid" Type="int" />
+    <Property Name="encryptedPassword" Type="nvarchar" MaxLength="200" />
+    <Property Name="createdDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeeInfomation">
+    <Key>
+      <PropertyRef Name="employeeID" />
+    </Key>
+    <Property Name="employeeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="nvarchar(max)" />
+    <Property Name="firstName" Type="varchar" MaxLength="300" />
+    <Property Name="lastName" Type="varchar" MaxLength="300" />
+    <Property Name="employeeCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="employeeGender" Type="varchar" MaxLength="300" />
+    <Property Name="employeeEmail" Type="varchar(max)" />
+    <Property Name="active" Type="bit" />
+    <Property Name="aspnet_userid" Type="nvarchar(max)" />
+    <Property Name="companyid" Type="int" />
+    <Property Name="createdBy" Type="int" />
+    <Property Name="createdDate" Type="datetime" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeeRole">
+    <Key>
+      <PropertyRef Name="employeeroleid" />
+    </Key>
+    <Property Name="employeeroleid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="employeeid" Type="bigint" Nullable="false" />
+    <Property Name="designationId" Type="int" Nullable="false" />
+    <Property Name="storeid" Type="bigint" Nullable="false" />
+    <Property Name="isdefault" Type="bit" Nullable="false" />
+    <Property Name="createdBy" Type="int" />
+    <Property Name="createdDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Floors">
+    <Key>
+      <PropertyRef Name="Floorid" />
+    </Key>
+    <Property Name="Floorid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" />
+    <Property Name="Order" Type="int" />
+    <Property Name="Storeid" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="Menu_List">
+    <Key>
+      <PropertyRef Name="menuID" />
+    </Key>
+    <Property Name="menuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="menuParentID" Type="int" />
+    <Property Name="menuName" Type="varchar(max)" />
+    <Property Name="controllerName" Type="varchar(max)" />
+    <Property Name="actionName" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Rate">
+    <Key>
+      <PropertyRef Name="rateID" />
+    </Key>
+    <Property Name="rateID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rateCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="storeID" Type="bigint" Nullable="false" />
+    <Property Name="companyID" Type="bigint" Nullable="false" />
+    <Property Name="isPrepay" Type="bit" Nullable="false" />
+    <Property Name="startTime" Type="datetime" Nullable="false" />
+    <Property Name="endTime" Type="datetime" Nullable="false" />
+    <Property Name="color" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="bufferTime" Type="int" />
+    <Property Name="alertInterval" Type="int" />
+    <Property Name="createdBy" Type="int" />
+    <Property Name="Createddate" Type="datetime" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+    <Property Name="ratetype" Type="int" />
+  </EntityType>
+  <EntityType Name="RateType">
+    <Key>
+      <PropertyRef Name="RateTypeid" />
+    </Key>
+    <Property Name="RateTypeid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="130" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="Shift">
+    <Key>
+      <PropertyRef Name="shfitID" />
+    </Key>
+    <Property Name="shfitID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="shiftCode" Type="varchar" MaxLength="100" />
+    <Property Name="storeID" Type="bigint" Nullable="false" />
+    <Property Name="startTime" Type="datetime" Nullable="false" />
+    <Property Name="endTime" Type="datetime" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="createdBy" Type="int" />
+    <Property Name="createdDate" Type="datetime" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Store">
+    <Key>
+      <PropertyRef Name="storeID" />
+    </Key>
+    <Property Name="storeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="storeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="storeName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="servicestartDate" Type="date" />
+    <Property Name="terminationDate" Type="date" />
+    <Property Name="companyId" Type="int" Nullable="false" />
+    <Property Name="createdBy" Type="int" Nullable="false" />
+    <Property Name="createdDate" Type="datetime" Nullable="false" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+    <Property Name="phone" Type="varchar" MaxLength="20" />
+    <Property Name="address" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Store_Terminal">
+    <Key>
+      <PropertyRef Name="terminalID" />
+    </Key>
+    <Property Name="terminalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="terminalCode" Type="varchar" MaxLength="150" />
+    <Property Name="title" Type="varchar" MaxLength="150" />
+    <Property Name="connectionCode" Type="uniqueidentifier" />
+    <Property Name="floorid" Type="int" />
+    <Property Name="color" Type="nvarchar(max)" />
+    <Property Name="active" Type="bit" />
+    <Property Name="createdBy" Type="int" />
+    <Property Name="createdDate" Type="datetime" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDated" Type="datetime" />
+  </EntityType>
+  <Function Name="Designations_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="comapnyID" Type="int" Mode="In" />
+    <Parameter Name="active" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="EmployeeInfomation_GetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="companyID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EmployeeInfomation_GetByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employeeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Rate_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="rateID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Rate_SelectByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="companyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Rate_SelectByRateID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="rateID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Shfit_SelectByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="companyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Shfit_SelectByShiftID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="shiftID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Store_SelectByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="companyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Store_SelectByStoreID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="storeID" Type="int" Mode="In" />
+    <Parameter Name="companyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Store_Terminal_ByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="companyID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ValidateStoreTerminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="title" Type="varchar(max)" Mode="In" />
+    <Parameter Name="companyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ValidateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="password" Type="varchar(max)" Mode="In" />
+    <Parameter Name="companyid" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="onlineinternetposModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Designations" EntityType="Self.Designations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_encryptedpass" EntityType="Self.Employee_encryptedpass" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeInfomation" EntityType="Self.EmployeeInfomation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeRole" EntityType="Self.EmployeeRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Floors" EntityType="Self.Floors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu_List" EntityType="Self.Menu_List" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rate" EntityType="Self.Rate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RateType" EntityType="Self.RateType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shift" EntityType="Self.Shift" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Store_Terminal" EntityType="Self.Store_Terminal" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,162 @@
+﻿@model POS.Models.StoreTerminalModel
+@{
+    ViewBag.Title = "Manage Store";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "";
+}
+
+
+
+
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-4">
+            <h4 class="page-title">Manage StoreTerminal</h4>
+        </div>
+        <div class="col-xs-8 text-right m-b-30">
+            <a href="@Url.Action("AddEditStoreTerminal", "StoreTerminal")" class="btn btn-primary pull-right rounded"><i class="fa fa-plus"></i>Add New</a>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+
+                <table class="table table-striped custom-table datatable" id="example">
+                    <thead>
+                        <tr>
+
+                            <th>Terminal Code</th>
+                            <th>Terminal Name</th>
+                            <th>Connection Code</th>
+                            <th>Floor Name</th>
+                            <th>Color</th>
+                            <th>Status</th>
+                            <th class="text-right">Action</th>
+                            @*<th>Edit</th>
+                                <th>Delete</th>
+                                <th>View</th>*@
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <script>
+            jQuery(document).ready(function () {
+
+                $('#example').DataTable({
+                    "ajax": {
+                        "url": "/StoreTerminal/LoadDataForStoreDataTable", // GetUserList",
+                        "type": "POST",
+                        "datatype": "json"
+                    },
+                    "columns": [
+                        //{ "data": "storeID" },
+          { "data": "terminalCode" },
+          { "data": "title" },
+          { "data": "connectionCode" },
+            { "data": "FloorName" },
+          { "data": "color" },
+          { "data": "StatusName" },
+
+           {// this is Actions Column
+               mRender: function (data, type, row) {
+
+                   var _rateID = row.rateID;
+                   var _div = '<div class="dropdown">';
+                   var linkEdit = '<a href="javascript:void(0);" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a><ul class="dropdown-menu pull-right"><li><a href="@Url.Action("AddEditStoreTerminal", "StoreTerminal", new { id = -1 })"><i class="fa fa-pencil m-r-5"></i>Edit</a></ul></div>';
+                   
+                   linkEdit = linkEdit.replace("-1", row.terminalID);
+                   //linkDel = linkDel.replace("-1", row.terminalID);
+
+                   var _fnal = _div + linkEdit;
+                   return _fnal;
+               },
+               className: "text-right"
+           }
+
+
+                    ]
+                });
+
+
+            });
+
+            function DeleteData(storeID) {
+                if (confirm("Are you sure you want to chanange status ...?")) {
+                    Delete(storeID);
+                }
+                else {
+                    return false;
+                }
+            }
+
+
+            function Delete(storeID) {
+                var url = '@Url.Content("~/")' + "Store/DelteStore";
+
+                jQuery.post(url, { storeID: storeID }, function (data) {
+                    if (data) {
+                        oTable = jQuery('#example').DataTable();
+                        oTable.draw();
+                        document.location.reload(true);
+                    }
+                    else {
+                        alert("Something Went Wrong!");
+                    }
+                });
+            }
+
+
+            function StoreDetails(obj) {
+                var url = '@Url.Content("~/")' + "Store/GetStoreDataByStoreID";
+
+                var _storeID = jQuery(obj).attr("Lang");
+                data = { storeID: _storeID };
+                jQuery.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: data,
+                    success: function (data) {
+
+                        var result = jQuery.parseJSON(data);
+
+
+                        jQuery('.lblstoreCode').text(result[0]["storeCode"]).show();
+                        jQuery('.lblStoreName').text(result[0]["storeName"]).show();
+                        jQuery('.lblServiceStartDate').text(result[0]["servicestartDate"]).show();
+                        jQuery('.lblTerminationDate').text(result[0]["terminationDate"]).show();
+                        jQuery('.ViewModelblActive').text(result[0]["active"]).show();
+
+                        //if (result[0]["active"] != 'active') {
+
+                        //    jQuery('.ViewModelblActive').text('NO');
+                        //}
+                        //else {
+                        //    jQuery('.ViewModelblActive').text('YES');
+                        //}
+
+
+
+
+                        event.preventDefault();
+                        jQuery('#modal-content').iziModal('open');
+
+
+                        //jQuery('#myModalLabelUser').text("VIEW USER");
+
+                    }
+                });
+
+            }
+
+
+        </script>
+

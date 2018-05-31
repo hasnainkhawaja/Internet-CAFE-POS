@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="onlineinternetposModelStoreContainer" CdmEntityContainer="onlineinternetposEntities">
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="onlineinternetposModel.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="companyCode" ColumnName="companyCode" />
+          <ScalarProperty Name="companyName" ColumnName="companyName" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="dbname" ColumnName="dbname" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee_encryptedpass">
+      <EntityTypeMapping TypeName="onlineinternetposModel.Employee_encryptedpass">
+        <MappingFragment StoreEntitySet="Employee_encryptedpass">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+          <ScalarProperty Name="encryptedPassword" ColumnName="encryptedPassword" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeRoles">
+      <EntityTypeMapping TypeName="onlineinternetposModel.EmployeeRole">
+        <MappingFragment StoreEntitySet="EmployeeRole">
+          <ScalarProperty Name="employeeroleid" ColumnName="employeeroleid" />
+          <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+          <ScalarProperty Name="designationId" ColumnName="designationId" />
+          <ScalarProperty Name="storeid" ColumnName="storeid" />
+          <ScalarProperty Name="isdefault" ColumnName="isdefault" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Shifts">
+      <EntityTypeMapping TypeName="onlineinternetposModel.Shift">
+        <MappingFragment StoreEntitySet="Shift">
+          <ScalarProperty Name="shfitID" ColumnName="shfitID" />
+          <ScalarProperty Name="shiftCode" ColumnName="shiftCode" />
+          <ScalarProperty Name="storeID" ColumnName="storeID" />
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
+          <ScalarProperty Name="endTime" ColumnName="endTime" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stores">
+      <EntityTypeMapping TypeName="onlineinternetposModel.Store">
+        <MappingFragment StoreEntitySet="Store">
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="storeID" ColumnName="storeID" />
+          <ScalarProperty Name="storeCode" ColumnName="storeCode" />
+          <ScalarProperty Name="storeName" ColumnName="storeName" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="servicestartDate" ColumnName="servicestartDate" />
+          <ScalarProperty Name="terminationDate" ColumnName="terminationDate" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeInfomations">
+      <EntityTypeMapping TypeName="onlineinternetposModel.EmployeeInfomation">
+        <MappingFragment StoreEntitySet="EmployeeInfomation">
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="companyid" ColumnName="companyid" />
+          <ScalarProperty Name="aspnet_userid" ColumnName="aspnet_userid" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="employeeEmail" ColumnName="employeeEmail" />
+          <ScalarProperty Name="employeeGender" ColumnName="employeeGender" />
+          <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="EmployeeInfomation_GetAll" FunctionName="onlineinternetposModel.Store.EmployeeInfomation_GetAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.EmployeeInfomation_GetAll_Result">
+          <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+          <ScalarProperty Name="employeeGender" ColumnName="employeeGender" />
+          <ScalarProperty Name="employeeEmail" ColumnName="employeeEmail" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="aspnet_userid" ColumnName="aspnet_userid" />
+          <ScalarProperty Name="companyid" ColumnName="companyid" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EmployeeInfomation_GetByID" FunctionName="onlineinternetposModel.Store.EmployeeInfomation_GetByID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.EmployeeInfomation_GetByID_Result">
+          <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+          <ScalarProperty Name="employeeGender" ColumnName="employeeGender" />
+          <ScalarProperty Name="employeeEmail" ColumnName="employeeEmail" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="aspnet_userid" ColumnName="aspnet_userid" />
+          <ScalarProperty Name="companyid" ColumnName="companyid" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Menu_List">
+      <EntityTypeMapping TypeName="onlineinternetposModel.Menu_List">
+        <MappingFragment StoreEntitySet="Menu_List">
+          <ScalarProperty Name="actionName" ColumnName="actionName" />
+          <ScalarProperty Name="controllerName" ColumnName="controllerName" />
+          <ScalarProperty Name="menuName" ColumnName="menuName" />
+          <ScalarProperty Name="menuParentID" ColumnName="menuParentID" />
+          <ScalarProperty Name="menuID" ColumnName="menuID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Designations">
+      <EntityTypeMapping TypeName="onlineinternetposModel.Designation">
+        <MappingFragment StoreEntitySet="Designations">
+          <ScalarProperty Name="modifiedDate" ColumnName="modifiedDate" />
+          <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="designationId" ColumnName="designationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Store_SelectByCompanyID" FunctionName="onlineinternetposModel.Store.Store_SelectByCompanyID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.Store_SelectByCompanyID_Result">
+          <ScalarProperty Name="storeID" ColumnName="storeID" />
+          <ScalarProperty Name="storeCode" ColumnName="storeCode" />
+          <ScalarProperty Name="storeName" ColumnName="storeName" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="servicestartDate" ColumnName="servicestartDate" />
+          <ScalarProperty Name="terminationDate" ColumnName="terminationDate" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Store_SelectByStoreID" FunctionName="onlineinternetposModel.Store.Store_SelectByStoreID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.Store_SelectByStoreID_Result">
+          <ScalarProperty Name="storeID" ColumnName="storeID" />
+          <ScalarProperty Name="storeCode" ColumnName="storeCode" />
+          <ScalarProperty Name="storeName" ColumnName="storeName" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="servicestartDate" ColumnName="servicestartDate" />
+          <ScalarProperty Name="terminationDate" ColumnName="terminationDate" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Designations_SelectAll" FunctionName="onlineinternetposModel.Store.Designations_SelectAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.Designations_SelectAll_Result">
+          <ScalarProperty Name="designationId" ColumnName="designationId" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+          <ScalarProperty Name="modifiedDate" ColumnName="modifiedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Rates">
+      <EntityTypeMapping TypeName="onlineinternetposModel.Rate">
+        <MappingFragment StoreEntitySet="Rate">
+          <ScalarProperty Name="ratetype" ColumnName="ratetype" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="alertInterval" ColumnName="alertInterval" />
+          <ScalarProperty Name="bufferTime" ColumnName="bufferTime" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="endTime" ColumnName="endTime" />
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
+          <ScalarProperty Name="isPrepay" ColumnName="isPrepay" />
+          <ScalarProperty Name="companyID" ColumnName="companyID" />
+          <ScalarProperty Name="storeID" ColumnName="storeID" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="rateCode" ColumnName="rateCode" />
+          <ScalarProperty Name="rateID" ColumnName="rateID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Rate_SelectByCompanyID" FunctionName="onlineinternetposModel.Store.Rate_SelectByCompanyID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.Rate_SelectByCompanyID_Result">
+          <ScalarProperty Name="rateID" ColumnName="rateID" />
+          <ScalarProperty Name="rateCode" ColumnName="rateCode" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="storeID" ColumnName="storeID" />
+          <ScalarProperty Name="companyID" ColumnName="companyID" />
+          <ScalarProperty Name="isPrepay" ColumnName="isPrepay" />
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
+          <ScalarProperty Name="endTime" ColumnName="endTime" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="bufferTime" ColumnName="bufferTime" />
+          <ScalarProperty Name="alertInterval" ColumnName="alertInterval" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="RateTypeName" ColumnName="RateTypeName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Rate_SelectByRateID" FunctionName="onlineinternetposModel.Store.Rate_SelectByRateID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.Rate_SelectByRateID_Result">
+          <ScalarProperty Name="rateID" ColumnName="rateID" />
+          <ScalarProperty Name="rateCode" ColumnName="rateCode" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="storeID" ColumnName="storeID" />
+          <ScalarProperty Name="companyID" ColumnName="companyID" />
+          <ScalarProperty Name="isPrepay" ColumnName="isPrepay" />
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
+          <ScalarProperty Name="endTime" ColumnName="endTime" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="bufferTime" ColumnName="bufferTime" />
+          <ScalarProperty Name="alertInterval" ColumnName="alertInterval" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+          <ScalarProperty Name="rateID1" ColumnName="rateID1" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Rate_Delete" FunctionName="onlineinternetposModel.Store.Rate_Delete" />
+    <FunctionImportMapping FunctionImportName="Shfit_SelectByCompanyID" FunctionName="onlineinternetposModel.Store.Shfit_SelectByCompanyID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.Shfit_SelectByCompanyID_Result">
+          <ScalarProperty Name="shfitID" ColumnName="shfitID" />
+          <ScalarProperty Name="shiftCode" ColumnName="shiftCode" />
+          <ScalarProperty Name="storeID" ColumnName="storeID" />
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
+          <ScalarProperty Name="endTime" ColumnName="endTime" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Shfit_SelectByShiftID" FunctionName="onlineinternetposModel.Store.Shfit_SelectByShiftID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.Shfit_SelectByShiftID_Result">
+          <ScalarProperty Name="shfitID" ColumnName="shfitID" />
+          <ScalarProperty Name="shiftCode" ColumnName="shiftCode" />
+          <ScalarProperty Name="storeID" ColumnName="storeID" />
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
+          <ScalarProperty Name="endTime" ColumnName="endTime" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="onlineinternetposModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="printOrder" ColumnName="printOrder" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="storeid" ColumnName="storeid" />
+          <ScalarProperty Name="parentId" ColumnName="parentId" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="categroyTitle" ColumnName="categroyTitle" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Floors">
+      <EntityTypeMapping TypeName="onlineinternetposModel.Floor">
+        <MappingFragment StoreEntitySet="Floors">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Storeid" ColumnName="Storeid" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Floorid" ColumnName="Floorid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RateTypes">
+      <EntityTypeMapping TypeName="onlineinternetposModel.RateType">
+        <MappingFragment StoreEntitySet="RateType">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="RateTypeid" ColumnName="RateTypeid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Store_Terminal_ByCompanyID" FunctionName="onlineinternetposModel.Store.Store_Terminal_ByCompanyID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.Store_Terminal_ByCompanyID_Result">
+          <ScalarProperty Name="terminalID" ColumnName="terminalID" />
+          <ScalarProperty Name="terminalCode" ColumnName="terminalCode" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="connectionCode" ColumnName="connectionCode" />
+          <ScalarProperty Name="floorid" ColumnName="floorid" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDated" ColumnName="updatedDated" />
+          <ScalarProperty Name="FloorName" ColumnName="FloorName" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Store_Terminal">
+      <EntityTypeMapping TypeName="onlineinternetposModel.Store_Terminal">
+        <MappingFragment StoreEntitySet="Store_Terminal">
+          <ScalarProperty Name="updatedDated" ColumnName="updatedDated" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="floorid" ColumnName="floorid" />
+          <ScalarProperty Name="connectionCode" ColumnName="connectionCode" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="terminalCode" ColumnName="terminalCode" />
+          <ScalarProperty Name="terminalID" ColumnName="terminalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ValidateStoreTerminal" FunctionName="onlineinternetposModel.Store.ValidateStoreTerminal">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.ValidateStoreTerminal_Result">
+          <ScalarProperty Name="storeID" ColumnName="storeID" />
+          <ScalarProperty Name="storeCode" ColumnName="storeCode" />
+          <ScalarProperty Name="storeName" ColumnName="storeName" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="servicestartDate" ColumnName="servicestartDate" />
+          <ScalarProperty Name="terminationDate" ColumnName="terminationDate" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="onlineinternetposModel.Store.ValidateUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.ValidateUser_Result">
+          <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+          <ScalarProperty Name="employeeGender" ColumnName="employeeGender" />
+          <ScalarProperty Name="employeeEmail" ColumnName="employeeEmail" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="aspnet_userid" ColumnName="aspnet_userid" />
+          <ScalarProperty Name="companyid" ColumnName="companyid" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
