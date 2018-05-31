@@ -39,19 +39,7 @@ namespace POS.Controllers
 
         }
 
-        //public IEnumerable<POSEntity.Store_SelectByCompanyID_Result> StoreList()
-        //{
-        //    return db.Store_SelectByCompanyID(1).ToList();
-        //}
-
-
-        //public void PopulateStoresDropDownList(object selectedDepartment = null)
-        //{
-        //    IEnumerable<Store_SelectByCompanyID_Result> streLst = StoreList();
-
-
-        //    ViewBag.DepartmentID = new SelectList(streLst, "storeID", "storeName", selectedDepartment);
-        //}
+         
 
         public JsonResult LoadDataForRateDataTable()
         {
@@ -96,13 +84,17 @@ namespace POS.Controllers
         [HttpPost]
         public Boolean DeleteRate(int rateID)
         {
-            Rate objrate = db.Rates.Where(o => o.rateID == rateID).SingleOrDefault();
-            objrate.active = false;
-            db.SaveChanges();
-            return true;
-
-            //LoadDataForRateDataTable();
-            //return View();
+            Rate objrate = db.Rates.Where(o => o.rateID == rateID &&  o.companyID==ClientSession.CompanyID).SingleOrDefault();
+            if (objrate == null)
+            {
+                return false;
+            }
+            else
+            {
+                objrate.active = false;
+                db.SaveChanges();
+                return true;
+            }
         }
 
 
@@ -110,16 +102,13 @@ namespace POS.Controllers
         public ActionResult AddEditRate(String id)
         {
             int _companyid = ClientSession.CompanyID;
-            Random rand = new Random();
-
-            int _newValue = rand.Next();
-
 
             RateModel mod = new RateModel();
 
             #region loadstores
             List<Store> stores = (from data in db.Stores
-                                    select data).ToList();
+                                  where data.companyId == ClientSession.CompanyID
+                                  select data).ToList();
 
             Store objStores = new Store();
             objStores.storeName = "Select";
@@ -134,7 +123,7 @@ namespace POS.Controllers
 
             #region loadRates
             List<POSEntity.RateType> rates = (from data in db.RateTypes
-                                  select data).ToList();
+                                              select data).ToList();
 
             POSEntity.RateType objRateType = new POSEntity.RateType();
             objRateType.Title = "Select";
@@ -152,32 +141,36 @@ namespace POS.Controllers
             if (_hdnrateId > 0)
             {
 
-                objRate = db.Rates.Where(o => o.rateID == _hdnrateId).SingleOrDefault();
-                mod.startTime = Convert.ToDateTime(objRate.startTime).ToShortTimeString();
-                mod.endTime = Convert.ToDateTime(objRate.endTime).ToShortTimeString();
-                mod.SelectedStoreId = Convert.ToInt32(objRate.storeID);
-                mod.SelectedRateId = Convert.ToInt32(objRate.ratetype);
-                mod.rateCode = objRate.rateCode;
+                objRate = db.Rates.Where(o => o.rateID == _hdnrateId && o.companyID==ClientSession.CompanyID).SingleOrDefault();
+                if (objRate != null)
+                {
+                    mod.startTime = Convert.ToDateTime(objRate.startTime).ToShortTimeString();
+                    mod.endTime = Convert.ToDateTime(objRate.endTime).ToShortTimeString();
+                    mod.SelectedStoreId = Convert.ToInt32(objRate.storeID);
+                    mod.SelectedRateId = Convert.ToInt32(objRate.ratetype);
+                    mod.rateCode = objRate.rateCode;
+                }
+                else
+                {
+                    throw new HttpException(404, "Rate does not exists");
+                }
             }
             else
             {
                 objRate = new Rate();
                 mod.startTime = DateTime.Now.ToShortTimeString();
                 mod.endTime = DateTime.Now.ToShortTimeString();
-                mod.rateCode = _companyid + "-" + _newValue;
 
             }
             //PopulateStoresDropDownList(mod.storeID);
             mod.rateID = _hdnrateId;
-            
+
             mod.title = objRate.title;
             mod.amount = Convert.ToDecimal(objRate.amount);
             mod.color = objRate.color;
             mod.bufferTime = Convert.ToInt32(objRate.bufferTime);
-            mod.alertInterval = Convert.ToInt32(objRate.alertInterval);
+            mod.alertInterval = Convert.ToInt32(objRate.alertInterval); 
 
-
-            //mod.terminationDate = Convert.ToDateTime(objStore.terminationDate).ToShortDateString() == "1/1/0001" ? "" : Convert.ToDateTime(objStore.terminationDate).ToShortDateString();
             mod.isPrepay = Convert.ToBoolean(objRate.isPrepay);
             mod.active = Convert.ToBoolean(objRate.active);
 
@@ -186,20 +179,30 @@ namespace POS.Controllers
 
 
         }
-         
+
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddEditRate(RateModel rate)
-        { 
+        {
 
             Rate objRate;
 
             if (ModelState.IsValid)
             {
-                 
+                if (rate.SelectedRateId == 2 && rate.alertInterval <= 0)
+                {
+                    ModelState.AddModelError("alertInterval", "Enter value greater than zero for deal rates");
+                }
+                else
+                {
                     if (rate.rateID > 0)
                     {
-                        objRate = db.Rates.Where(o => o.rateID == rate.rateID).SingleOrDefault();
+                        objRate = db.Rates.Where(o => o.rateID == rate.rateID && rate.companyID==ClientSession.CompanyID).SingleOrDefault();
+                        if(objRate==null)
+                        {
+                            throw new HttpException(404, "Rate does not exists");
+                        }
                     }
                     else
                     {
@@ -210,6 +213,7 @@ namespace POS.Controllers
                     objRate.endTime = Convert.ToDateTime(rate.endTime);
                     objRate.rateCode = rate.rateCode;
                     objRate.title = rate.title;
+
                     objRate.amount = rate.amount;
                     objRate.color = rate.color;
                     objRate.bufferTime = rate.bufferTime;
@@ -218,13 +222,14 @@ namespace POS.Controllers
                     objRate.ratetype = rate.SelectedRateId;
                     objRate.active = rate.active;
                     objRate.isPrepay = rate.isPrepay;
+                    objRate.companyID = ClientSession.CompanyID;
 
                     if (objRate.rateID > 0)
                     {
                         objRate.updatedBy = 1;
                         objRate.updatedDate = DateTime.Now;
-                        db.Entry(objRate).State = EntityState.Modified; 
-                        
+                        db.Entry(objRate).State = EntityState.Modified;
+
                         db.SaveChanges();
                     }
                     else
@@ -235,51 +240,46 @@ namespace POS.Controllers
                     }
 
                     db.SaveChanges();
-
-
+                     
                     //Users/LoadDataForDataTable
                     return RedirectToAction("ManageRate");
-
-                }  
-                else
-                {
-                    #region loadstores
-                    List<Store> stores = (from data in db.Stores
-                                          select data).ToList();
-
-                    Store objStores = new Store();
-                    objStores.storeName = "Select";
-                    objStores.storeID = 0;
-                    stores.Insert(0, objStores);
-                    rate.Stores = stores.Select(a => new SelectListItem
-                    {
-                        Text = a.storeName,
-                        Value = a.storeID.ToString()
-                    });
-                    #endregion
-
-                    #region loadRates
-                    List<POSEntity.RateType> rates = (from data in db.RateTypes
-                                            select data).ToList();
-
-                    POSEntity.RateType objRateType = new POSEntity.RateType();
-                    objRateType.Title = "Select";
-                    objRateType.RateTypeid = 0;
-                    rates.Insert(0, objRateType);
-                    rate.RateTypes = rates.Select(a => new SelectListItem
-                    {
-                        Text = a.Title,
-                        Value = a.RateTypeid.ToString()
-                    });
-                    #endregion
-
-
-             
-
-
-                    return View(rate);
                 }
+            }
 
+
+
+            #region loadstores
+            List<Store> stores = (from data in db.Stores where data.companyId== ClientSession.CompanyID
+                                  select data).ToList();
+
+            Store objStores = new Store();
+            objStores.storeName = "Select";
+            objStores.storeID = 0;
+            stores.Insert(0, objStores);
+            rate.Stores = stores.Select(a => new SelectListItem
+            {
+                Text = a.storeName,
+                Value = a.storeID.ToString()
+            });
+            #endregion
+
+            #region loadRates
+            List<POSEntity.RateType> rates = (from data in db.RateTypes
+                                              select data).ToList();
+
+            POSEntity.RateType objRateType = new POSEntity.RateType();
+            objRateType.Title = "Select";
+            objRateType.RateTypeid = 0;
+            rates.Insert(0, objRateType);
+            rate.RateTypes = rates.Select(a => new SelectListItem
+            {
+                Text = a.Title,
+                Value = a.RateTypeid.ToString()
+            });
+            #endregion
+
+
+            return View(rate);
         }
     }
 }
