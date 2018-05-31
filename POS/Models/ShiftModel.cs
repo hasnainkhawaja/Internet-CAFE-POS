@@ -22,7 +22,7 @@ namespace POS.Models
         [Required]
         [OptionVerificationAttribute]
         public int SelectedStoreId { get; set; }
-        public int shfitID { get; set; }
+        public Int64 shfitID { get; set; }
       
         public int? editShiftId { get; set; }
 
