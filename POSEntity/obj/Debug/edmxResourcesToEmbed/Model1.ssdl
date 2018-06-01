@@ -5,16 +5,17 @@
       <PropertyRef Name="categoryId" />
     </Key>
     <Property Name="categoryId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="categroyTitle" Type="nvarchar" MaxLength="100" />
-    <Property Name="discount" Type="bit" />
+    <Property Name="categoryTitle" Type="nvarchar" MaxLength="100" />
+    <Property Name="categoryCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="appliesDiscount" Type="bit" />
     <Property Name="parentId" Type="bigint" />
     <Property Name="storeid" Type="bigint" />
-    <Property Name="companyId" Type="int" />
+    <Property Name="companyid" Type="int" />
     <Property Name="printOrder" Type="int" />
     <Property Name="active" Type="bit" />
     <Property Name="createdBy" Type="int" />
     <Property Name="createdDate" Type="datetime" />
-    <Property Name="updatedBy" Type="int" />
+    <Property Name="updaedBy" Type="int" />
     <Property Name="updatedDate" Type="datetime" />
   </EntityType>
   <EntityType Name="Company">
@@ -182,6 +183,9 @@
     <Property Name="updatedBy" Type="int" />
     <Property Name="updatedDated" Type="datetime" />
   </EntityType>
+  <Function Name="Category_SelectByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="companyId" Type="int" Mode="In" />
+  </Function>
   <Function Name="Designations_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="comapnyID" Type="int" Mode="In" />
     <Parameter Name="active" Type="varchar(max)" Mode="In" />

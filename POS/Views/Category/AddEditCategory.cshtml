@@ -1,0 +1,120 @@
+﻿@model POS.Models.CategoryModel
+@{
+    ViewBag.Title = "Add Edit Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "";
+
+}
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            @using (Html.BeginForm("AddEditCategory", "Category", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.categoryId)
+                <h3 class="page-title">Category Details</h3>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.CategoryCode)
+                            @Html.TextBoxFor(model => model.CategoryCode, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.CategoryCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.CategoryTilte)
+                            @Html.TextBoxFor(model => model.CategoryTilte, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.CategoryTilte, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SelectedStoreId)
+                            @Html.DropDownListFor(x => x.SelectedStoreId, new SelectList(Model.Stores, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.SelectedStoreId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SelectedParentCategoryId)
+                            @Html.DropDownListFor(x => x.SelectedParentCategoryId, new SelectList(Model.Categories, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.SelectedParentCategoryId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.printOrder)
+                            @Html.TextBoxFor(model => model.printOrder, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.printOrder, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+
+                            @Html.LabelFor(x => x.appliesDiscount)
+                            @Html.CheckBoxFor(m => m.appliesDiscount, new { @class = "chkactive" })
+
+                            &nbsp;
+
+                            @Html.LabelFor(x => x.isActive)
+                            @Html.CheckBoxFor(m => m.isActive, new { @class = "chkactive" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-12 text-center m-t-20">
+                            <a href="@Url.Action("ManageCategory", "Category")" class="btn btn-primary">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">Save &amp; update</button>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        jQuery('#SelectedStoreId').on('change', function ()  {
+            SelectStoreCategories($("#SelectedStoreId").val())
+        });
+
+        function SelectStoreCategories(storeid) {
+            
+            var $select = $('#SelectedParentCategoryId');
+            $select.empty()
+            .append('<option selected="selected" value="0">Main Category</option>');
+            var url = '@Url.Content("~/")' + "Category/LoadDataForStoreCateogriesDataTable";
+            data = { storeid: storeid, categoryid: '@Model.categoryId' };
+          jQuery.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            success: function (data) {
+                $.each(data.data, function (key, entry) {
+                    $select.append($('<option></option>').attr('value', entry.categoryId).text(entry.categoryTitle));
+                })
+            }
+        });
+
+        }
+
+    </script>
+}

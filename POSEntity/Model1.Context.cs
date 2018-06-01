@@ -36,10 +36,10 @@ namespace POSEntity
         public virtual DbSet<Menu_List> Menu_List { get; set; }
         public virtual DbSet<Designation> Designations { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Floor> Floors { get; set; }
         public virtual DbSet<RateType> RateTypes { get; set; }
         public virtual DbSet<Store_Terminal> Store_Terminal { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
     
         public virtual ObjectResult<EmployeeInfomation_GetAll_Result> EmployeeInfomation_GetAll(Nullable<int> companyID)
         {
@@ -193,6 +193,15 @@ namespace POSEntity
                 new ObjectParameter("storeid", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectFloors_Result>("SelectFloors", companyidParameter, storeidParameter);
+        }
+    
+        public virtual ObjectResult<Category_SelectByCompanyID_Result> Category_SelectByCompanyID(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Category_SelectByCompanyID_Result>("Category_SelectByCompanyID", companyIdParameter);
         }
     }
 }

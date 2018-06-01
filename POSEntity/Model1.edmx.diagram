@@ -14,10 +14,10 @@
         <EntityTypeShape EntityType="onlineinternetposModel.Menu_List" Width="1.5" PointX="0.75" PointY="6.875" />
         <EntityTypeShape EntityType="onlineinternetposModel.Designation" Width="1.5" PointX="2.625" PointY="1.75" />
         <EntityTypeShape EntityType="onlineinternetposModel.Rate" Width="1.5" PointX="2.75" PointY="6" />
-        <EntityTypeShape EntityType="onlineinternetposModel.Category" Width="1.5" PointX="8.75" PointY="6.75" />
         <EntityTypeShape EntityType="onlineinternetposModel.Floor" Width="1.5" PointX="10.625" PointY="4.875" />
         <EntityTypeShape EntityType="onlineinternetposModel.RateType" Width="1.5" PointX="8.5" PointY="4.625" />
         <EntityTypeShape EntityType="onlineinternetposModel.Store_Terminal" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="onlineinternetposModel.Category" Width="1.5" PointX="7.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

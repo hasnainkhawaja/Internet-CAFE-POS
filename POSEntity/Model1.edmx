@@ -10,16 +10,17 @@
             <PropertyRef Name="categoryId" />
           </Key>
           <Property Name="categoryId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="categroyTitle" Type="nvarchar" MaxLength="100" />
-          <Property Name="discount" Type="bit" />
+          <Property Name="categoryTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="categoryCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="appliesDiscount" Type="bit" />
           <Property Name="parentId" Type="bigint" />
           <Property Name="storeid" Type="bigint" />
-          <Property Name="companyId" Type="int" />
+          <Property Name="companyid" Type="int" />
           <Property Name="printOrder" Type="int" />
           <Property Name="active" Type="bit" />
           <Property Name="createdBy" Type="int" />
           <Property Name="createdDate" Type="datetime" />
-          <Property Name="updatedBy" Type="int" />
+          <Property Name="updaedBy" Type="int" />
           <Property Name="updatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Company">
@@ -187,6 +188,9 @@
           <Property Name="updatedBy" Type="int" />
           <Property Name="updatedDated" Type="datetime" />
         </EntityType>
+        <Function Name="Category_SelectByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="companyId" Type="int" Mode="In" />
+        </Function>
         <Function Name="Designations_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="comapnyID" Type="int" Mode="In" />
           <Parameter Name="active" Type="varchar(max)" Mode="In" />
@@ -363,7 +367,6 @@
           <FunctionImport Name="Shfit_SelectByShiftID" ReturnType="Collection(onlineinternetposModel.Shfit_SelectByShiftID_Result)">
           <Parameter Name="shiftID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="Categories" EntityType="onlineinternetposModel.Category" />
           <EntitySet Name="Floors" EntityType="onlineinternetposModel.Floor" />
           <EntitySet Name="RateTypes" EntityType="onlineinternetposModel.RateType" />
           <FunctionImport Name="Store_Terminal_ByCompanyID" ReturnType="Collection(onlineinternetposModel.Store_Terminal_ByCompanyID_Result)">
@@ -383,6 +386,10 @@
           <FunctionImport Name="SelectFloors" ReturnType="Collection(onlineinternetposModel.SelectFloors_Result)">
             <Parameter Name="companyid" Mode="In" Type="Int32" />
             <Parameter Name="storeid" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <EntitySet Name="Categories" EntityType="onlineinternetposModel.Category" />
+          <FunctionImport Name="Category_SelectByCompanyID" ReturnType="Collection(onlineinternetposModel.Category_SelectByCompanyID_Result)">
+            <Parameter Name="companyId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="EmployeeInfomation">
@@ -590,23 +597,6 @@
           <Property Type="DateTime" Name="updatedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="StoreName" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="categoryId" />
-          </Key>
-          <Property Name="categoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="categroyTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="discount" Type="Boolean" />
-          <Property Name="parentId" Type="Int64" />
-          <Property Name="storeid" Type="Int64" />
-          <Property Name="companyId" Type="Int32" />
-          <Property Name="printOrder" Type="Int32" />
-          <Property Name="active" Type="Boolean" />
-          <Property Name="createdBy" Type="Int32" />
-          <Property Name="createdDate" Type="DateTime" Precision="3" />
-          <Property Name="updatedBy" Type="Int32" />
-          <Property Name="updatedDate" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="Floor">
           <Key>
             <PropertyRef Name="Floorid" />
@@ -694,6 +684,33 @@
           <Property Type="Int32" Name="Order" Nullable="true" />
           <Property Type="Int64" Name="Storeid" Nullable="true" />
           <Property Type="Boolean" Name="Active" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="categoryId" />
+          </Key>
+          <Property Name="categoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="categoryCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="appliesDiscount" Type="Boolean" />
+          <Property Name="parentId" Type="Int64" />
+          <Property Name="storeid" Type="Int64" />
+          <Property Name="companyid" Type="Int32" />
+          <Property Name="printOrder" Type="Int32" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="createdBy" Type="Int32" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+          <Property Name="updaedBy" Type="Int32" />
+          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="Category_SelectByCompanyID_Result">
+          <Property Type="Int64" Name="categoryId" Nullable="false" />
+          <Property Type="String" Name="CategoryTitle" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CategoryCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="appliesDiscount" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="active" Nullable="false" MaxLength="3" />
+          <Property Type="Int64" Name="storeid" Nullable="true" />
+          <Property Type="String" Name="store" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1018,24 +1035,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="onlineinternetposModel.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
-                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
-                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
-                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
-                <ScalarProperty Name="active" ColumnName="active" />
-                <ScalarProperty Name="printOrder" ColumnName="printOrder" />
-                <ScalarProperty Name="companyId" ColumnName="companyId" />
-                <ScalarProperty Name="storeid" ColumnName="storeid" />
-                <ScalarProperty Name="parentId" ColumnName="parentId" />
-                <ScalarProperty Name="discount" ColumnName="discount" />
-                <ScalarProperty Name="categroyTitle" ColumnName="categroyTitle" />
-                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Floors">
             <EntityTypeMapping TypeName="onlineinternetposModel.Floor">
               <MappingFragment StoreEntitySet="Floors">
@@ -1140,6 +1139,38 @@
                 <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="Storeid" ColumnName="Storeid" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="onlineinternetposModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="updaedBy" ColumnName="updaedBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="printOrder" ColumnName="printOrder" />
+                <ScalarProperty Name="companyid" ColumnName="companyid" />
+                <ScalarProperty Name="storeid" ColumnName="storeid" />
+                <ScalarProperty Name="parentId" ColumnName="parentId" />
+                <ScalarProperty Name="appliesDiscount" ColumnName="appliesDiscount" />
+                <ScalarProperty Name="categoryCode" ColumnName="categoryCode" />
+                <ScalarProperty Name="categoryTitle" ColumnName="categoryTitle" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Category_SelectByCompanyID" FunctionName="onlineinternetposModel.Store.Category_SelectByCompanyID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.Category_SelectByCompanyID_Result">
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
+                <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+                <ScalarProperty Name="appliesDiscount" ColumnName="appliesDiscount" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="storeid" ColumnName="storeid" />
+                <ScalarProperty Name="store" ColumnName="store" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

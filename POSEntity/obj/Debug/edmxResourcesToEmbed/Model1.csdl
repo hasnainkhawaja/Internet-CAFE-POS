@@ -108,7 +108,6 @@
     <FunctionImport Name="Shfit_SelectByShiftID" ReturnType="Collection(onlineinternetposModel.Shfit_SelectByShiftID_Result)">
       <Parameter Name="shiftID" Mode="In" Type="Int32" />
     </FunctionImport>
-    <EntitySet Name="Categories" EntityType="onlineinternetposModel.Category" />
     <EntitySet Name="Floors" EntityType="onlineinternetposModel.Floor" />
     <EntitySet Name="RateTypes" EntityType="onlineinternetposModel.RateType" />
     <FunctionImport Name="Store_Terminal_ByCompanyID" ReturnType="Collection(onlineinternetposModel.Store_Terminal_ByCompanyID_Result)">
@@ -128,6 +127,10 @@
     <FunctionImport Name="SelectFloors" ReturnType="Collection(onlineinternetposModel.SelectFloors_Result)">
       <Parameter Name="companyid" Mode="In" Type="Int32" />
       <Parameter Name="storeid" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="Categories" EntityType="onlineinternetposModel.Category" />
+    <FunctionImport Name="Category_SelectByCompanyID" ReturnType="Collection(onlineinternetposModel.Category_SelectByCompanyID_Result)">
+      <Parameter Name="companyId" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="EmployeeInfomation">
@@ -335,23 +338,6 @@
     <Property Type="DateTime" Name="updatedDate" Nullable="true" Precision="23" />
     <Property Type="String" Name="StoreName" Nullable="false" MaxLength="50" />
   </ComplexType>
-  <EntityType Name="Category">
-    <Key>
-      <PropertyRef Name="categoryId" />
-    </Key>
-    <Property Name="categoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="categroyTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="discount" Type="Boolean" />
-    <Property Name="parentId" Type="Int64" />
-    <Property Name="storeid" Type="Int64" />
-    <Property Name="companyId" Type="Int32" />
-    <Property Name="printOrder" Type="Int32" />
-    <Property Name="active" Type="Boolean" />
-    <Property Name="createdBy" Type="Int32" />
-    <Property Name="createdDate" Type="DateTime" Precision="3" />
-    <Property Name="updatedBy" Type="Int32" />
-    <Property Name="updatedDate" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="Floor">
     <Key>
       <PropertyRef Name="Floorid" />
@@ -439,5 +425,32 @@
     <Property Type="Int32" Name="Order" Nullable="true" />
     <Property Type="Int64" Name="Storeid" Nullable="true" />
     <Property Type="Boolean" Name="Active" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="categoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="categoryTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="categoryCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="appliesDiscount" Type="Boolean" />
+    <Property Name="parentId" Type="Int64" />
+    <Property Name="storeid" Type="Int64" />
+    <Property Name="companyid" Type="Int32" />
+    <Property Name="printOrder" Type="Int32" />
+    <Property Name="active" Type="Boolean" />
+    <Property Name="createdBy" Type="Int32" />
+    <Property Name="createdDate" Type="DateTime" Precision="3" />
+    <Property Name="updaedBy" Type="Int32" />
+    <Property Name="updatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <ComplexType Name="Category_SelectByCompanyID_Result">
+    <Property Type="Int64" Name="categoryId" Nullable="false" />
+    <Property Type="String" Name="CategoryTitle" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CategoryCode" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="appliesDiscount" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="active" Nullable="false" MaxLength="3" />
+    <Property Type="Int64" Name="storeid" Nullable="true" />
+    <Property Type="String" Name="store" Nullable="false" MaxLength="50" />
   </ComplexType>
 </Schema>

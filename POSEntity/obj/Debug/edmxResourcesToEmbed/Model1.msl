@@ -318,24 +318,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="onlineinternetposModel.Category">
-        <MappingFragment StoreEntitySet="Category">
-          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
-          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
-          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
-          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
-          <ScalarProperty Name="active" ColumnName="active" />
-          <ScalarProperty Name="printOrder" ColumnName="printOrder" />
-          <ScalarProperty Name="companyId" ColumnName="companyId" />
-          <ScalarProperty Name="storeid" ColumnName="storeid" />
-          <ScalarProperty Name="parentId" ColumnName="parentId" />
-          <ScalarProperty Name="discount" ColumnName="discount" />
-          <ScalarProperty Name="categroyTitle" ColumnName="categroyTitle" />
-          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Floors">
       <EntityTypeMapping TypeName="onlineinternetposModel.Floor">
         <MappingFragment StoreEntitySet="Floors">
@@ -440,6 +422,38 @@
           <ScalarProperty Name="Order" ColumnName="Order" />
           <ScalarProperty Name="Storeid" ColumnName="Storeid" />
           <ScalarProperty Name="Active" ColumnName="Active" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="onlineinternetposModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updaedBy" ColumnName="updaedBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="printOrder" ColumnName="printOrder" />
+          <ScalarProperty Name="companyid" ColumnName="companyid" />
+          <ScalarProperty Name="storeid" ColumnName="storeid" />
+          <ScalarProperty Name="parentId" ColumnName="parentId" />
+          <ScalarProperty Name="appliesDiscount" ColumnName="appliesDiscount" />
+          <ScalarProperty Name="categoryCode" ColumnName="categoryCode" />
+          <ScalarProperty Name="categoryTitle" ColumnName="categoryTitle" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Category_SelectByCompanyID" FunctionName="onlineinternetposModel.Store.Category_SelectByCompanyID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.Category_SelectByCompanyID_Result">
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
+          <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+          <ScalarProperty Name="appliesDiscount" ColumnName="appliesDiscount" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="storeid" ColumnName="storeid" />
+          <ScalarProperty Name="store" ColumnName="store" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

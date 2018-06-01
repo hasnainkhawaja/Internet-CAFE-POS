@@ -15,16 +15,17 @@ namespace POSEntity
     public partial class Category
     {
         public long categoryId { get; set; }
-        public string categroyTitle { get; set; }
-        public Nullable<bool> discount { get; set; }
+        public string categoryTitle { get; set; }
+        public string categoryCode { get; set; }
+        public Nullable<bool> appliesDiscount { get; set; }
         public Nullable<long> parentId { get; set; }
         public Nullable<long> storeid { get; set; }
-        public Nullable<int> companyId { get; set; }
+        public Nullable<int> companyid { get; set; }
         public Nullable<int> printOrder { get; set; }
         public Nullable<bool> active { get; set; }
         public Nullable<int> createdBy { get; set; }
         public Nullable<System.DateTime> createdDate { get; set; }
-        public Nullable<int> updatedBy { get; set; }
+        public Nullable<int> updaedBy { get; set; }
         public Nullable<System.DateTime> updatedDate { get; set; }
     }
 }
