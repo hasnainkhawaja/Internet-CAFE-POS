@@ -5,25 +5,7 @@
 
 
 }
-@section styles{
-    <link href="~/Content/colorpicker.css" type="text/css" rel="stylesheet" />
-    <style type="text/css">
-        #colorSelector {
-            position: relative;
-            width: 36px;
-            height: 36px;
-            background: url(/Content/images/select.png);
-        } 
-        #colorSelector div {
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 30px;
-            height: 30px;
-            background: url(/Content/images/select.png) center;
-        }
-    </style>
-}
+
 <div class="content container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -37,7 +19,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             @Html.LabelFor(x => x.rateCode)
-                            @Html.TextBoxFor(model => model.rateCode, new { @class = "form-control", @placeholder = "RT 13455" })
+                            @Html.TextBoxFor(model => model.rateCode, new { @class = "form-control", @readonly = true })
                             @Html.ValidationMessageFor(model => model.rateCode, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -99,48 +81,64 @@
                             @Html.ValidationMessageFor(model => model.endTime, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </div> 
+                </div>
+               
+
+
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <div id="colorSelector"><div style="background-color: @Model.color"></div></div>
-                            <br/>
-                            @Html.TextBoxFor(model => model.color, new { @class = "form-control", @readonly=true})
+                            @Html.LabelFor(x => x.color)
+                            @Html.TextBoxFor(model => model.color, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.color, "", new { @class = "text-danger" })
+
                         </div>
                     </div>
                 </div>
+
 
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             @Html.LabelFor(x => x.bufferTime)
-                            @Html.TextBoxFor(model => model.bufferTime, new { @class = "form-control", @placeholder = "Enter time in minutes" })
+                            @Html.TextBoxFor(model => model.bufferTime, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.bufferTime, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             @Html.LabelFor(x => x.alertInterval)
-                            @Html.TextBoxFor(model => model.alertInterval, new { @class = "form-control", @placeholder = "Enter time in minutes" })
+                            @Html.TextBoxFor(model => model.alertInterval, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.alertInterval, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-
+                 
 
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
                             @Html.LabelFor(x => x.isPrepay)
                             @Html.CheckBoxFor(m => m.isPrepay, new { @class = "chkPrepay" })
-                            &nbsp;
-                            @Html.LabelFor(x => x.active)
-                            @Html.CheckBoxFor(m => m.active, new { @class = "chkactive" })
+
                         </div>
-                    </div> 
+                    </div>
                 </div>
-                 
+
+
+
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Status: <span class="error">*</span></label>
+                            @Html.CheckBoxFor(m => m.active, new { @class = "chkactive" })
+
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="row">
                     <div class="row">
                         <div class="col-sm-12 text-center m-t-20">
@@ -159,6 +157,7 @@
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
+<<<<<<< HEAD
     <script type="text/javascript" src="~/Scripts/colorpicker.js"></script>
     <script>
 
@@ -180,4 +179,6 @@
             
         });
     </script>
+=======
+>>>>>>> origin/master
 }

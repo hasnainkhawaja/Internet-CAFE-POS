@@ -25,33 +25,38 @@ namespace POS.Models
         [Display(Name = "Type")]
         [Required]
         [OptionVerificationAttribute]
-        public int SelectedRateId { get; set; } 
+        public int SelectedRateId { get; set; }
 
-
+      
+//public int RateType { get; set; }
+ 
 
         public Int32 rateID { get; set; }
 
         [Display(Name = "Rate Code")]
         [Required]
-        public String rateCode { get; set; } 
+        public String rateCode { get; set; }
+
+
+
 
         [Display(Name = "Title")]
         [Required]
-        public String title { get; set; }  
+        public String title { get; set; }
+
+
 
         
         [Display(Name = "Amount")]
         [Required]
         public Decimal amount { get; set; }
 
-        [Display(Name = "Status")]
         public Boolean active { get; set; }
 
         public Int32 storeID { get; set; }
 
         public Int32 companyID { get; set; }
         
-        [Display(Name = "Is Prepay")]
         public Boolean isPrepay { get; set; }
 
 
@@ -84,7 +89,8 @@ namespace POS.Models
         public DateTime Createddate { get; set; }
 
         public Int32 updatedBy { get; set; }
-         
+
+
         public DateTime updatedDate { get; set; }
 
     }

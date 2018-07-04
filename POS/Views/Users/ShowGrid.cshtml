@@ -5,103 +5,48 @@
     //Layout = "";
 }
 
-
-<div class=" container">
-    @*@Html.ActionLink("Add New", "AddEditUser", "Users");*@
-
-
-    <a href="@Url.Action("AddEditUser", "Users")" class="waves-effect waves-light btn left">
-        Add New<i class="mdi-content-send right"></i>
-    </a>
-
-
-</div>
-
-<div id="table-datatables">
+<div class="content container-fluid">
     <div class="row">
+        <div class="col-xs-4">
+            <h4 class="page-title">Manage Users</h4>
+        </div>
+        <div class="col-xs-8 text-right m-b-30">
+            <a href="@Url.Action("AddEditUser", "Users")" class="btn btn-primary pull-right rounded"><i class="fa fa-plus"></i>Add New</a>
 
-        <div class="col s12 m8 l9">
-            <table id="example" class="responsive-table display" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Employee D</th>
-                        <th>User Name</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Employee Code</th>
-                        <th>Employee Email</th>
-                        <th>Status</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                        <th>View</th>
-                    </tr>
-                </thead>
-            </table>
         </div>
     </div>
-</div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
 
+                <table class="table table-striped custom-table datatable" id="example">
+                    <thead>
+                        <tr>
 
-
-
-
-<div id="modal-content" class="iziModal">
-    <div class="container">
-        @*<p class="caption">Collections allow you to group list objects together.</p>
-            <div class="divider"></div>*@
-
-        <div id="basic-collections" class="section">
-
-            <div class="row">
-                <div class="col s12 m8 l9">
-                    <ul class="collection">
-                        <li class="collection-item">        
-                            <b> User Name : </b>
-                            <span class="lbl popup-drop lblUserName"></span>
-                        </li>
-                        <li class="collection-item">    
-                            <b> First Name : </b>
-                                <span class="lbl popup-drop lblFirstName"></span>
-                        </li>
-
-                        <li class="collection-item">
-                            <b> Last Name : </b>
-                            <span class="lbl popup-drop lblLastName"></span>
-                        </li>
-
-                        <li class="collection-item">
-                            <b> Employee Code : </b>
-                            <span class="lbl popup-drop lblEmployeeCode"></span>
-                        </li>
-
-                        <li class="collection-item">
-                            <b> Gender : </b>
-                            <span class="lbl popup-drop lblGender"></span>
-                        </li>
-
-                        <li class="collection-item">
-                            <b> Email Address : </b>
-                            <span class="lbl popup-drop lblEmailAddress"></span>
-                        </li>
-                        <li class="collection-item">
-                            <b>Status : </b>
-                            <span class="lbl popup-drop ViewModelblActive"></span>
-                        </li>
-                    </ul>
-                </div>
+                            <th>Employee iD</th>
+                            <th>User Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Employee Code</th>
+                            <th>Employee Email</th>
+                            <th>Status</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
-        <!--Dismissable Content    -->
     </div>
+
 </div>
-
-
-
 
 
 <script>
     jQuery(document).ready(function () {
 
+     
         $('#example').DataTable({
             "ajax": {
                 "url": "/Users/LoadDataForDataTable", // GetUserList",
@@ -116,43 +61,25 @@
   { "data": "employeeCode" },
   { "data": "employeeEmail" },
   { "data": "active" },
-              {
-                  "render": function (data, type, full, meta) {
-                      return '<a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Click here to update record" href="/Users/AddEditUser/' + full.employeeID + '"><i class="mdi-editor-mode-edit"></i></a>';
-                      //return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.employeeID + "'); >Delete</a>";
 
-                  }
-              },
-              {
-                  data: null, render: function (data, type, row) {
-                      return '<a href="javascript:void(0);" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Click here to view record" onclick=DeleteData("' + row.employeeID + '"); ><i class="mdi-action-delete"></i></a>';
-                  }
-              },
-              {
-                  data: null, render: function (data, type, row) {
-                      return '<a href="javascript:void(0);" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Click here to view record" onclick="UserDetalis(this);" title="View" Lang="' + row.employeeID + '"><i class="mdi-action-search"></i></a>';
-                  }
-              },
+           {// this is Actions Column
+               mRender: function (data, type, row) {
+
+                   var _rateID = row.rateID;
+                   var _div = '<div class="dropdown">';
+                   var linkEdit = '<a href="javascript:void(0);" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a><ul class="dropdown-menu pull-right"><li><a href="@Url.Action("AddEditUser", "Users", new { id = -1 })"><i class="fa fa-pencil m-r-5"></i>Edit</a></li>';
+                   var linkdesignation = '<li><a href="@Url.Action("ManageEmployeeRole", "EmployeeRole", new { id = -1 })"><i class="fa fa-pencil m-r-5"></i>Manage Designations</a></li></ul></div>';
+
+                   linkEdit = linkEdit.replace("-1", row.employeeID);
+                   linkdesignation = linkdesignation.replace("-1", row.employeeID);
+
+                   var _fnal = _div + linkEdit + linkdesignation;
+                   return _fnal;
+               },
+               className: "text-right"
+           }
 
             ]
-        });
-
-
-
-        jQuery("#modal-content").iziModal({
-            title: "User Details",
-            //subtitle: "Simple, complete and lightweight modal plugin with jquery.",
-            //iconClass: 'icon-stack',
-            //overlayColor: 'rgba(255, 255, 255, 0.4)',
-            width: 500,
-            closeOnEscape: true,
-            closeButton: true,
-            overlay: true,
-            overlayClose: true,
-            appendTo: 'body', // or false
-            appendToOverlay: 'body', // or false
-            overlayColor: 'rgba(0, 0, 0, 0.4)',
-            padding: 20
         });
 
     });
