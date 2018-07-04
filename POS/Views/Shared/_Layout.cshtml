@@ -6,17 +6,19 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
     <!--Default Styles-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+     
     <link rel="stylesheet" type="text/css" href="~/content/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/content/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="~/content/select2.min.css">
     <link rel="stylesheet" type="text/css" href="~/content/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css" href="~/content/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="~/content/style.css">
+    <link rel="stylesheet" type="text/css" href="~/content/style.css"> 
+    <script type="text/javascript" src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/content/jquery.loadingModal.min.css">
     <!--Default Styles-->
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Scripts.Render("~/bundles/modernizr")
-    <script type="text/javascript" src="~/Scripts/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    @Scripts.Render("~/bundles/modernizr") 
+  
     @RenderSection("styles", required: false)
 </head>
 <body>
@@ -379,7 +381,10 @@
 
 
     <div class="sidebar-overlay" data-reff="#sidebar"></div>
-
+    
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+    <script type="text/javascript" src="~/Scripts/jquery.loadingModal.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.slimscroll.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="~/Scripts/fnReloadAjax.js"></script>
@@ -388,6 +393,7 @@
     <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.js"></script>
     <script type="text/javascript" src="~/Scripts/select2.min.js"></script>
     <script type="text/javascript" src="~/Scripts/app.js"></script>
+    
     @RenderSection("scripts", required: false)
 
     <script>
@@ -406,10 +412,11 @@
                 format: 'LT'
             });
 
+            $("select").select2();
         });
 
 
     </script>
-
+     
 </body>
 </html>

@@ -457,5 +457,104 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="BarcodeTypes">
+      <EntityTypeMapping TypeName="onlineinternetposModel.BarcodeType">
+        <MappingFragment StoreEntitySet="BarcodeType">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductUnits">
+      <EntityTypeMapping TypeName="onlineinternetposModel.ProductUnit">
+        <MappingFragment StoreEntitySet="ProductUnit">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ValidateProductBarcode" FunctionName="onlineinternetposModel.Store.ValidateProductBarcode" />
+    <FunctionImportMapping FunctionImportName="ValidateProductCode" FunctionName="onlineinternetposModel.Store.ValidateProductCode" />
+    <FunctionImportMapping FunctionImportName="Product_SelectByCompanyAndStore" FunctionName="onlineinternetposModel.Store.Product_SelectByCompanyAndStore">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.Product_SelectByCompanyAndStore_Result">
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="barcode" ColumnName="barcode" />
+          <ScalarProperty Name="barcodeTypeId" ColumnName="barcodeTypeId" />
+          <ScalarProperty Name="barcodeTypeTitle" ColumnName="barcodeTypeTitle" />
+          <ScalarProperty Name="productUnitId" ColumnName="productUnitId" />
+          <ScalarProperty Name="productUnitTitle" ColumnName="productUnitTitle" />
+          <ScalarProperty Name="TaxRate" ColumnName="TaxRate" />
+          <ScalarProperty Name="categoryid" ColumnName="categoryid" />
+          <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
+          <ScalarProperty Name="categoryCode" ColumnName="categoryCode" />
+          <ScalarProperty Name="visibleOnScreen" ColumnName="visibleOnScreen" />
+          <ScalarProperty Name="isMisc" ColumnName="isMisc" />
+          <ScalarProperty Name="stocking" ColumnName="stocking" />
+          <ScalarProperty Name="minAlert" ColumnName="minAlert" />
+          <ScalarProperty Name="restrictMinimumSale" ColumnName="restrictMinimumSale" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="isTaxIncluded" ColumnName="isTaxIncluded" />
+          <ScalarProperty Name="ItemCost" ColumnName="ItemCost" />
+          <ScalarProperty Name="ItemSale" ColumnName="ItemSale" />
+          <ScalarProperty Name="isCondimentItem" ColumnName="isCondimentItem" />
+          <ScalarProperty Name="Storeid" ColumnName="Storeid" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="TaxCategories">
+      <EntityTypeMapping TypeName="onlineinternetposModel.TaxCategory">
+        <MappingFragment StoreEntitySet="TaxCategories">
+          <ScalarProperty Name="rate" ColumnName="rate" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="companyid" ColumnName="companyid" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="TaxCategory_SelectByCompanyID" FunctionName="onlineinternetposModel.Store.TaxCategory_SelectByCompanyID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.TaxCategory_SelectByCompanyID_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="companyid" ColumnName="companyid" />
+          <ScalarProperty Name="companyname" ColumnName="companyname" />
+          <ScalarProperty Name="rate" ColumnName="rate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="onlineinternetposModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="taxId" ColumnName="taxId" />
+          <ScalarProperty Name="minAlert" ColumnName="minAlert" />
+          <ScalarProperty Name="restrictMinimumSale" ColumnName="restrictMinimumSale" />
+          <ScalarProperty Name="stocking" ColumnName="stocking" />
+          <ScalarProperty Name="isCondimentItem" ColumnName="isCondimentItem" />
+          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="itemSale" ColumnName="itemSale" />
+          <ScalarProperty Name="itemCost" ColumnName="itemCost" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="isMisc" ColumnName="isMisc" />
+          <ScalarProperty Name="visibleOnScreen" ColumnName="visibleOnScreen" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="productUnit" ColumnName="productUnit" />
+          <ScalarProperty Name="productTitle" ColumnName="productTitle" />
+          <ScalarProperty Name="productCode" ColumnName="productCode" />
+          <ScalarProperty Name="barcodeTypeId" ColumnName="barcodeTypeId" />
+          <ScalarProperty Name="barcode" ColumnName="barcode" />
+          <ScalarProperty Name="productid" ColumnName="productid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

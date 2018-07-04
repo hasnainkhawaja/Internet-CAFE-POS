@@ -1,0 +1,270 @@
+﻿@model POS.Models.ProductModel
+@{
+    ViewBag.Title = "Add Edit Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "";
+
+}
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            @using (Html.BeginForm("AddEditProduct", "Product", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.productId)
+                <h4 class="page-title">Product Information</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.ProductCode)
+                            @Html.TextBoxFor(x => x.ProductCode, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.ProductCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.ProductTitle)
+                            @Html.TextBoxFor(x => x.ProductTitle, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.ProductTitle, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SelectedStoreId)
+                            @Html.DropDownListFor(x => x.SelectedStoreId, new SelectList(Model.Stores, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.SelectedStoreId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SelectedCategoryId)
+                            @Html.DropDownListFor(x => x.SelectedCategoryId, new List<SelectListItem>() { }, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.SelectedCategoryId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SelectedBarcodeTypeId)
+                            @Html.DropDownListFor(x => x.SelectedBarcodeTypeId, new SelectList(Model.BarcodeTypes, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.SelectedBarcodeTypeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Barcode)
+                            @Html.TextBoxFor(x => x.Barcode, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Barcode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SelectedProductUnitId)
+                            @Html.DropDownListFor(x => x.SelectedProductUnitId, new SelectList(Model.ProductUnits, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.SelectedProductUnitId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.taxId)
+                            @Html.DropDownListFor(x => x.taxId, new SelectList(Model.TaxCategories, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.taxId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.itemCost)
+                            @Html.TextBoxFor(x => x.itemCost, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.itemCost, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Item Rate + Tax")
+                            @Html.TextBox("itemratetax", "0", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.itemRate)
+                            @Html.TextBoxFor(x => x.itemRate, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.itemRate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="page-title m-t-30">Product Stocking</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            Stocking Enabled?
+                            <div class="pull-right">
+                                @Html.CheckBoxFor(x=>x.stocking)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.minAlert)
+                            @Html.TextBoxFor(x => x.minAlert, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.minAlert, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.restrictMinSale)
+                            @Html.DropDownListFor(x => x.restrictMinSale, new SelectList(Model.YesNoOptions, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.restrictMinSale, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="page-title m-t-30">More Settings</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            Is Misc Item
+                            <div class="pull-right">
+                                @Html.CheckBoxFor(x=>x.isMisc)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            Condiment Item
+                            <div class="pull-right">
+                               @Html.CheckBoxFor(x=>x.isCondimentItem)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            Visible On Screen
+                            <div class="pull-right">
+                                @Html.CheckBoxFor(x => x.VisibleOnScreen)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            Status
+                            <div class="pull-right">
+                                @Html.CheckBoxFor(x=>x.Active)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-12 text-center m-t-20">
+                            <a href="@Url.Action("ManageProducts", "Products")" class="btn btn-primary">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary divSaveCancel">Save &amp; update</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+
+          
+
+            loadCategories(@Model.SelectedStoreId,'true');
+
+            $("#SelectedStoreId").on('change', function (e) {
+
+                loadCategories(this.value,'false');
+
+            });
+
+            function loadCategories(value,autoselect)
+            {
+                var $select = $('#SelectedCategoryId');
+
+                $select.empty()
+                .append('<option selected="selected" value="0">Select</option>');
+                var url = '@Url.Content("~/")' + "Category/LoadDataForCategoryDataTableByStore";
+                data = { storeid: value };
+                jQuery.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: data,
+                    success: function (data) {
+
+                        $.each(data.data, function (key, entry) {
+                            if (entry.categoryId == '@Model.SelectedCategoryId' && autoselect=='true')
+                            {
+                                    $select.append($('<option></option>').attr('value', entry.categoryId).attr('selected','selected').text(entry.categoryTitle));
+                            }
+                            else
+                            {
+                                $select.append($('<option></option>').attr('value', entry.categoryId).text(entry.categoryTitle));
+                            }
+                        
+                        })
+
+                    }
+                });
+            }
+            $("#SelectedBarcodeTypeId").on('change', function (e) {                
+                if (this.value == 1) {
+                    $("#Barcode").prop('disabled', true);
+                }
+                else {
+                    $("#Barcode").prop('disabled', false);
+                }
+            });
+             
+            $("#taxId").on('change', function () {
+
+                calculateItemRateTax();
+
+            });
+
+            $("#itemratetax").on('keyup', function () {
+
+                calculateRate();
+
+            });
+
+            $("#itemRate").on('keyup', function () {
+                calculateItemRateTax();
+            });
+
+           
+            if($("#SelectedBarcodeTypeId").val()==1)
+            {
+                $("#Barcode").prop('disabled', true);
+            }
+            calculateItemRateTax();
+        })
+    </script>
+}

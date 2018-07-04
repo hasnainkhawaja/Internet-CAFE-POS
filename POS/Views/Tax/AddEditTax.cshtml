@@ -1,0 +1,89 @@
+﻿@model POS.Models.TaxCategoryModel
+@{
+    ViewBag.Title = "AddEdit Rate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+@section styles{
+    <link href="~/Content/colorpicker.css" type="text/css" rel="stylesheet" />
+    <style type="text/css">
+        #colorSelector {
+            position: relative;
+            width: 36px;
+            height: 36px;
+            background: url(/Content/images/select.png);
+        } 
+        #colorSelector div {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 30px;
+            height: 30px;
+            background: url(/Content/images/select.png) center;
+        }
+    </style>
+}
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            @using (Html.BeginForm("AddEditTax", "Tax", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <h3 class="page-title">ADD/Edit Tax</h3>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(x => x.taxid)
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.title)
+                            @Html.TextBoxFor(model => model.title, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                        </div>
+                    </div> 
+                </div>
+                 
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.rate)
+                            @Html.TextBoxFor(model => model.rate, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.rate, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+                 
+
+                 
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group"> 
+                            @Html.LabelFor(x => x.active)
+                            @Html.CheckBoxFor(m => m.active, new { @class = "chkactive" })
+                        </div>
+                    </div> 
+                </div>
+                 
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-12 text-center m-t-20">
+                            <a href="@Url.Action("ManageTax", "Tax")" class="btn btn-primary">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">Save &amp; update</button>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/colorpicker.js"></script>
+}

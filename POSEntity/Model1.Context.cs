@@ -40,6 +40,10 @@ namespace POSEntity
         public virtual DbSet<RateType> RateTypes { get; set; }
         public virtual DbSet<Store_Terminal> Store_Terminal { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<BarcodeType> BarcodeTypes { get; set; }
+        public virtual DbSet<ProductUnit> ProductUnits { get; set; }
+        public virtual DbSet<TaxCategory> TaxCategories { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     
         public virtual ObjectResult<EmployeeInfomation_GetAll_Result> EmployeeInfomation_GetAll(Nullable<int> companyID)
         {
@@ -202,6 +206,62 @@ namespace POSEntity
                 new ObjectParameter("companyId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Category_SelectByCompanyID_Result>("Category_SelectByCompanyID", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> ValidateProductBarcode(Nullable<int> companyid, string barcode, Nullable<long> productId)
+        {
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("companyid", companyid) :
+                new ObjectParameter("companyid", typeof(int));
+    
+            var barcodeParameter = barcode != null ?
+                new ObjectParameter("barcode", barcode) :
+                new ObjectParameter("barcode", typeof(string));
+    
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("productId", productId) :
+                new ObjectParameter("productId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ValidateProductBarcode", companyidParameter, barcodeParameter, productIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> ValidateProductCode(Nullable<int> companyid, string barcode, Nullable<long> productId)
+        {
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("companyid", companyid) :
+                new ObjectParameter("companyid", typeof(int));
+    
+            var barcodeParameter = barcode != null ?
+                new ObjectParameter("barcode", barcode) :
+                new ObjectParameter("barcode", typeof(string));
+    
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("productId", productId) :
+                new ObjectParameter("productId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ValidateProductCode", companyidParameter, barcodeParameter, productIdParameter);
+        }
+    
+        public virtual ObjectResult<Product_SelectByCompanyAndStore_Result> Product_SelectByCompanyAndStore(Nullable<int> companyId, Nullable<long> storeId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var storeIdParameter = storeId.HasValue ?
+                new ObjectParameter("storeId", storeId) :
+                new ObjectParameter("storeId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Product_SelectByCompanyAndStore_Result>("Product_SelectByCompanyAndStore", companyIdParameter, storeIdParameter);
+        }
+    
+        public virtual ObjectResult<TaxCategory_SelectByCompanyID_Result> TaxCategory_SelectByCompanyID(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TaxCategory_SelectByCompanyID_Result>("TaxCategory_SelectByCompanyID", companyIdParameter);
         }
     }
 }

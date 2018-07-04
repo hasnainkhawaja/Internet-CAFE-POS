@@ -186,10 +186,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\DesignationController.cs" />
     <Compile Include="Controllers\FloorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\TaxController.cs" />
     <Compile Include="Controllers\RateController.cs" />
     <Compile Include="Controllers\ShiftController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
@@ -207,6 +210,9 @@
     <Compile Include="Models\ClientSessionsModel.cs" />
     <Compile Include="Models\DesignationModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\TaxCategoryModel.cs" />
     <Compile Include="Models\RateModel.cs" />
     <Compile Include="Models\ShiftModel.cs" />
     <Compile Include="Models\StoreModel.cs" />
@@ -348,6 +354,7 @@
     <Content Include="Content\img\user-06.jpg" />
     <Content Include="Content\img\user.jpg" />
     <Content Include="Content\img\video-call.jpg" />
+    <Content Include="Content\jquery.loadingModal.min.css" />
     <Content Include="Content\select2.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
@@ -386,6 +393,7 @@
     <Content Include="Scripts\jquery-ui.min.html" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.fullcalendar.js" />
+    <Content Include="Scripts\jquery.loadingModal.min.js" />
     <Content Include="Scripts\jquery.slimscroll.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -458,6 +466,13 @@
     <Content Include="Views\Home\Menu - Copy.cshtml" />
     <Content Include="Views\StoreTerminal\AddEditStoreTerminal.cshtml" />
     <Content Include="Views\StoreTerminal\ManageStoreTerminal.cshtml" />
+    <Content Include="Views\Category\AddEditCategory.cshtml" />
+    <Content Include="Views\Category\ManageCategory.cshtml" />
+    <Content Include="Views\Product\AddEditProduct.cshtml" />
+    <Content Include="Views\Product\ManageCategory.cshtml" />
+    <Content Include="Views\Tax\AddEditTax.cshtml" />
+    <Content Include="Views\Tax\ManageTax.cshtml" />
+    <Content Include="Views\Product\ManageProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
