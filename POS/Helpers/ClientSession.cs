@@ -25,7 +25,8 @@ namespace POS.Helpers
 
         public static int CompanyID
         {
-            get { return Convert.ToInt32(System.Web.HttpContext.Current.Session["CompanyID"]); }
+            get { return 1; }
+            //get { return Convert.ToInt32(System.Web.HttpContext.Current.Session["CompanyID"]); }
             set { System.Web.HttpContext.Current.Session["CompanyID"] = value; }
         }
         public static int EmployeeID

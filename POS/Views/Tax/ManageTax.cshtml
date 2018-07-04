@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Tax Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-4">
+            <h4 class="page-title">Manage Rate</h4>
+        </div>
+        <div class="col-xs-8 text-right m-b-30">
+            <a href="@Url.Action("AddEditTax", "Tax")" class="btn btn-primary pull-right rounded"><i class="fa fa-plus"></i>Add New</a>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+
+                <table class="table table-striped custom-table datatable" id="example">
+                    <thead>
+                        <tr> 
+                            <th>Title</th>
+                            <th>Rate</th> 
+                            <th>Active</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script>
+    jQuery(document).ready(function () { 
+
+        $('#example').DataTable({
+            "ajax": {
+                "url": "/Tax/LoadDataForTaxDataTable",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columns": [  
+              { "data": "title" }, 
+              { "data": "rate" },
+              { "data": "Active" },
+               {// this is Actions Column
+                   mRender: function (data, type, row) { 
+                       var _div = '<div class="dropdown">';
+                       var linkEdit = '<a href="javascript:void(0);" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a><ul class="dropdown-menu pull-right"><li><a href="@Url.Action("AddEditTax", "Tax", new { id = -1 })"><i class="fa fa-pencil m-r-5"></i>Edit</a>';
+                       var linkDel = '<li><a href="javascript:void(0);" onclick=DeleteData("' + row.id + '");><i class="fa fa-pencil m-r-5"></i>Delete</a></li></ul></div>';
+
+                       linkEdit = linkEdit.replace("-1", row.id);
+                       linkDel = linkDel.replace("-1", row.id);
+
+                       var _fnal = _div + linkEdit + linkDel;
+                       return _fnal;
+                   },
+                   className: "text-right"
+               } 
+
+            ]
+        });
+
+        
+
+    });
+
+   
+</script>

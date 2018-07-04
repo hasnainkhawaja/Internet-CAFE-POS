@@ -60,6 +60,36 @@ namespace POS.Controllers
 
 
 
+        public JsonResult LoadDataForCategoryDataTableByStore(Int64 storeid)
+        {
+            try
+            {
+
+                IEnumerable<Category> rateLst = CategoriesListByStore(storeid);
+
+
+                int recordsTotal = 0;
+
+
+                recordsTotal = rateLst.Count();
+                var data = rateLst.ToList();
+                return Json(new { Result = "OK", recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        private IEnumerable<POSEntity.Category> CategoriesListByStore(Int64 storeid)
+        {
+            return db.Categories.Where(x => x.companyid == ClientSession.CompanyID && x.storeid == storeid).ToList();
+        }
+
+
+
         [HttpGet]
         public string GetRateDataByRateID(Int64 categoryId)
         {
@@ -262,8 +292,7 @@ namespace POS.Controllers
 
             return Json(true); 
         }
-
-
+         
         [HttpPost]
         public JsonResult LoadDataForStoreCateogriesDataTable(Int64 storeid,Int64 categoryid=0)
         {

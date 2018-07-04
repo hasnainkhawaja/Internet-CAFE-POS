@@ -34,7 +34,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             @Html.LabelFor(x => x.SelectedStoreId)
-                            @Html.DropDownListFor(x => x.SelectedStoreId, new SelectList(Model.Stores, "Value", "Text"), new { @class = "form-control" })
+                            @Html.DropDownListFor(x => x.SelectedStoreId, new SelectList(Model.Stores, "Value", "Text"), new { @class = "form-control"  })
                             @Html.ValidationMessageFor(x => x.SelectedStoreId, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -91,7 +91,18 @@
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
+
     <script type="text/javascript">
+
+        $('#SelectedStoreId').select2({
+            placeholder: 'Select an option'
+        });
+
+
+        $('#SelectedParentCategoryId').select2({
+            placeholder: 'Select an option'
+        });
+
         jQuery('#SelectedStoreId').on('change', function ()  {
             SelectStoreCategories($("#SelectedStoreId").val())
         });

@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="onlineinternetposModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BarcodeType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="20" />
+    <Property Name="active" Type="bit" />
+  </EntityType>
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="categoryId" />
@@ -103,6 +111,41 @@
     <Property Name="controllerName" Type="varchar(max)" />
     <Property Name="actionName" Type="varchar(max)" />
   </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="productid" />
+    </Key>
+    <Property Name="productid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="barcode" Type="nvarchar" MaxLength="100" />
+    <Property Name="barcodeTypeId" Type="int" />
+    <Property Name="productCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="productTitle" Type="nvarchar" MaxLength="100" />
+    <Property Name="productUnit" Type="int" />
+    <Property Name="categoryId" Type="bigint" />
+    <Property Name="visibleOnScreen" Type="bit" />
+    <Property Name="isMisc" Type="bit" />
+    <Property Name="active" Type="bit" />
+    <Property Name="itemCost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="itemSale" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="createdBy" Type="int" />
+    <Property Name="createdDate" Type="datetime" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedDate" Type="datetime" />
+    <Property Name="isCondimentItem" Type="bit" />
+    <Property Name="stocking" Type="bit" />
+    <Property Name="restrictMinimumSale" Type="bit" />
+    <Property Name="minAlert" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="taxId" Type="int" />
+  </EntityType>
+  <EntityType Name="ProductUnit">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="20" />
+    <Property Name="code" Type="nvarchar" MaxLength="10" />
+    <Property Name="active" Type="bit" />
+  </EntityType>
   <EntityType Name="Rate">
     <Key>
       <PropertyRef Name="rateID" />
@@ -183,6 +226,16 @@
     <Property Name="updatedBy" Type="int" />
     <Property Name="updatedDated" Type="datetime" />
   </EntityType>
+  <EntityType Name="TaxCategories">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="20" />
+    <Property Name="companyid" Type="int" />
+    <Property Name="active" Type="bit" />
+    <Property Name="rate" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
   <Function Name="Category_SelectByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="companyId" Type="int" Mode="In" />
   </Function>
@@ -195,6 +248,10 @@
   </Function>
   <Function Name="EmployeeInfomation_GetByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="employeeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Product_SelectByCompanyAndStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="companyId" Type="int" Mode="In" />
+    <Parameter Name="storeId" Type="bigint" Mode="In" />
   </Function>
   <Function Name="Rate_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="rateID" Type="int" Mode="In" />
@@ -225,6 +282,19 @@
   <Function Name="Store_Terminal_ByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="companyID" Type="int" Mode="In" />
   </Function>
+  <Function Name="TaxCategory_SelectByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="companyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ValidateProductBarcode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="companyid" Type="int" Mode="In" />
+    <Parameter Name="barcode" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="productId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="ValidateProductCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="companyid" Type="int" Mode="In" />
+    <Parameter Name="barcode" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="productId" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="ValidateStoreTerminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
     <Parameter Name="title" Type="varchar(max)" Mode="In" />
@@ -236,6 +306,7 @@
     <Parameter Name="companyid" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="onlineinternetposModelStoreContainer">
+    <EntitySet Name="BarcodeType" EntityType="Self.BarcodeType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Designations" EntityType="Self.Designations" Schema="dbo" store:Type="Tables" />
@@ -244,10 +315,13 @@
     <EntitySet Name="EmployeeRole" EntityType="Self.EmployeeRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Floors" EntityType="Self.Floors" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu_List" EntityType="Self.Menu_List" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductUnit" EntityType="Self.ProductUnit" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rate" EntityType="Self.Rate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RateType" EntityType="Self.RateType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Shift" EntityType="Self.Shift" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Store_Terminal" EntityType="Self.Store_Terminal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaxCategories" EntityType="Self.TaxCategories" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

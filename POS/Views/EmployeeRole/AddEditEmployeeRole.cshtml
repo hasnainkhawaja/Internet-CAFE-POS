@@ -1,0 +1,81 @@
+﻿@model POS.Models.EmployeeRoleModel
+@{
+    ViewBag.Title = "AddEditDesignations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            @using (Html.BeginForm("AddEditEmployeeRoleSave", "EmployeeRole", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <h3 class="page-title">ADD/Edit EmployeeRole</h3>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(x => x.employeeroleid)
+                 @Html.HiddenFor(x => x.employeeid)
+    <div class="row">
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(x => x.UserName)
+                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+
+                <div class="row">
+                  
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SelectedStoreId)
+                            @Html.DropDownListFor(x => x.SelectedStoreId, new SelectList(Model.Stores, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.SelectedStoreId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SelectedDesignationsId)
+                            @Html.DropDownListFor(x => x.SelectedDesignationsId, new SelectList(Model.Designations, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.SelectedDesignationsId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+        </div>
+
+    <div class="row">
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.LabelFor(x => x.isdefault)
+                @Html.CheckBoxFor(x => x.isdefault)
+
+            </div>
+        </div>
+    </div>
+
+
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-12 text-center m-t-20">
+                            <a href="@Url.Action("ManageEmployeeRole", "EmployeeRole")" class="btn btn-primary">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">Save &amp; update</button>
+                        </div>
+                    </div>
+                </div>
+            }
+    </div>
+</div>
+                   </div>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

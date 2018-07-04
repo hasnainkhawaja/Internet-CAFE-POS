@@ -132,6 +132,27 @@
     <FunctionImport Name="Category_SelectByCompanyID" ReturnType="Collection(onlineinternetposModel.Category_SelectByCompanyID_Result)">
       <Parameter Name="companyId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="BarcodeTypes" EntityType="onlineinternetposModel.BarcodeType" />
+    <EntitySet Name="ProductUnits" EntityType="onlineinternetposModel.ProductUnit" />
+    <FunctionImport Name="ValidateProductBarcode" ReturnType="Collection(Int32)">
+      <Parameter Name="companyid" Mode="In" Type="Int32" />
+      <Parameter Name="barcode" Mode="In" Type="String" />
+      <Parameter Name="productId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ValidateProductCode" ReturnType="Collection(Int32)">
+      <Parameter Name="companyid" Mode="In" Type="Int32" />
+      <Parameter Name="barcode" Mode="In" Type="String" />
+      <Parameter Name="productId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Product_SelectByCompanyAndStore" ReturnType="Collection(onlineinternetposModel.Product_SelectByCompanyAndStore_Result)">
+      <Parameter Name="companyId" Mode="In" Type="Int32" />
+      <Parameter Name="storeId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="TaxCategories" EntityType="onlineinternetposModel.TaxCategory" />
+    <FunctionImport Name="TaxCategory_SelectByCompanyID" ReturnType="Collection(onlineinternetposModel.TaxCategory_SelectByCompanyID_Result)">
+      <Parameter Name="companyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Products" EntityType="onlineinternetposModel.Product" />
   </EntityContainer>
   <EntityType Name="EmployeeInfomation">
     <Key>
@@ -453,4 +474,89 @@
     <Property Type="Int64" Name="storeid" Nullable="true" />
     <Property Type="String" Name="store" Nullable="false" MaxLength="50" />
   </ComplexType>
+  <EntityType Name="BarcodeType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="ProductUnit">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="active" Type="Boolean" />
+  </EntityType>
+  <ComplexType Name="Product_SelectByCompanyAndStore_Result">
+    <Property Type="Int64" Name="productId" Nullable="false" />
+    <Property Type="String" Name="barcode" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="barcodeTypeId" Nullable="true" />
+    <Property Type="String" Name="barcodeTypeTitle" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="productUnitId" Nullable="true" />
+    <Property Type="String" Name="productUnitTitle" Nullable="true" MaxLength="20" />
+    <Property Type="Decimal" Name="TaxRate" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int64" Name="categoryid" Nullable="true" />
+    <Property Type="String" Name="CategoryTitle" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="categoryCode" Nullable="false" MaxLength="20" />
+    <Property Type="Boolean" Name="visibleOnScreen" Nullable="true" />
+    <Property Type="Boolean" Name="isMisc" Nullable="true" />
+    <Property Type="Boolean" Name="stocking" Nullable="true" />
+    <Property Type="Decimal" Name="minAlert" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Boolean" Name="restrictMinimumSale" Nullable="true" />
+    <Property Type="String" Name="active" Nullable="false" MaxLength="8" />
+    <Property Type="Boolean" Name="isTaxIncluded" Nullable="true" />
+    <Property Type="Decimal" Name="ItemCost" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="ItemSale" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Boolean" Name="isCondimentItem" Nullable="true" />
+    <Property Type="Int64" Name="Storeid" Nullable="true" />
+    <Property Type="Int32" Name="CompanyId" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="TaxCategory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="companyid" Type="Int32" />
+    <Property Name="active" Type="Boolean" />
+    <Property Name="rate" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <ComplexType Name="TaxCategory_SelectByCompanyID_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="title" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Active" Nullable="false" MaxLength="3" />
+    <Property Type="Int32" Name="companyid" Nullable="true" />
+    <Property Type="String" Name="companyname" Nullable="false" MaxLength="50" />
+    <Property Type="Decimal" Name="rate" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="productid" />
+    </Key>
+    <Property Name="productid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="barcodeTypeId" Type="Int32" />
+    <Property Name="productCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="productTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="productUnit" Type="Int32" />
+    <Property Name="categoryId" Type="Int64" />
+    <Property Name="visibleOnScreen" Type="Boolean" />
+    <Property Name="isMisc" Type="Boolean" />
+    <Property Name="active" Type="Boolean" />
+    <Property Name="itemCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="itemSale" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="createdBy" Type="Int32" />
+    <Property Name="createdDate" Type="DateTime" Precision="3" />
+    <Property Name="updatedBy" Type="Int32" />
+    <Property Name="updatedDate" Type="DateTime" Precision="3" />
+    <Property Name="isCondimentItem" Type="Boolean" />
+    <Property Name="stocking" Type="Boolean" />
+    <Property Name="restrictMinimumSale" Type="Boolean" />
+    <Property Name="minAlert" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="taxId" Type="Int32" />
+  </EntityType>
 </Schema>
