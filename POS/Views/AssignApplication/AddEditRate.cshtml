@@ -1,0 +1,160 @@
+﻿@model POS.Models.RateModel
+@{
+    ViewBag.Title = "AddEdit Rate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            @using (Html.BeginForm("AddEditRate", "Rate", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <h3 class="page-title">ADD/Edit Rate</h3>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(x => x.rateID)
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.rateCode)
+                            @Html.TextBoxFor(model => model.rateCode, new { @class = "form-control", @readonly = true })
+                            @Html.ValidationMessageFor(model => model.rateCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SelectedStoreId)
+                            @Html.DropDownListFor(x => x.SelectedStoreId, new SelectList(Model.Stores, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.SelectedStoreId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SelectedRateId)
+                            @Html.DropDownListFor(x => x.SelectedRateId, new SelectList(Model.RateTypes, "Value", "Text"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.SelectedRateId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.title)
+                            @Html.TextBoxFor(model => model.title, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.amount)
+                            @Html.TextBoxFor(model => model.amount, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.startTime)
+                            @Html.TextBoxFor(model => model.startTime, new { @class = "timepicker form-control" })
+                            @Html.ValidationMessageFor(model => model.startTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.endTime)
+                            @Html.TextBoxFor(model => model.endTime, new { @class = "timepicker form-control" })
+                            @Html.ValidationMessageFor(model => model.endTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+               
+
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.color)
+                            @Html.TextBoxFor(model => model.color, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.color, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.bufferTime)
+                            @Html.TextBoxFor(model => model.bufferTime, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.bufferTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.alertInterval)
+                            @Html.TextBoxFor(model => model.alertInterval, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.alertInterval, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                 
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.isPrepay)
+                            @Html.CheckBoxFor(m => m.isPrepay, new { @class = "chkPrepay" })
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Status: <span class="error">*</span></label>
+                            @Html.CheckBoxFor(m => m.active, new { @class = "chkactive" })
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-12 text-center m-t-20">
+                            <a href="@Url.Action("ManageRate", "Rate")" class="btn btn-primary">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">Save &amp; update</button>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

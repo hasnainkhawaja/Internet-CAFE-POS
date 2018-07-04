@@ -20,7 +20,7 @@ namespace POS
                 url: "{controller}/{action}/{id}",
                 
                 //defaults: new { controller = "Home", action = "Dashboard", id = UrlParameter.Optional }
-                //defaults: new { controller = "Users", action = "ShowGrid", id = UrlParameter.Optional }
+               // defaults: new { controller = "Users", action = "ShowGrid", id = UrlParameter.Optional }
                 
                 
               // defaults: new { controller = "Store", action = "ManageStore", id = UrlParameter.Optional }
@@ -30,7 +30,9 @@ namespace POS
                         //defaults: new { controller = "Rate", action = "ManageRate", id = UrlParameter.Optional }
                        //  defaults: new { controller = "Shift", action = "ManageShift", id = UrlParameter.Optional }
                //defaults: new { controller = "StoreTerminal", action = "ManageStoreTerminal", id = UrlParameter.Optional }
-               defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
+
+               //defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
+               defaults: new { controller = "AssignApplication", action = "ManageAssignApplication", id = UrlParameter.Optional }
   
             );
         }

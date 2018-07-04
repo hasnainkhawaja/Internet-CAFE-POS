@@ -186,9 +186,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CreateApplicationController.cs" />
+    <Compile Include="Controllers\EmployeeRoleController.cs" />
     <Compile Include="Controllers\DesignationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\AssignApplicationController.cs" />
     <Compile Include="Controllers\RateController.cs" />
     <Compile Include="Controllers\ShiftController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
@@ -204,6 +207,9 @@
     <Compile Include="Helpers\TimeFormatAttribute.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ClientSessionsModel.cs" />
+    <Compile Include="Models\CreateApplicationModel.cs" />
+    <Compile Include="Models\AssignApplicationModel.cs" />
+    <Compile Include="Models\EmployeeRoleModel.cs" />
     <Compile Include="Models\DesignationModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\RateModel.cs" />
@@ -431,6 +437,12 @@
     <Content Include="Views\Home\Menu - Copy.cshtml" />
     <Content Include="Views\StoreTerminal\AddEditStoreTerminal.cshtml" />
     <Content Include="Views\StoreTerminal\ManageStoreTerminal.cshtml" />
+    <Content Include="Views\EmployeeRole\AddEditEmployeeRole.cshtml" />
+    <Content Include="Views\EmployeeRole\ManageEmployeeRole.cshtml" />
+    <Content Include="Views\CreateApplication\AddEditApplication.cshtml" />
+    <Content Include="Views\CreateApplication\ManageApplication.cshtml" />
+    <Content Include="Views\AssignApplication\AddEditRate.cshtml" />
+    <Content Include="Views\AssignApplication\ManageAssignApplication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

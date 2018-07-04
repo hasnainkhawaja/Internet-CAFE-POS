@@ -318,24 +318,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="onlineinternetposModel.Category">
-        <MappingFragment StoreEntitySet="Category">
-          <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
-          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
-          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
-          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
-          <ScalarProperty Name="active" ColumnName="active" />
-          <ScalarProperty Name="printOrder" ColumnName="printOrder" />
-          <ScalarProperty Name="companyId" ColumnName="companyId" />
-          <ScalarProperty Name="storeid" ColumnName="storeid" />
-          <ScalarProperty Name="parentId" ColumnName="parentId" />
-          <ScalarProperty Name="discount" ColumnName="discount" />
-          <ScalarProperty Name="categroyTitle" ColumnName="categroyTitle" />
-          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Floors">
       <EntityTypeMapping TypeName="onlineinternetposModel.Floor">
         <MappingFragment StoreEntitySet="Floors">
@@ -432,5 +414,68 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ValidateUser_UserNameByCompanyid" FunctionName="onlineinternetposModel.Store.ValidateUser_UserNameByCompanyid" />
+    <FunctionImportMapping FunctionImportName="Menu_ListGetByParentID" FunctionName="onlineinternetposModel.Store.Menu_ListGetByParentID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.Menu_ListGetByParentID_Result1">
+          <ScalarProperty Name="menuID" ColumnName="menuID" />
+          <ScalarProperty Name="menuParentID" ColumnName="menuParentID" />
+          <ScalarProperty Name="menuName" ColumnName="menuName" />
+          <ScalarProperty Name="controllerName" ColumnName="controllerName" />
+          <ScalarProperty Name="actionName" ColumnName="actionName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetDesignationAndEmpdsForAssignApplication" FunctionName="onlineinternetposModel.Store.GetDesignationAndEmpdsForAssignApplication">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.GetDesignationAndEmpdsForAssignApplication_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetMenuBydesignationOrEmployeeID" FunctionName="onlineinternetposModel.Store.GetMenuBydesignationOrEmployeeID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="onlineinternetposModel.GetMenuBydesignationOrEmployeeID_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="parent" ColumnName="parent" />
+          <ScalarProperty Name="text" ColumnName="text" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="MenuAppCompanyMapps">
+      <EntityTypeMapping TypeName="onlineinternetposModel.MenuAppCompanyMapp">
+        <MappingFragment StoreEntitySet="MenuAppCompanyMapp">
+          <ScalarProperty Name="menuID" ColumnName="menuID" />
+          <ScalarProperty Name="companyID" ColumnName="companyID" />
+          <ScalarProperty Name="appCompanyMapID" ColumnName="appCompanyMapID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuApplicationPrivacies">
+      <EntityTypeMapping TypeName="onlineinternetposModel.MenuApplicationPrivacy">
+        <MappingFragment StoreEntitySet="MenuApplicationPrivacy">
+          <ScalarProperty Name="AllowAccess" ColumnName="AllowAccess" />
+          <ScalarProperty Name="AllowAssignment" ColumnName="AllowAssignment" />
+          <ScalarProperty Name="ViewToSuperAdmin" ColumnName="ViewToSuperAdmin" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="menuID" ColumnName="menuID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuAuthorizations">
+      <EntityTypeMapping TypeName="onlineinternetposModel.MenuAuthorization">
+        <MappingFragment StoreEntitySet="MenuAuthorization">
+          <ScalarProperty Name="imageURL" ColumnName="imageURL" />
+          <ScalarProperty Name="isDashboard" ColumnName="isDashboard" />
+          <ScalarProperty Name="appCompanyMapID" ColumnName="appCompanyMapID" />
+          <ScalarProperty Name="designationID" ColumnName="designationID" />
+          <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+          <ScalarProperty Name="authorizationID" ColumnName="authorizationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="DELETEMenuAuthorizationByEmpIDAndDesigID" FunctionName="onlineinternetposModel.Store.DELETEMenuAuthorizationByEmpIDAndDesigID" />
   </EntityContainerMapping>
 </Mapping>

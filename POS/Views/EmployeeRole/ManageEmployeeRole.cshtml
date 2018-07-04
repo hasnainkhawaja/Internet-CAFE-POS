@@ -1,0 +1,131 @@
+﻿@model POS.Models.EmployeeRoleModel
+@{
+    ViewBag.Title = "View EmployeeRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+
+
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-4">
+            <h4 class="page-title">Manage EmployeeRole</h4>
+        </div>
+        <div class="col-xs-8 text-right m-b-30">
+            <a href="#" class="btn btn-primary pull-right rounded AddDesignation"><i class="fa fa-plus"></i>Add Designation</a>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+
+                <table class="table table-striped custom-table datatable" id="example">
+                    <thead>
+                        <tr>
+                            <th>User Name</th>
+                            <th>Store Name</th>
+                            <th>Desigantion Name</th>
+                            <th>Default Store</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+
+
+
+
+<script>
+
+
+
+
+
+    jQuery(document).ready(function () {
+
+        var url = window.location.href;
+        var number = url.match(/(\d+)$/g);
+
+
+        jQuery('.AddDesignation').attr('href', '/EmployeeRole/AddEditEmployeeRole/0?empid=' + number)
+
+        
+        
+    
+        jQuery('#example').DataTable({
+            "ajax": {
+                "url": "/EmployeeRole/LoadDataForEmployeeRoleDataTable?empid=" + number,
+                //"data": {
+                    //id: window.location.href.match(/(\d+)$/g)
+                //},// GetUserList",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "USerName" },
+                { "data": "StoreName" },
+  { "data": "title" },
+  { "data": "defaultStore" },
+   {// this is Actions Column
+       mRender: function (data, type, row) {
+
+           var url1 = window.location.href;
+           var number1 = url.match(/(\d+)$/g);
+
+           var _div = '<div class="dropdown">';
+           @*var linkEdit = '<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a><ul class="dropdown-menu pull-right">';
+           var linkDel = '<li><a href="@Url.Action("DeleteDesignations", "Designation", new { id = -1 })"><i class="fa fa-pencil m-r-5"></i>Delete</a></li></ul></div>';*@
+
+           var linkEdit = '<a href="javascript:void(0);" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a><ul class="dropdown-menu pull-right"><li><a href="@Url.Action("AddEditEmployeeRole", "EmployeeRole", new { id = -1, empid = -1 })"><i class="fa fa-pencil m-r-5"></i>Edit</a></li>';
+           //var linkDel = '<li><a href="@Url.Action("ManageEmployeeRole", "EmployeeRole", new { id = -1 })"><i class="fa fa-pencil m-r-5"></i>ManageDesgnatons</a></li></ul></div>';
+           var linkDel = '<li><a href="@Url.Action("DeleteEmployeeRole", "EmployeeRole", new { id = -1, empid = -1 })"><i class="fa fa-pencil m-r-5"></i>Delete</a></li></ul></div>';
+
+
+           linkEdit = linkEdit.replace("-1", row.employeeroleid);
+           linkEdit = linkEdit.replace("-1", number1);
+           linkDel = linkDel.replace("-1", row.employeeroleid);
+           linkDel = linkDel.replace("-1", number1);
+
+           var _fnal = _div + linkEdit + linkDel;
+           return _fnal;
+
+
+       },
+       className: "text-right"
+   }
+
+
+            ]
+        });
+
+
+
+
+
+
+    });
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+

@@ -6,3 +6,11 @@ C:\Users\hp\Desktop\POS-Hus-Mod-old\POS\bin\POSEntity.exe
 C:\Users\hp\Desktop\POS-Hus-Mod-old\POS\bin\POSEntity.pdb
 C:\Users\hp\Desktop\POS-Hus-Mod-old\POS\obj\Debug\POS.dll
 C:\Users\hp\Desktop\POS-Hus-Mod-old\POS\obj\Debug\POS.pdb
+C:\Users\hp\Documents\GitHub\Internet-CAFE-POS\POS\bin\POS.dll.config
+C:\Users\hp\Documents\GitHub\Internet-CAFE-POS\POS\bin\POS.dll
+C:\Users\hp\Documents\GitHub\Internet-CAFE-POS\POS\bin\POS.pdb
+C:\Users\hp\Documents\GitHub\Internet-CAFE-POS\POS\bin\POSEntity.exe
+C:\Users\hp\Documents\GitHub\Internet-CAFE-POS\POS\bin\POSEntity.pdb
+C:\Users\hp\Documents\GitHub\Internet-CAFE-POS\POS\obj\Debug\POS.csprojResolveAssemblyReference.cache
+C:\Users\hp\Documents\GitHub\Internet-CAFE-POS\POS\obj\Debug\POS.dll
+C:\Users\hp\Documents\GitHub\Internet-CAFE-POS\POS\obj\Debug\POS.pdb

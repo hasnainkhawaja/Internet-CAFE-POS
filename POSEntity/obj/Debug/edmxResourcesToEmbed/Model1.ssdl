@@ -1,22 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="onlineinternetposModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Category">
-    <Key>
-      <PropertyRef Name="categoryId" />
-    </Key>
-    <Property Name="categoryId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="categroyTitle" Type="nvarchar" MaxLength="100" />
-    <Property Name="discount" Type="bit" />
-    <Property Name="parentId" Type="bigint" />
-    <Property Name="storeid" Type="bigint" />
-    <Property Name="companyId" Type="int" />
-    <Property Name="printOrder" Type="int" />
-    <Property Name="active" Type="bit" />
-    <Property Name="createdBy" Type="int" />
-    <Property Name="createdDate" Type="datetime" />
-    <Property Name="updatedBy" Type="int" />
-    <Property Name="updatedDate" Type="datetime" />
-  </EntityType>
   <EntityType Name="Company">
     <Key>
       <PropertyRef Name="companyId" />
@@ -102,6 +85,36 @@
     <Property Name="controllerName" Type="varchar(max)" />
     <Property Name="actionName" Type="varchar(max)" />
   </EntityType>
+  <EntityType Name="MenuAppCompanyMapp">
+    <Key>
+      <PropertyRef Name="appCompanyMapID" />
+    </Key>
+    <Property Name="appCompanyMapID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="companyID" Type="int" />
+    <Property Name="menuID" Type="int" />
+  </EntityType>
+  <EntityType Name="MenuApplicationPrivacy">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="menuID" Type="int" />
+    <Property Name="CompanyID" Type="int" />
+    <Property Name="ViewToSuperAdmin" Type="bit" />
+    <Property Name="AllowAssignment" Type="bit" />
+    <Property Name="AllowAccess" Type="bit" />
+  </EntityType>
+  <EntityType Name="MenuAuthorization">
+    <Key>
+      <PropertyRef Name="authorizationID" />
+    </Key>
+    <Property Name="authorizationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="employeeID" Type="int" />
+    <Property Name="designationID" Type="int" />
+    <Property Name="appCompanyMapID" Type="int" />
+    <Property Name="isDashboard" Type="bit" />
+    <Property Name="imageURL" Type="varchar(max)" />
+  </EntityType>
   <EntityType Name="Rate">
     <Key>
       <PropertyRef Name="rateID" />
@@ -182,6 +195,12 @@
     <Property Name="updatedBy" Type="int" />
     <Property Name="updatedDated" Type="datetime" />
   </EntityType>
+  <Function Name="DELETEMenuAuthorizationByEmpIDAndDesigID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="companyid" Type="int" Mode="In" />
+    <Parameter Name="menuids" Type="varchar(max)" Mode="In" />
+    <Parameter Name="designationID" Type="int" Mode="In" />
+    <Parameter Name="employeeID" Type="int" Mode="In" />
+  </Function>
   <Function Name="Designations_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="comapnyID" Type="int" Mode="In" />
     <Parameter Name="active" Type="varchar(max)" Mode="In" />
@@ -191,6 +210,18 @@
   </Function>
   <Function Name="EmployeeInfomation_GetByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="employeeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetDesignationAndEmpdsForAssignApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="type" Type="varchar(max)" Mode="In" />
+    <Parameter Name="companyid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetMenuBydesignationOrEmployeeID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="designationid" Type="int" Mode="In" />
+    <Parameter Name="employeeid" Type="int" Mode="In" />
+    <Parameter Name="companyID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Menu_ListGetByParentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="parentID" Type="int" Mode="In" />
   </Function>
   <Function Name="Rate_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="rateID" Type="int" Mode="In" />
@@ -227,8 +258,13 @@
     <Parameter Name="password" Type="varchar(max)" Mode="In" />
     <Parameter Name="companyid" Type="int" Mode="In" />
   </Function>
+  <Function Name="ValidateUser_UserNameByCompanyid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employeeid" Type="int" Mode="In" />
+    <Parameter Name="userName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="employeeEmail" Type="varchar(max)" Mode="In" />
+    <Parameter Name="companyid" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="onlineinternetposModelStoreContainer">
-    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Designations" EntityType="Self.Designations" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee_encryptedpass" EntityType="Self.Employee_encryptedpass" Schema="dbo" store:Type="Tables" />
@@ -236,6 +272,9 @@
     <EntitySet Name="EmployeeRole" EntityType="Self.EmployeeRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Floors" EntityType="Self.Floors" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu_List" EntityType="Self.Menu_List" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MenuAppCompanyMapp" EntityType="Self.MenuAppCompanyMapp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MenuApplicationPrivacy" EntityType="Self.MenuApplicationPrivacy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MenuAuthorization" EntityType="Self.MenuAuthorization" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rate" EntityType="Self.Rate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RateType" EntityType="Self.RateType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Shift" EntityType="Self.Shift" Schema="dbo" store:Type="Tables" />
