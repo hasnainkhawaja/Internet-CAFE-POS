@@ -39,11 +39,17 @@ namespace POSEntity
         public virtual DbSet<Floor> Floors { get; set; }
         public virtual DbSet<RateType> RateTypes { get; set; }
         public virtual DbSet<Store_Terminal> Store_Terminal { get; set; }
+<<<<<<< HEAD
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<BarcodeType> BarcodeTypes { get; set; }
         public virtual DbSet<ProductUnit> ProductUnits { get; set; }
         public virtual DbSet<TaxCategory> TaxCategories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+=======
+        public virtual DbSet<MenuAppCompanyMapp> MenuAppCompanyMapps { get; set; }
+        public virtual DbSet<MenuApplicationPrivacy> MenuApplicationPrivacies { get; set; }
+        public virtual DbSet<MenuAuthorization> MenuAuthorizations { get; set; }
+>>>>>>> origin/master
     
         public virtual ObjectResult<EmployeeInfomation_GetAll_Result> EmployeeInfomation_GetAll(Nullable<int> companyID)
         {
@@ -186,26 +192,98 @@ namespace POSEntity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ValidateUser_Result>("ValidateUser", userNameParameter, passwordParameter, companyidParameter);
         }
     
-        public virtual ObjectResult<SelectFloors_Result> SelectFloors(Nullable<int> companyid, Nullable<long> storeid)
+        public virtual ObjectResult<string> ValidateUser_UserNameByCompanyid(Nullable<int> employeeid, string userName, string employeeEmail, Nullable<int> companyid)
+        {
+            var employeeidParameter = employeeid.HasValue ?
+                new ObjectParameter("employeeid", employeeid) :
+                new ObjectParameter("employeeid", typeof(int));
+    
+            var userNameParameter = userName != null ?
+                new ObjectParameter("userName", userName) :
+                new ObjectParameter("userName", typeof(string));
+    
+            var employeeEmailParameter = employeeEmail != null ?
+                new ObjectParameter("employeeEmail", employeeEmail) :
+                new ObjectParameter("employeeEmail", typeof(string));
+    
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("companyid", companyid) :
+                new ObjectParameter("companyid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ValidateUser_UserNameByCompanyid", employeeidParameter, userNameParameter, employeeEmailParameter, companyidParameter);
+        }
+    
+        public virtual ObjectResult<EmployeeRole_GetByEmployeeID_Result> EmployeeRole_GetByEmployeeID(Nullable<int> employeeID, Nullable<int> companyid)
+        {
+            var employeeIDParameter = employeeID.HasValue ?
+                new ObjectParameter("employeeID", employeeID) :
+                new ObjectParameter("employeeID", typeof(int));
+    
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("companyid", companyid) :
+                new ObjectParameter("companyid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeRole_GetByEmployeeID_Result>("EmployeeRole_GetByEmployeeID", employeeIDParameter, companyidParameter);
+        }
+    
+        public virtual ObjectResult<Menu_ListGetByParentID_Result1> Menu_ListGetByParentID(Nullable<int> parentID)
+        {
+            var parentIDParameter = parentID.HasValue ?
+                new ObjectParameter("parentID", parentID) :
+                new ObjectParameter("parentID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Menu_ListGetByParentID_Result1>("Menu_ListGetByParentID", parentIDParameter);
+        }
+    
+        public virtual ObjectResult<GetDesignationAndEmpdsForAssignApplication_Result> GetDesignationAndEmpdsForAssignApplication(string type, Nullable<int> companyid)
+        {
+            var typeParameter = type != null ?
+                new ObjectParameter("type", type) :
+                new ObjectParameter("type", typeof(string));
+    
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("companyid", companyid) :
+                new ObjectParameter("companyid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDesignationAndEmpdsForAssignApplication_Result>("GetDesignationAndEmpdsForAssignApplication", typeParameter, companyidParameter);
+        }
+    
+        public virtual ObjectResult<GetMenuBydesignationOrEmployeeID_Result> GetMenuBydesignationOrEmployeeID(Nullable<int> designationid, Nullable<int> employeeid, Nullable<int> companyID)
+        {
+            var designationidParameter = designationid.HasValue ?
+                new ObjectParameter("designationid", designationid) :
+                new ObjectParameter("designationid", typeof(int));
+    
+            var employeeidParameter = employeeid.HasValue ?
+                new ObjectParameter("employeeid", employeeid) :
+                new ObjectParameter("employeeid", typeof(int));
+    
+            var companyIDParameter = companyID.HasValue ?
+                new ObjectParameter("companyID", companyID) :
+                new ObjectParameter("companyID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMenuBydesignationOrEmployeeID_Result>("GetMenuBydesignationOrEmployeeID", designationidParameter, employeeidParameter, companyIDParameter);
+        }
+    
+        public virtual int DELETEMenuAuthorizationByEmpIDAndDesigID(Nullable<int> companyid, string menuids, Nullable<int> designationID, Nullable<int> employeeID)
         {
             var companyidParameter = companyid.HasValue ?
                 new ObjectParameter("companyid", companyid) :
                 new ObjectParameter("companyid", typeof(int));
     
-            var storeidParameter = storeid.HasValue ?
-                new ObjectParameter("storeid", storeid) :
-                new ObjectParameter("storeid", typeof(long));
+            var menuidsParameter = menuids != null ?
+                new ObjectParameter("menuids", menuids) :
+                new ObjectParameter("menuids", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectFloors_Result>("SelectFloors", companyidParameter, storeidParameter);
-        }
+            var designationIDParameter = designationID.HasValue ?
+                new ObjectParameter("designationID", designationID) :
+                new ObjectParameter("designationID", typeof(int));
     
-        public virtual ObjectResult<Category_SelectByCompanyID_Result> Category_SelectByCompanyID(Nullable<int> companyId)
-        {
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("companyId", companyId) :
-                new ObjectParameter("companyId", typeof(int));
+            var employeeIDParameter = employeeID.HasValue ?
+                new ObjectParameter("employeeID", employeeID) :
+                new ObjectParameter("employeeID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Category_SelectByCompanyID_Result>("Category_SelectByCompanyID", companyIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DELETEMenuAuthorizationByEmpIDAndDesigID", companyidParameter, menuidsParameter, designationIDParameter, employeeIDParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> ValidateProductBarcode(Nullable<int> companyid, string barcode, Nullable<long> productId)

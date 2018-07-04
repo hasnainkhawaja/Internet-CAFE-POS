@@ -17,11 +17,17 @@
         <EntityTypeShape EntityType="onlineinternetposModel.Floor" Width="1.5" PointX="10.625" PointY="4.875" />
         <EntityTypeShape EntityType="onlineinternetposModel.RateType" Width="1.5" PointX="8.5" PointY="4.625" />
         <EntityTypeShape EntityType="onlineinternetposModel.Store_Terminal" Width="1.5" PointX="5.375" PointY="7.75" />
+<<<<<<< HEAD
         <EntityTypeShape EntityType="onlineinternetposModel.Category" Width="1.5" PointX="7.375" PointY="7.75" />
         <EntityTypeShape EntityType="onlineinternetposModel.BarcodeType" Width="1.5" PointX="9.375" PointY="7.75" />
         <EntityTypeShape EntityType="onlineinternetposModel.ProductUnit" Width="1.5" PointX="11.375" PointY="0.75" />
         <EntityTypeShape EntityType="onlineinternetposModel.TaxCategory" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="onlineinternetposModel.Product" Width="1.5" PointX="9.375" PointY="10.75" />
+=======
+        <EntityTypeShape EntityType="onlineinternetposModel.MenuAppCompanyMapp" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="onlineinternetposModel.MenuApplicationPrivacy" Width="1.5" PointX="9.375" PointY="7.75" />
+        <EntityTypeShape EntityType="onlineinternetposModel.MenuAuthorization" Width="1.5" PointX="7.375" PointY="10.75" />
+>>>>>>> origin/master
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

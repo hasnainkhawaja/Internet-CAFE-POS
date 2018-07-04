@@ -186,13 +186,21 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\CategoryController.cs" />
+=======
+    <Compile Include="Controllers\CreateApplicationController.cs" />
+    <Compile Include="Controllers\EmployeeRoleController.cs" />
+>>>>>>> origin/master
     <Compile Include="Controllers\DesignationController.cs" />
-    <Compile Include="Controllers\FloorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\TaxController.cs" />
+=======
+    <Compile Include="Controllers\AssignApplicationController.cs" />
+>>>>>>> origin/master
     <Compile Include="Controllers\RateController.cs" />
     <Compile Include="Controllers\ShiftController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
@@ -208,6 +216,9 @@
     <Compile Include="Helpers\TimeFormatAttribute.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ClientSessionsModel.cs" />
+    <Compile Include="Models\CreateApplicationModel.cs" />
+    <Compile Include="Models\AssignApplicationModel.cs" />
+    <Compile Include="Models\EmployeeRoleModel.cs" />
     <Compile Include="Models\DesignationModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
@@ -310,36 +321,9 @@
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\colorpicker.css" />
     <Content Include="Content\dataTables.bootstrap.min.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fullcalendar.min.css" />
-    <Content Include="Content\Images\blank.gif" />
-    <Content Include="Content\Images\colorpicker_background.png" />
-    <Content Include="Content\Images\colorpicker_hex.png" />
-    <Content Include="Content\Images\colorpicker_hsb_b.png" />
-    <Content Include="Content\Images\colorpicker_hsb_h.png" />
-    <Content Include="Content\Images\colorpicker_hsb_s.png" />
-    <Content Include="Content\Images\colorpicker_indic.gif" />
-    <Content Include="Content\Images\colorpicker_overlay.png" />
-    <Content Include="Content\Images\colorpicker_rgb_b.png" />
-    <Content Include="Content\Images\colorpicker_rgb_g.png" />
-    <Content Include="Content\Images\colorpicker_rgb_r.png" />
-    <Content Include="Content\Images\colorpicker_select.gif" />
-    <Content Include="Content\Images\colorpicker_submit.png" />
-    <Content Include="Content\Images\custom_background.png" />
-    <Content Include="Content\Images\custom_hex.png" />
-    <Content Include="Content\Images\custom_hsb_b.png" />
-    <Content Include="Content\Images\custom_hsb_h.png" />
-    <Content Include="Content\Images\custom_hsb_s.png" />
-    <Content Include="Content\Images\custom_indic.gif" />
-    <Content Include="Content\Images\custom_rgb_b.png" />
-    <Content Include="Content\Images\custom_rgb_g.png" />
-    <Content Include="Content\Images\custom_rgb_r.png" />
-    <Content Include="Content\Images\custom_submit.png" />
-    <Content Include="Content\Images\select.png" />
-    <Content Include="Content\Images\select2.png" />
-    <Content Include="Content\Images\slider.png" />
     <Content Include="Content\img\attachment.png" />
     <Content Include="Content\img\calander.png" />
     <Content Include="Content\img\favicon.png" />
@@ -383,7 +367,6 @@
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\colorpicker.js" />
     <Content Include="Scripts\dataTables.bootstrap.min.js" />
     <Content Include="Scripts\dropfiles.js" />
     <Content Include="Scripts\fnReloadAjax.js" />
@@ -463,9 +446,12 @@
     <Content Include="Views\Rate\AddEditRate.cshtml" />
     <Content Include="Views\Shift\ManageShift.cshtml" />
     <Content Include="Views\Shift\AddEditShift.cshtml" />
+    <Content Include="Views\Shift\AddShift.cshtml" />
+    <Content Include="Views\Shift\EditShift.cshtml" />
     <Content Include="Views\Home\Menu - Copy.cshtml" />
     <Content Include="Views\StoreTerminal\AddEditStoreTerminal.cshtml" />
     <Content Include="Views\StoreTerminal\ManageStoreTerminal.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Category\AddEditCategory.cshtml" />
     <Content Include="Views\Category\ManageCategory.cshtml" />
     <Content Include="Views\Product\AddEditProduct.cshtml" />
@@ -473,6 +459,14 @@
     <Content Include="Views\Tax\AddEditTax.cshtml" />
     <Content Include="Views\Tax\ManageTax.cshtml" />
     <Content Include="Views\Product\ManageProduct.cshtml" />
+=======
+    <Content Include="Views\EmployeeRole\AddEditEmployeeRole.cshtml" />
+    <Content Include="Views\EmployeeRole\ManageEmployeeRole.cshtml" />
+    <Content Include="Views\CreateApplication\AddEditApplication.cshtml" />
+    <Content Include="Views\CreateApplication\ManageApplication.cshtml" />
+    <Content Include="Views\AssignApplication\AddEditRate.cshtml" />
+    <Content Include="Views\AssignApplication\ManageAssignApplication.cshtml" />
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

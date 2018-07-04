@@ -209,79 +209,11 @@ namespace POS.Controllers
             db.SaveChanges();
             return true;
         }
-
-
-        //[HttpPost]
-        //public ActionResult AddEditUser(FormCollection frm, HttpPostedFileBase logoUpload)
-        //{
-        //    int _hdnUserId = 0;
-        //    String _isActive="";
-        //    EmployeeInfomation objEmp;
-        //    if (ModelState.IsValid)
-        //    {
-        //        _hdnUserId =Convert.ToInt32(frm["hdnUserID"].ToString());
-
-        //        if (_hdnUserId > 0)
-        //        {
-
-        //            objEmp = db.EmployeeInfomations.Where(o => o.employeeID == _hdnUserId).SingleOrDefault();
-                    
-
-        //        }
-        //        else
-        //        {
-        //            objEmp  = new EmployeeInfomation();
-        //        }
-                 
-                
-        //        objEmp.userName = frm["txtUserName"].ToString();
-        //            objEmp.firstName = frm["txFirstName"].ToString();
-        //            objEmp.lastName = frm["txtLastName"].ToString();
-        //            objEmp.employeeCode = frm["txtEmployeeCode"].ToString();
-        //            objEmp.employeeGender = frm["ddlGender"].ToString();
-        //            objEmp.employeeEmail = frm["txtEmployeeEmail"].ToString();
-        //            _isActive =frm["chkActive"].ToString();
-        //            if (_isActive == "true,false" || _isActive == "true")
-        //            {
-        //                objEmp.active= true;
-
-	
-        //            }
-        //            else
-        //            {
-
-        //                objEmp.active = false;
-
-        //            }
-                
-    
-        //        if (_hdnUserId > 0)
-        //        {
-        //            objEmp.updatedBy = 1;
-        //            objEmp.updatedDate = DateTime.Now;
-        //            db.Entry(objEmp).State = EntityState.Modified;
-        //            db.SaveChanges();  
-        //        }
-        //        else
-        //        {
-        //            objEmp.aspnet_userid = "2132332332";
-        //            objEmp.companyid = 1;
-        //            objEmp.createdBy = 1233;
-        //            objEmp.createdDate = DateTime.Now;
-        //            db.EmployeeInfomations.Add(objEmp);
-        //        }
-
-        //        db.SaveChanges();
-
-        //    }
-        //    return RedirectToAction("GetUserList");
-        //}
-
-
-
         [HttpPost]
         public ActionResult AddEditUserSave(FormCollection frm, HttpPostedFileBase logoUpload)
         {
+            String _retval = "0";
+            int _companyId = ClientSession.CompanyID;
             int _hdnUserId = 0;
             String _isActive = "";
             EmployeeInfomation objEmp;
@@ -291,6 +223,10 @@ namespace POS.Controllers
             if (ModelState.IsValid)
             {
                 _hdnUserId = Convert.ToInt32(frm["hdnEmployeeid"].ToString());
+
+
+               
+
 
                 if (_hdnUserId > 0)
                 {
@@ -303,6 +239,9 @@ namespace POS.Controllers
                 {
                     objEmp = new EmployeeInfomation();
                 }
+
+
+
 
 
 
@@ -326,6 +265,7 @@ namespace POS.Controllers
 
                 }
 
+           
                     if (_hdnUserId > 0)
                     {
                         objEmp.updatedBy = 1;
@@ -343,10 +283,6 @@ namespace POS.Controllers
                     }
 
                     db.SaveChanges();
-                
-
-
-
             }
 
             //Users/LoadDataForDataTable
@@ -356,8 +292,14 @@ namespace POS.Controllers
         }
 
 
+        [HttpGet]
         public ActionResult AddEditUser(String id)
         {
+            int _companyid = ClientSession.CompanyID;
+            Random rand = new Random();
+            int _newValue = rand.Next();
+
+
             UsersModel mod = new UsersModel();
             EmployeeInfomation objEmp;
             _hdnUserId = Convert.ToInt32(id);
@@ -365,69 +307,24 @@ namespace POS.Controllers
             {
 
                 objEmp = db.EmployeeInfomations.Where(o => o.employeeID == _hdnUserId).SingleOrDefault();
-
+                mod.employeeCode = objEmp.employeeCode;
 
             }
             else
             {
                 objEmp = new EmployeeInfomation();
+                mod.employeeCode = _companyid + "-" + _newValue;
             }
-
-
-            //objEmp.userName = frm["txtUserName"].ToString();
-            //objEmp.firstName = frm["txFirstName"].ToString();
-            //objEmp.lastName = frm["txtLastName"].ToString();
-            //objEmp.employeeCode = frm["txtEmployeeCode"].ToString();
-            //objEmp.employeeGender = frm["ddlGender"].ToString();
-            //objEmp.employeeEmail = frm["txtEmployeeEmail"].ToString();
-            //_isActive = frm["chkActive"].ToString();
-            //if (_isActive == "true,false" || _isActive == "true")
-            //{
-            //    objEmp.active = true;
-
-
-            //}
-            //else
-            //{
-
-            //    objEmp.active = false;
-
-            //}
-
-
-            //        if (_hdnUserId > 0)
-            //        {
-            //            objEmp.updatedBy = 1;
-            //            objEmp.updatedDate = DateTime.Now;
-            //            db.Entry(objEmp).State = EntityState.Modified;
-            //            db.SaveChanges();  
-            //        }
-            //        else
-            //        {
-            //            objEmp.aspnet_userid = "2132332332";
-            //            objEmp.companyid = 1;
-            //            objEmp.createdBy = 1233;
-            //            objEmp.createdDate = DateTime.Now;
-            //            db.EmployeeInfomations.Add(objEmp);
-            //        }
-
-            //        db.SaveChanges();
-
-            //    }
 
 
             mod.employeeid = _hdnUserId.ToString();
             mod.userName = objEmp.userName;
             mod.firstName = objEmp.firstName;
             mod.lastName = objEmp.lastName;
-            mod.employeeCode = objEmp.employeeCode;
+         
             mod.employeeGender = objEmp.employeeGender;
             mod.employeeEmail = objEmp.employeeEmail;
             mod.active = Convert.ToBoolean(objEmp.active);
-           
-           // var _getAllGen = GetAllGenders();
-           //mod.employeeGenders = GetSelectListItems(_getAllGen);
-
            
             return View(mod);
 
@@ -436,12 +333,24 @@ namespace POS.Controllers
 
 
 
-
-        
-        public ActionResult TestAddEdit()
+        [HttpGet]
+        public String ValidateUserName(String userName, String employeeid, String employeeEmail)
         {
-            return RedirectToAction("AddEditUser", "Users");
+            List<String> list = new List<String>();
+            String _retval = "0";
+            int _companyId = ClientSession.CompanyID;
+            IEnumerable<String> objEmp = db.ValidateUser_UserNameByCompanyid(Convert.ToInt32(employeeid), userName, employeeEmail, ClientSession.CompanyID).ToList();
+            if (objEmp != null && objEmp.Count() > 0)
+            {
+                foreach (var item in objEmp)
+                {
+                    list.Add(item);
+                }
 
+                _retval = list[0].ToString();
+            }
+
+            return _retval;
         }
 
     }

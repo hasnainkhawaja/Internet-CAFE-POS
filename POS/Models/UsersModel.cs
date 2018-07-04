@@ -20,9 +20,11 @@ namespace POS.Models
 
         [Required(ErrorMessage = "*")]
         [Display(Name = "userName")]
-       public string userName { get; set; }
-        [Required(ErrorMessage = "*")]
+        public string userName { get; set; }
 
+
+
+        [Required(ErrorMessage = "*")]
         public string firstName { get; set; }
         [Required(ErrorMessage = "*")]
         public string lastName { get; set; }
@@ -39,6 +41,16 @@ namespace POS.Models
         public int companyid { get; set; }
         public string createdBy { get; set; }
         public DateTime createdDate { get; set; }
+
+
+//        [Required(ErrorMessage = "Username is Required")]  
+//        //[RegularExpression(@"^[a-zA-Z0-9]+$",ErrorMessage = "user name must be combination of letters and numbers only.")]  
+//        [Remote("UsernameExists", "Users", HttpMethod = "POST", ErrorMessage = "User name already registered.")]
+//        public string userName  
+//{  
+//    get;  
+//    set;  
+//}  
 
         public class UsersContext : DbContext
         {

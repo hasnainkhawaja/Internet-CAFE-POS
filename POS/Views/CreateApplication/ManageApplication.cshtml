@@ -1,0 +1,137 @@
+﻿@model POS.Models.CreateApplicationModel
+@{
+    ViewBag.Title = "View EmployeeRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+
+
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-4">
+            <h4 class="page-title">Manage Application</h4>
+        </div>
+        <div class="col-xs-8 text-right m-b-30">
+            <a href="javascript:void(0);" class="btn btn-primary pull-right rounded AddApplication"><i class="fa fa-plus"></i>Add Application</a>
+
+       </div>
+        
+    </div>
+
+    <div class="row btnBack hide">
+        <div class="col-xs-8 text-right m-b-30">
+            <a href="#" class="btn btn-primary pull-right rounded btnBackHref"><i class="fa fa-plus"></i>Back</a>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+
+                <table class="table table-striped custom-table datatable" id="example">
+                    <thead>
+                        <tr>
+                           <th>Menu Name</th>
+                           <th>Controller Name</th>
+    <th>Action Name</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+
+<script>
+
+
+
+
+
+    jQuery(document).ready(function () {
+
+        var url = window.location.href;
+        var number = url.match(/(\d+)$/g);
+        jQuery('.btnBackHref').attr('href', '/CreateApplication/LoadDataForCreateApplication?parentid=0');
+        if (parseInt(number) > 0)
+        {
+            jQuery('.AddApplication').attr('href', '/CreateApplication/AddEditApplication?parentid=' + number);
+        }
+        else
+        {
+            jQuery('.AddApplication').attr('href', '/CreateApplication/AddEditApplication?parentid=0');
+        }
+   
+        jQuery('#example').DataTable({
+            "ajax": {
+                "url": "/CreateApplication/LoadDataForCreateApplication?parentid=" + number,
+                //"data": {
+                //id: window.location.href.match(/(\d+)$/g)
+                //},// GetUserList",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columns": [
+              { "data": "menuName" },
+               { "data": "controllerName" },
+{ "data": "actionName" },
+  //{ "data": "defaultStore" },
+   {// this is Actions Column
+       mRender: function (data, type, row) {
+
+           var _div = '<div class="dropdown">';
+           var linkEditforChildNode = '<a href="javascript:void(0);" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a><ul class="dropdown-menu pull-right"><li><a href="@Url.Action("ManageApplication", "CreateApplication", new { id = -1})" class="lnkAddChildNode" ><i class="fa fa-pencil m-r-5"></i>Add ChildNode</a></li>';
+           var linkEdit = '<li><a href="@Url.Action("AddEditApplication", "CreateApplication", new { id = -1 })" ><i class="fa fa-pencil m-r-5"></i>Edit</a></li></ul></div>';
+
+           linkEditforChildNode = linkEditforChildNode.replace("-1", row.menuID);
+           linkEdit = linkEdit.replace("-1", row.menuID);
+           
+           
+           //linkEdit = linkEdit.replace("-1", number1);
+           //linkDel = linkDel.replace("-1", row.employeeroleid);
+           //linkDel = linkDel.replace("-1", number1);
+
+           var _fnal = _div + linkEditforChildNode + linkEdit;// + linkDel;
+           return _fnal;
+
+
+       },
+       className: "text-right"
+   }
+
+
+            ]
+        });
+
+
+
+
+
+
+    });
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+

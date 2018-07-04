@@ -4,6 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
+<<<<<<< HEAD
     <Schema Namespace="onlineinternetposModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BarcodeType">
           <Key>
@@ -31,6 +32,9 @@
           <Property Name="updaedBy" Type="int" />
           <Property Name="updatedDate" Type="datetime" />
         </EntityType>
+=======
+    <Schema Namespace="onlineinternetposModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+>>>>>>> origin/master
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="companyId" />
@@ -116,6 +120,7 @@
           <Property Name="controllerName" Type="varchar(max)" />
           <Property Name="actionName" Type="varchar(max)" />
         </EntityType>
+<<<<<<< HEAD
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="productid" />
@@ -150,6 +155,37 @@
           <Property Name="title" Type="nvarchar" MaxLength="20" />
           <Property Name="code" Type="nvarchar" MaxLength="10" />
           <Property Name="active" Type="bit" />
+=======
+        <EntityType Name="MenuAppCompanyMapp">
+          <Key>
+            <PropertyRef Name="appCompanyMapID" />
+          </Key>
+          <Property Name="appCompanyMapID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="companyID" Type="int" />
+          <Property Name="menuID" Type="int" />
+        </EntityType>
+        <EntityType Name="MenuApplicationPrivacy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="menuID" Type="int" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="ViewToSuperAdmin" Type="bit" />
+          <Property Name="AllowAssignment" Type="bit" />
+          <Property Name="AllowAccess" Type="bit" />
+        </EntityType>
+        <EntityType Name="MenuAuthorization">
+          <Key>
+            <PropertyRef Name="authorizationID" />
+          </Key>
+          <Property Name="authorizationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeID" Type="int" />
+          <Property Name="designationID" Type="int" />
+          <Property Name="appCompanyMapID" Type="int" />
+          <Property Name="isDashboard" Type="bit" />
+          <Property Name="imageURL" Type="varchar(max)" />
+>>>>>>> origin/master
         </EntityType>
         <EntityType Name="Rate">
           <Key>
@@ -231,6 +267,7 @@
           <Property Name="updatedBy" Type="int" />
           <Property Name="updatedDated" Type="datetime" />
         </EntityType>
+<<<<<<< HEAD
         <EntityType Name="TaxCategories">
           <Key>
             <PropertyRef Name="id" />
@@ -243,6 +280,13 @@
         </EntityType>
         <Function Name="Category_SelectByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="companyId" Type="int" Mode="In" />
+=======
+        <Function Name="DELETEMenuAuthorizationByEmpIDAndDesigID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="companyid" Type="int" Mode="In" />
+          <Parameter Name="menuids" Type="varchar(max)" Mode="In" />
+          <Parameter Name="designationID" Type="int" Mode="In" />
+          <Parameter Name="employeeID" Type="int" Mode="In" />
+>>>>>>> origin/master
         </Function>
         <Function Name="Designations_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="comapnyID" Type="int" Mode="In" />
@@ -254,9 +298,23 @@
         <Function Name="EmployeeInfomation_GetByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="employeeID" Type="int" Mode="In" />
         </Function>
+<<<<<<< HEAD
         <Function Name="Product_SelectByCompanyAndStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="companyId" Type="int" Mode="In" />
           <Parameter Name="storeId" Type="bigint" Mode="In" />
+=======
+        <Function Name="GetDesignationAndEmpdsForAssignApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="type" Type="varchar(max)" Mode="In" />
+          <Parameter Name="companyid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMenuBydesignationOrEmployeeID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="designationid" Type="int" Mode="In" />
+          <Parameter Name="employeeid" Type="int" Mode="In" />
+          <Parameter Name="companyID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Menu_ListGetByParentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parentID" Type="int" Mode="In" />
+>>>>>>> origin/master
         </Function>
         <Function Name="Rate_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="rateID" Type="int" Mode="In" />
@@ -266,10 +324,6 @@
         </Function>
         <Function Name="Rate_SelectByRateID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="rateID" Type="int" Mode="In" />
-        </Function>
-        <Function Name="SelectFloors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="companyid" Type="int" Mode="In" />
-          <Parameter Name="storeid" Type="bigint" Mode="In" />
         </Function>
         <Function Name="Shfit_SelectByCompanyID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="companyId" Type="int" Mode="In" />
@@ -310,9 +364,18 @@
           <Parameter Name="password" Type="varchar(max)" Mode="In" />
           <Parameter Name="companyid" Type="int" Mode="In" />
         </Function>
+        <Function Name="ValidateUser_UserNameByCompanyid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employeeid" Type="int" Mode="In" />
+          <Parameter Name="userName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="employeeEmail" Type="varchar(max)" Mode="In" />
+          <Parameter Name="companyid" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="onlineinternetposModelStoreContainer">
+<<<<<<< HEAD
           <EntitySet Name="BarcodeType" EntityType="Self.BarcodeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+=======
+>>>>>>> origin/master
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Designations" EntityType="Self.Designations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee_encryptedpass" EntityType="Self.Employee_encryptedpass" Schema="dbo" store:Type="Tables" />
@@ -320,8 +383,14 @@
           <EntitySet Name="EmployeeRole" EntityType="Self.EmployeeRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Floors" EntityType="Self.Floors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu_List" EntityType="Self.Menu_List" Schema="dbo" store:Type="Tables" />
+<<<<<<< HEAD
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductUnit" EntityType="Self.ProductUnit" Schema="dbo" store:Type="Tables" />
+=======
+          <EntitySet Name="MenuAppCompanyMapp" EntityType="Self.MenuAppCompanyMapp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuApplicationPrivacy" EntityType="Self.MenuApplicationPrivacy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuAuthorization" EntityType="Self.MenuAuthorization" Schema="dbo" store:Type="Tables" />
+>>>>>>> origin/master
           <EntitySet Name="Rate" EntityType="Self.Rate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RateType" EntityType="Self.RateType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shift" EntityType="Self.Shift" Schema="dbo" store:Type="Tables" />
@@ -457,10 +526,13 @@
             <Parameter Name="password" Mode="In" Type="String" />
             <Parameter Name="companyid" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SelectFloors" ReturnType="Collection(onlineinternetposModel.SelectFloors_Result)">
+          <FunctionImport Name="ValidateUser_UserNameByCompanyid" ReturnType="Collection(String)">
+            <Parameter Name="employeeid" Mode="In" Type="Int32" />
+            <Parameter Name="userName" Mode="In" Type="String" />
+            <Parameter Name="employeeEmail" Mode="In" Type="String" />
             <Parameter Name="companyid" Mode="In" Type="Int32" />
-            <Parameter Name="storeid" Mode="In" Type="Int64" />
           </FunctionImport>
+<<<<<<< HEAD
           <EntitySet Name="Categories" EntityType="onlineinternetposModel.Category" />
           <FunctionImport Name="Category_SelectByCompanyID" ReturnType="Collection(onlineinternetposModel.Category_SelectByCompanyID_Result)">
           <Parameter Name="companyId" Mode="In" Type="Int32" />
@@ -484,6 +556,32 @@
           <EntitySet Name="TaxCategories" EntityType="onlineinternetposModel.TaxCategory" />
           <FunctionImport Name="TaxCategory_SelectByCompanyID" ReturnType="Collection(onlineinternetposModel.TaxCategory_SelectByCompanyID_Result)">
           <Parameter Name="companyId" Mode="In" Type="Int32" />
+=======
+          <FunctionImport Name="EmployeeRole_GetByEmployeeID" ReturnType="Collection(onlineinternetposModel.EmployeeRole_GetByEmployeeID_Result)">
+            <Parameter Name="employeeID" Mode="In" Type="Int32" />
+            <Parameter Name="companyid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Menu_ListGetByParentID" ReturnType="Collection(onlineinternetposModel.Menu_ListGetByParentID_Result1)">
+          <Parameter Name="parentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetDesignationAndEmpdsForAssignApplication" ReturnType="Collection(onlineinternetposModel.GetDesignationAndEmpdsForAssignApplication_Result)">
+            <Parameter Name="type" Mode="In" Type="String" />
+            <Parameter Name="companyid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMenuBydesignationOrEmployeeID" ReturnType="Collection(onlineinternetposModel.GetMenuBydesignationOrEmployeeID_Result)">
+            <Parameter Name="designationid" Mode="In" Type="Int32" />
+            <Parameter Name="employeeid" Mode="In" Type="Int32" />
+            <Parameter Name="companyID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="MenuAppCompanyMapps" EntityType="onlineinternetposModel.MenuAppCompanyMapp" />
+          <EntitySet Name="MenuApplicationPrivacies" EntityType="onlineinternetposModel.MenuApplicationPrivacy" />
+          <EntitySet Name="MenuAuthorizations" EntityType="onlineinternetposModel.MenuAuthorization" />
+          <FunctionImport Name="DELETEMenuAuthorizationByEmpIDAndDesigID">
+            <Parameter Name="companyid" Mode="In" Type="Int32" />
+            <Parameter Name="menuids" Mode="In" Type="String" />
+            <Parameter Name="designationID" Mode="In" Type="Int32" />
+            <Parameter Name="employeeID" Mode="In" Type="Int32" />
+>>>>>>> origin/master
           </FunctionImport>
           <EntitySet Name="Products" EntityType="onlineinternetposModel.Product" />
         </EntityContainer>
@@ -773,31 +871,70 @@
           <Property Type="DateTime" Name="updatedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="Password" Nullable="true" MaxLength="200" />
         </ComplexType>
-        <ComplexType Name="SelectFloors_Result">
-          <Property Type="Int32" Name="Floorid" Nullable="false" />
-          <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Order" Nullable="true" />
-          <Property Type="Int64" Name="Storeid" Nullable="true" />
-          <Property Type="Boolean" Name="Active" Nullable="true" />
+        <ComplexType Name="EmployeeRole_GetByEmployeeID_Result">
+          <Property Type="Int64" Name="employeeID" Nullable="false" />
+          <Property Type="Int32" Name="designationId" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="storeid" Nullable="false" />
+          <Property Type="String" Name="StoreName" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="employeeroleid" Nullable="false" />
+          <Property Type="String" Name="USerName" Nullable="true" />
+          <Property Type="String" Name="defaultStore" Nullable="false" MaxLength="3" />
         </ComplexType>
-        <EntityType Name="Category">
+        <ComplexType Name="Menu_ListGetByParentID_Result">
+          <Property Type="Int32" Name="menuID" Nullable="false" />
+          <Property Type="Int32" Name="menuParentID" Nullable="true" />
+          <Property Type="String" Name="menuName" Nullable="true" />
+          <Property Type="String" Name="controllerName" Nullable="true" />
+          <Property Type="String" Name="actionName" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Menu_ListGetByParentID_Result1">
+          <Property Type="Int32" Name="menuID" Nullable="false" />
+          <Property Type="Int32" Name="menuParentID" Nullable="true" />
+          <Property Type="String" Name="menuName" Nullable="true" />
+          <Property Type="String" Name="controllerName" Nullable="true" />
+          <Property Type="String" Name="actionName" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetDesignationAndEmpdsForAssignApplication_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetMenuBydesignationOrEmployeeID_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="parent" Nullable="true" />
+          <Property Type="String" Name="text" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="MenuAppCompanyMapp">
           <Key>
-            <PropertyRef Name="categoryId" />
+            <PropertyRef Name="appCompanyMapID" />
           </Key>
-          <Property Name="categoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="categoryTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="categoryCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="appliesDiscount" Type="Boolean" />
-          <Property Name="parentId" Type="Int64" />
-          <Property Name="storeid" Type="Int64" />
-          <Property Name="companyid" Type="Int32" />
-          <Property Name="printOrder" Type="Int32" />
-          <Property Name="active" Type="Boolean" />
-          <Property Name="createdBy" Type="Int32" />
-          <Property Name="createdDate" Type="DateTime" Precision="3" />
-          <Property Name="updaedBy" Type="Int32" />
-          <Property Name="updatedDate" Type="DateTime" Precision="3" />
+          <Property Name="appCompanyMapID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyID" Type="Int32" />
+          <Property Name="menuID" Type="Int32" />
         </EntityType>
+        <EntityType Name="MenuApplicationPrivacy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="menuID" Type="Int32" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="ViewToSuperAdmin" Type="Boolean" />
+          <Property Name="AllowAssignment" Type="Boolean" />
+          <Property Name="AllowAccess" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="MenuAuthorization">
+          <Key>
+            <PropertyRef Name="authorizationID" />
+          </Key>
+          <Property Name="authorizationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeID" Type="Int32" />
+          <Property Name="designationID" Type="Int32" />
+          <Property Name="appCompanyMapID" Type="Int32" />
+          <Property Name="isDashboard" Type="Boolean" />
+          <Property Name="imageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+<<<<<<< HEAD
         <ComplexType Name="Category_SelectByCompanyID_Result">
           <Property Type="Int64" Name="categoryId" Nullable="false" />
           <Property Type="String" Name="CategoryTitle" Nullable="true" MaxLength="100" />
@@ -892,6 +1029,8 @@
           <Property Name="minAlert" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="taxId" Type="Int32" />
         </EntityType>
+=======
+>>>>>>> origin/master
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1311,49 +1450,36 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SelectFloors" FunctionName="onlineinternetposModel.Store.SelectFloors">
+          <FunctionImportMapping FunctionImportName="ValidateUser_UserNameByCompanyid" FunctionName="onlineinternetposModel.Store.ValidateUser_UserNameByCompanyid" />
+          <FunctionImportMapping FunctionImportName="Menu_ListGetByParentID" FunctionName="onlineinternetposModel.Store.Menu_ListGetByParentID">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="onlineinternetposModel.SelectFloors_Result">
-                <ScalarProperty Name="Floorid" ColumnName="Floorid" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="Storeid" ColumnName="Storeid" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
+              <ComplexTypeMapping TypeName="onlineinternetposModel.Menu_ListGetByParentID_Result1">
+                <ScalarProperty Name="menuID" ColumnName="menuID" />
+                <ScalarProperty Name="menuParentID" ColumnName="menuParentID" />
+                <ScalarProperty Name="menuName" ColumnName="menuName" />
+                <ScalarProperty Name="controllerName" ColumnName="controllerName" />
+                <ScalarProperty Name="actionName" ColumnName="actionName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="onlineinternetposModel.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
-                <ScalarProperty Name="updaedBy" ColumnName="updaedBy" />
-                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
-                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
-                <ScalarProperty Name="active" ColumnName="active" />
-                <ScalarProperty Name="printOrder" ColumnName="printOrder" />
-                <ScalarProperty Name="companyid" ColumnName="companyid" />
-                <ScalarProperty Name="storeid" ColumnName="storeid" />
-                <ScalarProperty Name="parentId" ColumnName="parentId" />
-                <ScalarProperty Name="appliesDiscount" ColumnName="appliesDiscount" />
-                <ScalarProperty Name="categoryCode" ColumnName="categoryCode" />
-                <ScalarProperty Name="categoryTitle" ColumnName="categoryTitle" />
-                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Category_SelectByCompanyID" FunctionName="onlineinternetposModel.Store.Category_SelectByCompanyID">
+          <FunctionImportMapping FunctionImportName="GetDesignationAndEmpdsForAssignApplication" FunctionName="onlineinternetposModel.Store.GetDesignationAndEmpdsForAssignApplication">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="onlineinternetposModel.Category_SelectByCompanyID_Result">
-                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
-                <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
-                <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
-                <ScalarProperty Name="appliesDiscount" ColumnName="appliesDiscount" />
-                <ScalarProperty Name="active" ColumnName="active" />
-                <ScalarProperty Name="storeid" ColumnName="storeid" />
-                <ScalarProperty Name="store" ColumnName="store" />
+              <ComplexTypeMapping TypeName="onlineinternetposModel.GetDesignationAndEmpdsForAssignApplication_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMenuBydesignationOrEmployeeID" FunctionName="onlineinternetposModel.Store.GetMenuBydesignationOrEmployeeID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="onlineinternetposModel.GetMenuBydesignationOrEmployeeID_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="parent" ColumnName="parent" />
+                <ScalarProperty Name="text" ColumnName="text" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+<<<<<<< HEAD
           <EntitySetMapping Name="BarcodeTypes">
             <EntityTypeMapping TypeName="onlineinternetposModel.BarcodeType">
               <MappingFragment StoreEntitySet="BarcodeType">
@@ -1453,6 +1579,42 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+=======
+          <EntitySetMapping Name="MenuAppCompanyMapps">
+            <EntityTypeMapping TypeName="onlineinternetposModel.MenuAppCompanyMapp">
+              <MappingFragment StoreEntitySet="MenuAppCompanyMapp">
+                <ScalarProperty Name="menuID" ColumnName="menuID" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="appCompanyMapID" ColumnName="appCompanyMapID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuApplicationPrivacies">
+            <EntityTypeMapping TypeName="onlineinternetposModel.MenuApplicationPrivacy">
+              <MappingFragment StoreEntitySet="MenuApplicationPrivacy">
+                <ScalarProperty Name="AllowAccess" ColumnName="AllowAccess" />
+                <ScalarProperty Name="AllowAssignment" ColumnName="AllowAssignment" />
+                <ScalarProperty Name="ViewToSuperAdmin" ColumnName="ViewToSuperAdmin" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="menuID" ColumnName="menuID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuAuthorizations">
+            <EntityTypeMapping TypeName="onlineinternetposModel.MenuAuthorization">
+              <MappingFragment StoreEntitySet="MenuAuthorization">
+                <ScalarProperty Name="imageURL" ColumnName="imageURL" />
+                <ScalarProperty Name="isDashboard" ColumnName="isDashboard" />
+                <ScalarProperty Name="appCompanyMapID" ColumnName="appCompanyMapID" />
+                <ScalarProperty Name="designationID" ColumnName="designationID" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="authorizationID" ColumnName="authorizationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DELETEMenuAuthorizationByEmpIDAndDesigID" FunctionName="onlineinternetposModel.Store.DELETEMenuAuthorizationByEmpIDAndDesigID" />
+>>>>>>> origin/master
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

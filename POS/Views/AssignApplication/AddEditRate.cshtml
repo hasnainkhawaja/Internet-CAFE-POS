@@ -157,28 +157,4 @@
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
-<<<<<<< HEAD
-    <script type="text/javascript" src="~/Scripts/colorpicker.js"></script>
-    <script>
-
-        
-        $('#colorSelector').ColorPicker({
-            color: '@Model.color',
-            onShow: function (colpkr) {
-                $(colpkr).fadeIn(500);
-                return false;
-            },
-            onHide: function (colpkr) {
-                $(colpkr).fadeOut(500);
-                return false;
-            },
-            onChange: function (hsb, hex, rgb) {
-                $('#colorSelector div').css('backgroundColor', '#' + hex);
-                $("#color").val('#' + hex);
-            },
-            
-        });
-    </script>
-=======
->>>>>>> origin/master
 }
